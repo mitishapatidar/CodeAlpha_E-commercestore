@@ -1,6 +1,21 @@
 # Architecture
 
-## One turn
+## (a) The agent loop at a glance
+
+```mermaid
+flowchart LR
+    C([Customer message]) --> G[Guard<br/>app/guard.py]
+    G --> M[Memory<br/>app/memory.py]
+    M --> I[Intent parser<br/>LLM #1 · app/intent.py]
+    I --> V[Verifier<br/>app/verifier.py]
+    V --> P[Policy engine<br/>app/policy_engine.py<br/>+ data/policies.json]
+    P --> D{Decision<br/>app/decision.py}
+    D --> T[Tools<br/>app/tools.py]
+    T --> R[Responder<br/>LLM #2 · app/responder.py]
+    R --> U([Reply + decision + trace<br/>React console / storefront])
+```
+
+## Detailed turn
 
 ```mermaid
 flowchart TD
@@ -29,7 +44,7 @@ flowchart TD
     OUT2 --> OUT
 ```
 
-## Data graph
+## (b) Data model
 
 ```mermaid
 erDiagram
@@ -76,3 +91,22 @@ delivered or lost orders become an ASK ("save it for future orders?").
 - Tools are called only when needed; identical reads are deduplicated within a turn; `get_conversations` runs once
   per session.
 - Typical deterministic turn: under 20 ms.
+
+## Components
+
+| Component | File | Responsibility |
+|---|---|---|
+| Config / clock | `app/config.py` | env settings; "now" = request `current_time` > `AGENT_NOW` > wall clock (IST) |
+| Data layer | `app/data.py` | loads 6 CSVs + conversations.json + 300 product spec sheets once; typed IST dates; indexes by customer/order |
+| Policy store | `app/policy_store.py` | versioned `data/policies.json`, selection by order placement date, hot reload on file change |
+| Policy engine | `app/policy_engine.py` | day-N windows, loyalty extension, in-time request exception, refund cap + GST + restocking, threshold, warranty, delays |
+| Tools | `app/tools.py` | the 10 handbook tools, `ToolTracer` (records every call), write log + duplicate-action guard |
+| Guard | `app/guard.py` | regex risk flags (EN + Hinglish); strips injected sentences |
+| Intent parser | `app/intent.py` | LLM #1 with JSON schema; rule parser fallback; Python validation of LLM output |
+| Verifier | `app/verifier.py` | order/item resolution, ownership, ambiguity options, repeat-claims and fraud signals |
+| Decision engine | `app/decision.py` | one handler per intent type → ANSWER/ASK/ACT/ESCALATE + customer message + audit reasons |
+| Memory | `app/memory.py` | sessions, pending questions, story-change tracking, prior evidence, open tickets |
+| Responder | `app/responder.py` | LLM #2 rephrases the verified draft; rejected if it adds amounts/IDs or drops references |
+| Orchestrator | `app/agent.py` | one turn end to end; global triggers; one escalation per turn |
+| API | `app/main.py` | FastAPI per `API_CONTRACT.md` (+ products, categories, demo reset) |
+| UI | `frontend/` | React console (chat + Agent Brain timeline) and customer storefront with support widget |

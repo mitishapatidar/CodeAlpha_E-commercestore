@@ -47,3 +47,20 @@ We would rather document a boundary than hide it.
 ## Data
 - Policy markdown → `policies.json` was transcribed by hand. A new policy file needs a matching JSON edit.
 - Timezone: all dates are treated as IST (`+05:30`); delivery dates have no time, so "48 hours" uses day granularity.
+
+## Specific failure modes we know about
+- **Delivered-but-damaged without the word "photo"**: a defect claim with no evidence → ASK for photos even if the
+  customer insists. This follows Return Policy §4, but a harness that expects ACT on a bare claim would mark it ASK.
+- **Held dependent intents show as ANSWER**: in "never arrived, refund it", the refund intent is *held* behind the
+  delivery investigation; the per-intent label is ANSWER (with "Held" in the reasoning). The turn decision is
+  ESCALATE.
+- **One escalation per turn**: several triggers (e.g. legal + safety) are merged into one ticket routed to the
+  most severe team; the other teams are listed in the reason text only.
+- **Keyword guard false positives/negatives**: product names can collide with risk words (we fixed "Spark"), and
+  creative phrasing ("I'll see you in court-ish") can slip through. The LLM path widens intent coverage but the
+  guard itself stays regex-based.
+- **Latest-order fallback**: "where is my order?" with nothing in transit answers about the most recent order.
+- **Demo scenarios depend on the clock**: `/demo-scenarios` picks rows valid *today*; on a different date it picks
+  different orders (by design), and the refund scenario needs `POST /demo/reset` before it can ACT again.
+- **UI**: the console shows tokens = 0 in deterministic mode; the storefront cart and product pages are visual only
+  (no checkout); sign-in is a demo account picker, not authentication.

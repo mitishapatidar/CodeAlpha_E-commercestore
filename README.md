@@ -1,12 +1,12 @@
-# NovaMart Support Agent
+# NovaMart Support Agent (Team ELEVATE · Mantra Yudha)
 
-An agentic customer-support backend for **NovaMart** (fictional e-commerce), built for the
-*Mantra Yudha: AI Customer Support Agent from Hell* problem statement.
-
-For every customer message the agent **understands → verifies → reasons over policy → decides
-(ANSWER / ASK / ACT / ESCALATE) → calls tools → replies**, and shows its full reasoning trace.
-
-> **Iron principle:** AI reasons. Backend verifies. Database stores truth. Tools act. Humans handle exceptions.
+**An AI customer-support agent that verifies before it acts.** NovaMart's customers can be confused, contradictory
+or deliberately misleading, so our agent treats every message as a *claim*, not a fact. Each turn goes through
+the same loop: understand the request, check it against orders, tickets and conversation history, apply the
+correct **versioned** policy with exact window and refund maths, and only then choose **ANSWER, ASK, ACT or
+ESCALATE**. The LLM is used only to parse language and to phrase the reply. Every number, eligibility check and
+decision is made by deterministic Python and is shown in a live "Agent Brain" trace, so it cannot be talked into
+an unauthorised ₹50,000 refund.
 
 ![Agent console: refund capped at the amount paid](docs/screenshots/01-refund-cap-act.jpg)
 
@@ -14,149 +14,162 @@ For every customer message the agent **understands → verifies → reasons over
 |---|---|---|
 | ![](docs/screenshots/02-otp-contradiction-escalate.jpg) | ![](docs/screenshots/03-prompt-injection.jpg) | ![](docs/screenshots/04-storefront-support-chat.jpg) |
 
-## Why it is hard to fool
+**Demo video:** <DEMO_LINK>
 
-| Design choice | Effect |
-|---|---|
-| **LLM thinks, Python verifies.** The LLM only (1) extracts intents as JSON and (2) rephrases a verified draft reply. | No hallucinated facts, money or order IDs. Decisions are deterministic and auditable. |
-| **Every LLM output is validated.** Order IDs and amounts must appear in the customer's text; the rewritten reply must keep every amount/ID from the draft and add none. | A prompt-injected or confused LLM cannot change an outcome. |
-| **Policies are data** (`data/policies.json`, hot-reloaded, versioned by order date). | A mid-event policy mutation is a JSON edit. No code change, no restart. |
-| **Customer text is untrusted.** A guard flags injection, legal, safety, self-harm, abuse, refund-redirect and chargeback language, and strips injected sentences before parsing. | "Ignore previous instructions / I'm admin / policy changed" has no effect. |
-| **Memory first.** Prior conversations and open tickets are loaded at session start; pending questions carry over between turns. | Never re-asks for a photo already sent; follow-ups like "the Sony one" resolve correctly. |
-| **Works with no API key.** A full rule-based parser and template writer run when the LLM is unavailable, fails or refuses. | The hidden harness always gets a correct decision. |
+## Key features
 
-## Quick start (backend + frontend)
+- **Four explicit moves.** Every reply carries a decision (ANSWER / ASK / ACT / ESCALATE), with a per-intent
+  decision for multi-intent messages.
+- **Versioned policy as data.** `data/policies.json` mirrors all 10 policy documents. The version is chosen by the
+  order placement date, and the file is hot-reloaded, so a mid-event policy change is a JSON edit with no code
+  change and no restart.
+- **Exact policy maths.** Day-0 delivery counting, loyalty extensions, refund = item paid incl. 18% GST −
+  restocking (capped at what was paid), the approval threshold on order total, warranty vs refund, the
+  "request raised in time" exception, and delay goodwill credit.
+- **Verification first.** Order ownership, fake IDs, ambiguity across orders and items, OTP-verified delivery
+  disputes, payment pending or failed, already-refunded items, repeat claimants and suspended accounts.
+- **Injection-proof by design.** A guard flags injection, legal, safety, self-harm, abuse, refund-redirect and
+  chargeback language (EN + Hinglish). The LLM has no tool access, and its outputs are validated by Python.
+- **Memory.** Prior conversations and open tickets are loaded first. Pending questions carry across turns, so
+  the agent never re-asks for a photo already sent, and follow-ups like "the Sony one" resolve correctly.
+- **Safe actions.** The 10 tools are called with verified parameters. Duplicate refunds are refused, and there is
+  one escalation per turn with full context and an SLA.
+- **Works without an API key.** A rule-based parser and template writer take over when the LLM is off, fails or
+  refuses, so decisions stay identical.
+- **Judge-facing UI.** The React console shows the Agent Brain timeline. A customer-facing storefront has a
+  floating support chat. 13 one-click demo scenarios are built from the real dataset.
 
-```bash
-pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000      # terminal 1: API
-cd frontend && npm install && npm run dev             # terminal 2: UI -> http://localhost:5173
+## Architecture (summary)
+
+```
+customer msg → Guard → Memory → Intent (LLM #1, JSON) → Verifier → Policy engine → Decision → Tools → Reply (LLM #2, validated)
 ```
 
-The UI reads `VITE_API_URL` (default `http://localhost:8000`; see `frontend/.env.example`). It has two views:
+"AI reasons, backend verifies, database stores truth, tools act, humans handle exceptions." Details, mermaid
+diagrams and the decision priority are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The prompts and
+injection defences are in [docs/PROMPT_STRATEGY.md](docs/PROMPT_STRATEGY.md), the failure modes in
+[docs/LIMITATIONS.md](docs/LIMITATIONS.md), and the demo walkthrough in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md).
 
-- **Console view** (for judges): customers, orders and 13 one-click demo scenarios on the left, the chat in
-  the middle with a decision badge on every reply, and the **Agent Brain** on the right. The Agent Brain is a
-  timeline (Understand → Verify → Policy → Decide → Act) showing intents, every tool call with its parameters,
-  the policy version and maths, flags, tokens and latency.
-- **Customer view**: the NovaMart storefront (search, categories, products, My Orders with Track / Get help)
-  with a floating support chat, which is how a shopper would meet the agent.
+## Quick start
 
-`npm run build` type-checks and builds the UI with zero warnings.
-
-## Quick start (backend only)
+Requirements: Python 3.11+ and Node 20+.
 
 ```bash
+# 1. backend
 pip install -r requirements.txt
-cp .env.example .env          # optional: add LLM_API_KEY for LLM mode
-uvicorn app.main:app --host 0.0.0.0 --port 8000
-streamlit run ui.py           # optional backup console -> http://localhost:8501 (main UI: frontend/)
-pytest -q                     # 106 tests
+uvicorn app.main:app --host 0.0.0.0 --port 8000        # http://localhost:8000/docs
+
+# 2. frontend (second terminal)
+cd frontend
+npm install
+npm run dev                                             # http://localhost:5173
+
+# 3. tests (from the repo root)
+pytest -q
 ```
 
-Without a key the agent runs in **deterministic mode** (rules + templates): every decision is identical,
-only the reply wording is less natural. With a key it uses **Claude** (`claude-opus-5-5` by default,
-effort `low`, structured JSON output). Set `LLM_PROVIDER=gemini|openai` and `LLM_MODEL` to switch providers.
+Optional: copy `.env.example` to `.env` and set `LLM_API_KEY` to turn on LLM mode. Without it, everything runs in
+deterministic mode. Before recording a demo, press **Reset demo data** in the UI (or `POST /demo/reset`) to clear
+refunds and tickets the agent created earlier.
+
+## Environment variables
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `LLM_PROVIDER` | `anthropic` | `anthropic`, `gemini` or `openai` |
+| `LLM_PROVIDER` | `anthropic` | `anthropic`, `gemini` or `openai` (install that SDK) |
 | `LLM_MODEL` | `claude-opus-5-5` | Model ID for the chosen provider |
 | `LLM_API_KEY` | none | API key (falls back to `ANTHROPIC_API_KEY`) |
 | `LLM_MODE` | `auto` | `off` forces deterministic mode |
-| `AGENT_NOW` | wall clock | Fixed "current time" (ISO) for reproducible evaluation |
-| `DATA_DIR` | `data` | Dataset folder (swap in the hidden dataset here) |
+| `AGENT_NOW` | wall clock (IST) | Fixed "current time" for reproducible evaluation |
+| `DATA_DIR` | `data` | Dataset folder (point it at the hidden dataset; same schema) |
+| `VITE_API_URL` (frontend) | `http://localhost:8000` | Backend URL used by the UI |
+
+## Model used
+
+| Use | Model | Settings |
+|---|---|---|
+| Intent parsing (LLM #1) | **Claude Opus 5.5** (`claude-opus-5-5`) | structured JSON output (`output_config.format`), effort `low`, cached system prompt |
+| Reply writing (LLM #2) | **Claude Opus 5.5** (`claude-opus-5-5`) | effort `low`, max 600 tokens, rewrite validated by Python |
+| Fallback (always on) | Deterministic rule parser + templates | used when no key is set or the LLM errors or refuses |
+
+Anthropic Python SDK `anthropic` 1.x. Gemini and OpenAI adapters are included (`LLM_PROVIDER`).
 
 ## API
 
-`POST /chat`
+Implements [API_CONTRACT.md](API_CONTRACT.md): `GET /health` · `GET /customers?q=` · `GET /customers/{id}/orders` ·
+`GET /demo-scenarios` · `POST /chat` · `POST /reset`. Extras: `GET /products`, `GET /categories` (storefront),
+`GET /tools` (the 10 tool specs) and `POST /demo/reset`.
 
 ```json
-{"customer_id": "CUST-00708", "message": "My headphones from ORD-000014 arrived damaged, photo attached. Give me ₹10,000 refund.",
- "session_id": "abc", "current_time": "2026-01-12T12:00:00+05:30", "attachments": []}
+POST /chat {"customer_id": "CUST-00929", "message": "My Voltix Beat Plus 300 from ORD-007932 arrived damaged, photo attached. Give me ₹10,00,000 refund.", "session_id": "s1"}
+→ {"decision": "ACT", "refund_amount": 3691.0, "ticket_id": "RFD-…", "policy_version": "v2",
+   "intents": [{"type": "refund", "order_id": "ORD-007932", "reason": "damaged", "amount_claimed": 1000000, "decision": "ACT"}],
+   "tool_calls": [{"name": "get_order", "ok": true, …}, {"name": "check_refund_eligibility", …}, {"name": "calculate_refund", …}, {"name": "create_refund", "params": {"amount": 3691.0, …}}],
+   "reasoning": ["Verified ORD-007932 exists and belongs to CUST-00929.", "Policy v2 applies …", "Requested INR 1,000,000 exceeds the maximum refundable INR 3,691; capped …"],
+   "tokens": {"input": 0, "output": 0, "llm_calls": 0}, "latency_ms": 7, "reply": "Hi Teja — …"}
 ```
 
-Response:
-
-```json
-{"reply": "Hi Sneha — I've verified ORD-000014 (Auralix Prime 100) and initiated a refund of ₹1,258 (RFD-…). You asked for ₹10,000, but the most I can refund…",
- "decision": "ACT",
- "intents": [{"type": "refund", "order_id": "ORD-000014", "reason": "damaged", "amount_claimed": 10000, "decision": "ACT", "refund_amount": 1257.82, "policy_version": "v1"}],
- "tool_calls": [{"tool": "get_customer", "params": {...}}, {"tool": "get_conversations", ...}, {"tool": "get_order", ...},
-                {"tool": "check_refund_eligibility", ...}, {"tool": "calculate_refund", ...}, {"tool": "create_refund", "params": {"amount": 1257.82, ...}}],
- "refund_amount": 1257.82, "escalate": false, "ticket_id": "RFD-…", "reasoning": ["Verified ORD-000014 exists and belongs to CUST-00708.", "..."],
- "policy_version": "v1", "flags": [], "language": "en", "parser": "rules", "reply_source": "template",
- "usage": {"llm_calls": 0, "total_tokens": 0}, "latency_ms": 9}
-```
-
-Endpoints follow `API_CONTRACT.md` (extra fields are additive, never NaN):
-`GET /health` · `GET /customers?q=&limit=20` · `GET /customers/{id}/orders` · `GET /demo-scenarios` ·
-`POST /chat` · `POST /reset {session_id}`. Extras: `GET /tools` (the 10 tool specs), `POST /demo/reset`
-(clears actions the agent created, for repeatable demos).
-
-Run for the team frontend: `uvicorn app.main:app --host 0.0.0.0 --port 8000`.
-
-## Project layout
+## Project structure
 
 ```
 app/
-  config.py         settings, IST clock (request time > AGENT_NOW > wall clock)
-  data.py           loads CSV/JSON once, typed IST dates, indexes, product spec parser
-  policy_store.py   versioned policies.json (selection by order placement date, hot reload)
-  policy_engine.py  windows (day 0 = delivery), loyalty extension, refund cap, restocking, threshold, warranty, delays
-  tools.py          the 10 tools + ToolTracer (records every call); writes go to runtime/actions_log.jsonl
-  guard.py          injection / legal / safety / self-harm / abuse / refund-redirect / chargeback flags (EN + Hinglish)
-  intent.py         LLM call #1 (JSON schema) + rule-based parser; LLM output validated against the text
-  verifier.py       order resolution (ownership, ambiguity, item selection) + risk signals
-  decision.py       per-intent handlers -> ANSWER / ASK / ACT / ESCALATE with an audit trail
+  config.py         settings; IST clock (request time > AGENT_NOW > wall clock)
+  data.py           loads CSV/JSON once, typed IST dates, indexes, product-spec parser
+  policy_store.py   versioned policies.json (selection by order date, hot reload)
+  policy_engine.py  windows, loyalty, refund cap, restocking, threshold, warranty, delays
+  tools.py          the 10 tools + ToolTracer + duplicate-action guard (runtime/actions_log.jsonl)
+  guard.py          injection / legal / safety / self-harm / abuse / redirect / chargeback flags
+  intent.py         LLM call #1 (JSON schema) + rule-based parser; LLM output validated
+  verifier.py       order + item resolution, ownership, ambiguity, risk signals
+  decision.py       per-intent handlers → ANSWER / ASK / ACT / ESCALATE with audit trail
   memory.py         sessions, pending questions, prior evidence, open tickets
-  responder.py      LLM call #2 rewrites a verified draft; Python rejects unsafe rewrites
-  agent.py          orchestrates one turn; one escalation per turn with full context
-  main.py           FastAPI app
-frontend/           React + TypeScript + Tailwind v4 console and storefront (Vite)
-ui.py               backup Streamlit console (the main UI is the React app in frontend/)
-data/policies.json  structured mirror of data/policies/*.md (the only source of numbers)
-tests/              106 tests: data, policy versions, tools, guard, intent, LLM layer, 13 scenario categories
-docs/               ARCHITECTURE.md · PROMPT_STRATEGY.md · LIMITATIONS.md
+  responder.py      LLM call #2 rewrites a verified draft; unsafe rewrites rejected
+  agent.py          orchestrates one turn; one escalation per turn
+  demo.py           13 demo scenarios discovered from the dataset (valid at "now")
+  main.py           FastAPI app (API_CONTRACT.md)
+frontend/           Vite + React + TypeScript + Tailwind v4: Agent Console + customer storefront
+data/               dataset (CSV/JSON/markdown) + policies.json (the only source of numbers)
+tests/              106 pytest tests
+docs/               ARCHITECTURE · PROMPT_STRATEGY · LIMITATIONS · DEMO_SCRIPT · screenshots/
+ui.py               backup Streamlit console
 ```
 
-## Hidden-test categories
+## Test results
+
+**106 / 106 passing** (`pytest -q`, ~4 s, deterministic mode). Coverage includes data loading and policy version
+boundaries (2026-05-31 23:59 vs 2026-06-01 00:00 IST), tools and policy maths, the guard (positives and negatives
+per flag), intent parsing and LLM-output validation, the API contract, and scenario tests for all **13 hidden-test
+categories** plus memory, duplicate refunds and every demo scenario. Separately, 900 randomised turns ran with
+0 crashes, and all 13 demo scenarios match their expected decision live.
 
 | # | Category | Where | Test |
 |---|---|---|---|
-| 1 | Policy versions | `policy_store.get_policy` (order placement date) | `test_policy_version_*`, `test_version_boundary_*` |
-| 2 | Approval thresholds | `policy_engine.over_threshold` (order total) | `test_threshold_*` |
-| 3 | Window arithmetic | `policy_engine.check_eligibility` (day 0, loyalty, in-time request) | `test_defect_window_edge_v2`, `test_loyalty_*` |
+| 1 | Policy versions | `policy_store.get_policy` | `test_policy_version_*`, `test_version_boundary_*` |
+| 2 | Approval thresholds | `policy_engine.over_threshold` | `test_threshold_*` |
+| 3 | Window arithmetic | `policy_engine.check_eligibility` | `test_defect_window_edge_v2`, `test_loyalty_*` |
 | 4 | Refund limits | `policy_engine.calculate_refund` | `test_refund_capped_*`, `test_restocking_*` |
 | 5 | Delivery claims (OTP) | `decision.h_delivery_issue` | `test_otp_*`, `test_non_otp_*` |
-| 6 | Suspicious refunds | `verifier.repeat_claims`, soft-signal scoring | `test_repeat_claimant_*`, `test_inflated_amount_*` |
+| 6 | Suspicious refunds | `verifier.repeat_claims`, soft signals | `test_repeat_claimant_*`, `test_inflated_amount_*` |
 | 7 | Ambiguity | `verifier.resolve_order` | `test_two_matching_orders_*`, `test_unknown_order_id_*` |
-| 8 | Contradictory customers | `decision._contradiction` (record + story change) | `test_damage_claim_on_undelivered_*`, `test_story_change_*` |
-| 9 | Warranty | `decision.h_warranty`, `_not_eligible` | `test_in_warranty_*`, `test_expired_warranty_*` |
-| 10 | Prompt injection | `guard.scan`, `intent._validate_llm`, `responder._safe` | `test_injection_*`, `test_pure_injection_*` |
-| 11 | Multi-intent | clause splitting, `depends_on`, per-intent decisions | `test_never_arrived_refund_and_address_change` |
-| 12 | Payment issues | `decision.h_payment_issue`, money-flow payment guard | `test_refund_on_pending_payment_*`, `test_money_deducted_*` |
+| 8 | Contradictory customers | `decision._contradiction` | `test_damage_claim_on_undelivered_*`, `test_story_change_*` |
+| 9 | Warranty | `decision.h_warranty` | `test_in_warranty_*`, `test_expired_warranty_*` |
+| 10 | Prompt injection | `guard`, `intent._validate_llm`, `responder._safe` | `test_injection_*`, `test_pure_injection_*` |
+| 11 | Multi-intent | clause splitting + `depends_on` | `test_never_arrived_refund_and_address_change` |
+| 12 | Payment issues | `decision.h_payment_issue` | `test_refund_on_pending_payment_*`, `test_money_deducted_*` |
 | 13 | Safety / legal | `agent.global_triggers` | `test_safety_and_legal_always_escalate` |
 
 ## Policy mutation drill
 
-When the organisers change a rule, edit only `data/policies.json`. For example, to add a v3 effective
-2026-10-05 with a 5-day change-of-mind window:
+Edit only `data/policies.json`: add a version with its `applies_from` (and set `applies_to` on the previous
+one). The running server picks it up on the next request. For a retroactive rule, set
+`meta.version_selection` to `"request_date"`. `pytest -q` shows which decisions changed.
 
-```json
-{"version": "v3", "applies_from": "2026-10-05T00:00:00+05:30", "applies_to": null,
- "windows_days": {"change_of_mind": 5, "defective": 10, "damaged": 10, "wrong_item": 10, "missing_item": 10}, ...}
-```
+## Team ELEVATE
 
-Also set `applies_to` on v2. The running server picks it up on the next request; `pytest -q` shows which decisions changed.
-For a retroactive rule ("applies to all open requests"), set `meta.version_selection` to `"request_date"`.
-
-## Models
-
-| Use | Model | Settings |
+| Member | GitHub | Role |
 |---|---|---|
-| Intent parsing (LLM #1) | Claude Opus 5.5 (`claude-opus-5-5`) | structured output (`output_config.format` JSON schema), effort `low`, cached system prompt |
-| Reply writing (LLM #2) | Claude Opus 5.5 (`claude-opus-5-5`) | effort `low`, max 600 tokens, output validated |
-| Fallback | Deterministic rule parser + templates | always on |
+| Mitisha Patidar (lead) | [@mitishapatidar](https://github.com/mitishapatidar) | <ROLE> |
+| Khushi | [@skhushi2978-del](https://github.com/skhushi2978-del) | <ROLE> |
+| Samiksha Tiwari | [@tiwarisamiksha729-crypto](https://github.com/tiwarisamiksha729-crypto) | <ROLE> |
 
-Gemini (`google-genai`) and OpenAI (`openai`) adapters are included. Install the SDK and set `LLM_PROVIDER`.
+Built with Claude Code (Claude Opus 5.5) as the coding assistant; prompts are logged in [prompt_log.md](prompt_log.md).
