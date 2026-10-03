@@ -207,7 +207,7 @@ export function Chat({
       </div>
 
       {/* messages */}
-      <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-6">
+      <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-5 sm:px-6">
         {messages.length === 0 && !sending ? (
           <div className="mx-auto flex h-full max-w-lg flex-col items-center justify-center text-center">
             <div className="brand-gradient mb-4 grid size-12 place-items-center rounded-2xl shadow-[0_10px_30px_-10px_rgba(255,153,0,0.4)]">

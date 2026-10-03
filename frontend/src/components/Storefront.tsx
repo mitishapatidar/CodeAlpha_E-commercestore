@@ -11,6 +11,8 @@ import {
   Laptop,
   LifeBuoy,
   LogOut,
+  Maximize2,
+  Minimize2,
   MessageCircle,
   Monitor,
   Mouse,
@@ -211,6 +213,7 @@ export function Storefront({
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
+  const [chatMax, setChatMax] = useState(false);
   const seen = useRef(messages.length);
   const unread = !chatOpen && messages.length > seen.current;
 
@@ -448,7 +451,7 @@ export function Storefront({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute bottom-20 right-4 z-30 flex h-[min(560px,calc(100%-9rem))] w-[min(400px,calc(100%-2rem))] flex-col overflow-hidden rounded-3xl border border-line-strong bg-bg shadow-2xl"
+            className={cx("absolute z-30 flex flex-col overflow-hidden rounded-3xl border border-line-strong bg-bg shadow-2xl transition-[inset,width,height] duration-200", chatMax ? "inset-4 bottom-20" : "bottom-20 right-4 h-[min(560px,calc(100%-9rem))] w-[min(400px,calc(100%-2rem))]")}
             role="dialog"
             aria-label="NovaMart support chat"
           >
@@ -458,7 +461,16 @@ export function Storefront({
                 <div className="text-sm font-semibold">NovaMart Support</div>
                 <div className="text-2xs text-slate-300">Verified answers from your real order data</div>
               </div>
-              <button type="button" aria-label="Close support chat" onClick={() => setChatOpen(false)} className="ml-auto rounded-lg p-1 text-white hover:bg-white/15">
+              <button
+                type="button"
+                aria-label={chatMax ? "Minimise chat" : "Maximise chat"}
+                title={chatMax ? "Minimise" : "Maximise"}
+                onClick={() => setChatMax((m) => !m)}
+                className="ml-auto rounded-lg p-1 text-white hover:bg-white/15"
+              >
+                {chatMax ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+              </button>
+              <button type="button" aria-label="Close support chat" onClick={() => setChatOpen(false)} className="rounded-lg p-1 text-white hover:bg-white/15">
                 <X className="size-4" />
               </button>
             </div>
