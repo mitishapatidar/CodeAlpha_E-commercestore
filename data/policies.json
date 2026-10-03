@@ -1,0 +1,146 @@
+{
+  "_comment": "Structured mirror of data/policies/*.md. The agent reads ONLY this file for numbers and rules. To apply a policy change, add a new entry to refund_policies with its applies_from; no code change needed. The file is hot-reloaded when it changes on disk.",
+  "meta": {
+    "currency": "INR",
+    "timezone": "+05:30",
+    "gst_rate": 0.18,
+    "version_selection": "order_date",
+    "sources": ["refund_policy_v1.md", "refund_policy_v2.md", "return_policy_v1.md", "return_policy_v2.md",
+                "replacement_policy.md", "warranty_policy.md", "shipping_policy.md", "payment_policy.md",
+                "cancellation_policy.md", "customer_escalation_policy.md"]
+  },
+
+  "refund_policies": [
+    {
+      "version": "v1",
+      "applies_from": "2026-01-01T00:00:00+05:30",
+      "applies_to": "2026-05-31T23:59:59+05:30",
+      "windows_days": {
+        "change_of_mind": 10,
+        "defective": 15,
+        "damaged": 15,
+        "wrong_item": 15,
+        "missing_item": 15
+      },
+      "not_delivered_claim": {"from_eta_plus_days": 7, "until_eta_plus_days": 30},
+      "duplicate_charge_days": 30,
+      "approval_threshold": 100000,
+      "loyalty_extension_days": {"gold": 2, "platinum": 3},
+      "loyalty_extension_reasons": ["change_of_mind"],
+      "restocking_fee": {"percent": 0, "cap": 0, "categories": [], "reasons": ["change_of_mind"]},
+      "evidence_required_reasons": ["defective", "damaged", "wrong_item", "missing_item"],
+      "shipping_refund_reasons_full_order": ["defective", "damaged", "wrong_item", "lost", "cancellation"]
+    },
+    {
+      "version": "v2",
+      "applies_from": "2026-06-01T00:00:00+05:30",
+      "applies_to": null,
+      "windows_days": {
+        "change_of_mind": 7,
+        "defective": 10,
+        "damaged": 10,
+        "wrong_item": 10,
+        "missing_item": 10
+      },
+      "not_delivered_claim": {"from_eta_plus_days": 7, "until_eta_plus_days": 30},
+      "duplicate_charge_days": 30,
+      "approval_threshold": 75000,
+      "loyalty_extension_days": {"gold": 2, "platinum": 3},
+      "loyalty_extension_reasons": ["change_of_mind"],
+      "restocking_fee": {"percent": 5, "cap": 2500, "categories": ["Laptops", "Tablets", "Cameras", "Monitors"], "reasons": ["change_of_mind"]},
+      "evidence_required_reasons": ["defective", "damaged", "wrong_item", "missing_item"],
+      "shipping_refund_reasons_full_order": ["defective", "damaged", "wrong_item", "lost", "cancellation"]
+    }
+  ],
+
+  "replacement": {
+    "reasons": ["defective", "damaged", "wrong_item"],
+    "max_per_order_item": 1,
+    "requires_evidence": true
+  },
+
+  "warranty": {
+    "starts_from": "actual_delivery_date",
+    "not_covered_keywords": ["dropped", "drop", "fell", "cracked by", "water", "liquid", "spilled", "burn", "opened", "unauthorised repair", "unauthorized repair"],
+    "inside_defect_window": "return_replacement_refund",
+    "inside_warranty": "warranty_service_repair_no_refund",
+    "after_warranty": "paid_repair"
+  },
+
+  "shipping": {
+    "free_shipping_min_subtotal": 1000,
+    "flat_fee": 79,
+    "otp_required_min_total": 5000,
+    "delay_goodwill": {"after_days": 3, "credit_per_full_days": 3, "credit_amount": 100, "max_credit": 300},
+    "suspected_lost_after_days": 7,
+    "no_otp_investigation_hours": 48,
+    "address_change_allowed_statuses": ["placed", "confirmed", "processing"]
+  },
+
+  "cancellation": {
+    "allowed_statuses": ["placed", "confirmed", "processing"],
+    "partial_allowed_statuses": ["placed", "confirmed"],
+    "abuse_limit": {"max_cancellations": 5, "days": 30},
+    "needs_approval": false
+  },
+
+  "payment": {
+    "cod_max_total": 50000,
+    "pending_wait_hours": 24,
+    "auto_reversal_business_days": "5-7",
+    "refund_timelines": {
+      "wallet": "instant",
+      "UPI": "1-3 business days",
+      "credit_card": "5-7 business days",
+      "debit_card": "5-7 business days",
+      "net_banking": "5-7 business days",
+      "cash_on_delivery": "NovaMart wallet (instant) or a bank account verified by the Payments team"
+    },
+    "refund_only_to_original_method": true
+  },
+
+  "escalation": {
+    "repeat_claims": {"min_claims": 3, "days": 90,
+      "ticket_rules": [
+        {"category": "delivery", "subcategories": ["not_received"]},
+        {"category": "refund", "subcategories": ["*"]},
+        {"category": "return", "subcategories": ["return_request"]},
+        {"category": "damaged_product", "subcategories": ["*"]},
+        {"category": "missing_product", "subcategories": ["*"]},
+        {"category": "wrong_product", "subcategories": ["*"]}
+      ]
+    },
+    "soft_fraud_signals_to_escalate": 2,
+    "teams": {
+      "over_threshold": "Refunds & Payments",
+      "otp_dispute": "Logistics Desk",
+      "repeat_claims": "Trust & Safety",
+      "suspended_account": "Trust & Safety",
+      "refund_destination": "Refunds & Payments",
+      "contradiction": "Trust & Safety",
+      "legal": "Customer Experience",
+      "safety": "Technical Support",
+      "self_harm": "Customer Experience",
+      "harassment": "Customer Experience",
+      "human_request": "Support Lead",
+      "policy_exception": "Support Lead",
+      "chargeback": "Refunds & Payments",
+      "replacement_limit": "Returns & Warranty",
+      "suspicious": "Trust & Safety"
+    },
+    "sla": {
+      "critical": "first response in 15 minutes",
+      "high": "first response within 1 hour",
+      "medium": "first response within 4 hours",
+      "low": "first response within 24 hours"
+    }
+  },
+
+  "agent_authority": {
+    "goodwill_credit_max": 300,
+    "may": ["cancel_eligible_orders", "initiate_returns_below_threshold", "initiate_replacements_below_threshold",
+            "register_warranty_claims", "create_tickets", "update_unshipped_address", "goodwill_credit"],
+    "may_not": ["approve_above_threshold", "refund_other_instrument", "override_windows", "waive_restocking",
+                "change_account_status", "reveal_other_customer_data"]
+  }
+}
