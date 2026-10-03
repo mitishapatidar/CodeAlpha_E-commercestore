@@ -1,0 +1,27 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+*.egg-info/
+
+# Tools / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Runtime artefacts (actions created by the agent)
+runtime/
+*.log
+
+# Local tooling
+.claude/
+
+# Organiser material (not ours to redistribute)
+Mantra_Yudha_Handbook_for_Participants.pdf

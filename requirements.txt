@@ -1,0 +1,14 @@
+# NovaMart Support Agent
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pandas>=2.2
+pydantic>=2.7
+python-dotenv>=1.0
+streamlit>=1.38
+pytest>=8.0
+httpx>=0.27          # FastAPI TestClient + Streamlit -> API calls
+
+# LLM SDK (pick via LLM_PROVIDER in .env). Default: Claude.
+anthropic>=0.40
+# google-genai>=1.0  # uncomment if LLM_PROVIDER=gemini
+# openai>=1.40       # uncomment if LLM_PROVIDER=openai
