@@ -130,7 +130,7 @@ export function AgentBrain({ message, onClose }: { message: ChatMessage | null; 
       (r?.reasoning ?? [])
         .map((l) => l.replace(/^#\d+ \w+ -> \w+: /, ""))
         .flatMap((l) => l.split(/(?<=\.)\s+(?=[A-Z])/))
-        .filter((l) => /policy v\d|window|threshold|day \d|restocking|warranty|refundable|GST|capped/i.test(l)),
+        .filter((l) => /policy v\d|window|threshold|day \d|restocking|warranty|refundable|GST|capped|escalation trigger|OTP|held:/i.test(l)),
     ),
   ];
   const d = r ? DECISION[r.decision] : null;

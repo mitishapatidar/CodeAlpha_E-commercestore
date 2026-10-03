@@ -8,6 +8,12 @@ For every customer message the agent **understands → verifies → reasons over
 
 > **Iron principle:** AI reasons. Backend verifies. Database stores truth. Tools act. Humans handle exceptions.
 
+![Agent console: refund capped at the amount paid](docs/screenshots/01-refund-cap-act.jpg)
+
+| OTP-verified "never received" → ESCALATE | Prompt injection ignored | Customer storefront + support chat |
+|---|---|---|
+| ![](docs/screenshots/02-otp-contradiction-escalate.jpg) | ![](docs/screenshots/03-prompt-injection.jpg) | ![](docs/screenshots/04-storefront-support-chat.jpg) |
+
 ## Why it is hard to fool
 
 | Design choice | Effect |
@@ -19,14 +25,33 @@ For every customer message the agent **understands → verifies → reasons over
 | **Memory first.** Prior conversations and open tickets are loaded at session start; pending questions carry over between turns. | Never re-asks for a photo already sent; follow-ups like "the Sony one" resolve correctly. |
 | **Works with no API key.** A full rule-based parser and template writer run when the LLM is unavailable, fails or refuses. | The hidden harness always gets a correct decision. |
 
-## Quick start
+## Quick start (backend + frontend)
+
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8000      # terminal 1: API
+cd frontend && npm install && npm run dev             # terminal 2: UI -> http://localhost:5173
+```
+
+The UI reads `VITE_API_URL` (default `http://localhost:8000`; see `frontend/.env.example`). It has two views:
+
+- **Console view** (for judges): customers, orders and 13 one-click demo scenarios on the left, the chat in
+  the middle with a decision badge on every reply, and the **Agent Brain** on the right. The Agent Brain is a
+  timeline (Understand → Verify → Policy → Decide → Act) showing intents, every tool call with its parameters,
+  the policy version and maths, flags, tokens and latency.
+- **Customer view**: the NovaMart storefront (search, categories, products, My Orders with Track / Get help)
+  with a floating support chat, which is how a shopper would meet the agent.
+
+`npm run build` type-checks and builds the UI with zero warnings.
+
+## Quick start (backend only)
 
 ```bash
 pip install -r requirements.txt
 cp .env.example .env          # optional: add LLM_API_KEY for LLM mode
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 streamlit run ui.py           # optional backup console -> http://localhost:8501 (main UI: frontend/)
-pytest -q                     # 105 tests
+pytest -q                     # 106 tests
 ```
 
 Without a key the agent runs in **deterministic mode** (rules + templates): every decision is identical,
@@ -88,9 +113,10 @@ app/
   responder.py      LLM call #2 rewrites a verified draft; Python rejects unsafe rewrites
   agent.py          orchestrates one turn; one escalation per turn with full context
   main.py           FastAPI app
+frontend/           React + TypeScript + Tailwind v4 console and storefront (Vite)
 ui.py               backup Streamlit console (the main UI is the React app in frontend/)
 data/policies.json  structured mirror of data/policies/*.md (the only source of numbers)
-tests/              105 tests: data, policy versions, tools, guard, intent, LLM layer, 13 scenario categories
+tests/              106 tests: data, policy versions, tools, guard, intent, LLM layer, 13 scenario categories
 docs/               ARCHITECTURE.md · PROMPT_STRATEGY.md · LIMITATIONS.md
 ```
 

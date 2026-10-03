@@ -462,7 +462,7 @@ export function Storefront({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute bottom-20 right-4 z-30 flex h-[min(620px,calc(100%-7rem))] w-[min(400px,calc(100%-2rem))] flex-col overflow-hidden rounded-3xl border border-line-strong bg-bg shadow-2xl"
+            className="absolute bottom-20 right-4 z-30 flex h-[min(560px,calc(100%-9rem))] w-[min(400px,calc(100%-2rem))] flex-col overflow-hidden rounded-3xl border border-line-strong bg-bg shadow-2xl"
             role="dialog"
             aria-label="NovaMart support chat"
           >
