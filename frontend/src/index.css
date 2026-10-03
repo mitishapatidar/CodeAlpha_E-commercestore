@@ -104,3 +104,19 @@
     display: none;
   }
 }
+
+/* shadcn/ui semantic tokens used by components in src/components/ui */
+@theme {
+  --color-background: #0b0f17;
+  --color-foreground: #e5e7eb;
+  --color-input: #1f2937;
+  --color-muted-foreground: #9ca3af;
+  --color-ring: #f97316;
+}
+
+.lab-bg::before {
+  overflow: hidden;
+  max-width: 100vw;
+  max-height: 100vh;
+  box-sizing: border-box;
+}

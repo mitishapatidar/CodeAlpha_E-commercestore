@@ -401,3 +401,20 @@ def test_storefront_catalog_endpoints():
     ps = c.get("/products", params={"category": "Laptops", "limit": 5}).json()
     assert 0 < len(ps) <= 5 and all(p["category"] == "Laptops" for p in ps)
     assert "NaN" not in c.get("/products", params={"limit": 300}).text
+
+
+def test_owner_and_customer_dashboard_endpoints():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    c = TestClient(app)
+    o, i, cu, w = pick(lambda o, i, c: delivered(o) and o["total_amount"] < 20000, lambda o: at(o["actual_delivery_date"], 2))
+    r = c.post("/chat", json={"customer_id": cu["customer_id"], "message": f"{o['order_id']} arrived damaged, photo attached, refund it",
+                              "session_id": "dash", "current_time": w.isoformat()}).json()
+    assert r["decision"] == "ACT"
+    turns = c.get("/admin/turns").json()
+    assert turns and turns[0]["customer_id"] == cu["customer_id"] and turns[0]["response"]["decision"] == "ACT"
+    acts = c.get("/admin/actions").json()
+    assert any(a["type"] == "refund" and a["order_id"] == o["order_id"] for a in acts)
+    tks = c.get(f"/customers/{cu['customer_id']}/tickets").json()
+    assert tks and tks[0]["source"] == "agent" and tks[0]["type"] == "refund"
+    assert c.post("/demo/reset").json() == {"ok": True} and c.get("/admin/turns").json() == []

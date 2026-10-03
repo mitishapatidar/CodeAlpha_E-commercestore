@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api";
 import { DECISION, TIER_TONE, humanDate, initials, inr, pretty, statusTone } from "../format";
 import type { Customer, Order, Scenario } from "../types";
-import { Button, Chip, SectionLabel, Skeleton, cx } from "./ui";
+import { Button, Chip, SectionLabel, Skeleton, cx } from "./ui/primitives";
 
 function useDebounced<T>(value: T, ms = 250): T {
   const [v, setV] = useState(value);

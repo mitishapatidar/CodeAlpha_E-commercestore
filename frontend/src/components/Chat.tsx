@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from
 import { FLAG_LABEL, inr, timeOf } from "../format";
 import type { ChatMessage, Customer } from "../types";
 import { Avatar } from "./Sidebar";
-import { Button, Chip, DecisionBadge, cx } from "./ui";
+import { Button, Chip, DecisionBadge, cx } from "./ui/primitives";
 
 const LOOP = ["Understand", "Verify", "Policy", "Decide", "Act"];
 

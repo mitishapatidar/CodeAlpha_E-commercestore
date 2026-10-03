@@ -7,8 +7,10 @@
 from __future__ import annotations
 
 import re
+import threading
 import time
 import uuid
+from collections import deque
 
 from app import decision as dec
 from app.config import now_ist
@@ -21,6 +23,10 @@ from app.policy_store import section
 from app.responder import template_reply, write_reply
 from app.schemas import ChatRequest, ChatResponse, ToolCall
 from app.tools import ToolTracer
+
+# Recent turns for the owner review dashboard (in-memory ring buffer; production would persist this).
+TURN_LOG: deque[dict] = deque(maxlen=300)
+_turn_lock = threading.Lock()
 
 YES = re.compile(r"\b(yes|yeah|yep|yup|sure|ok|okay|go ahead|please do|do it|haan|han|ha|ji|theek|thik|confirm|proceed)\b", re.I)
 NO = re.compile(r"^\s*(no|nope|nah|nahi|not now|no thanks|don'?t)\b", re.I)
@@ -219,7 +225,7 @@ def run_turn(req: ChatRequest) -> ChatResponse:
                            for o in outcomes]
         else:
             intents_out = [{"order_id": None, "reason": None, "decision": decision, **i} for i in (to_jsonable(pr) if pr else [])]
-        return ChatResponse(
+        resp = ChatResponse(
             reply=reply, decision=decision, intents=intents_out,
             tool_calls=[_tool_call(c) for c in tracer.calls], refund_amount=refund, escalate=decision == "ESCALATE",
             ticket_id=esc_id or next((c["result"].get("id") for c in reversed(tracer.actions) if c["result"].get("id")), None),
@@ -229,6 +235,10 @@ def run_turn(req: ChatRequest) -> ChatResponse:
                     "output": sum(c["output_tokens"] for c in usage.calls), "llm_calls": len(usage.calls)},
             usage={"llm_calls": len(usage.calls), "total_tokens": usage.total_tokens, "calls": usage.calls},
             latency_ms=int((time.perf_counter() - t0) * 1000))
+        with _turn_lock:
+            TURN_LOG.appendleft({"id": uuid.uuid4().hex[:10], "at": now.isoformat(), "customer_id": req.customer_id,
+                                 "message": req.message[:500], "response": resp.model_dump()})
+        return resp
 
     # identity -------------------------------------------------------------
     if not req.customer_id:

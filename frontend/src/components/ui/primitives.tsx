@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertTriangle, CheckCircle2, X } from "lucide-react";
 import { useEffect, type ButtonHTMLAttributes, type ReactNode } from "react";
-import { DECISION } from "../format";
-import type { Decision } from "../types";
+import { DECISION } from "@/format";
+import type { Decision } from "@/types";
 
 export const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(" ");
 

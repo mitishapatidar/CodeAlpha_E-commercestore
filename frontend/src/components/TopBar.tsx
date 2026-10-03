@@ -1,6 +1,6 @@
-import { BrainCircuit, Gauge, LayoutDashboard, MessageSquare, MessagesSquare, PanelLeft, RefreshCw, Sparkles } from "lucide-react";
+import { BrainCircuit, Gauge, LayoutDashboard, LogOut, MessageSquare, MessagesSquare, PanelLeft, RefreshCw, Sparkles } from "lucide-react";
 import type { Health } from "../types";
-import { Chip, IconButton, cx } from "./ui";
+import { Chip, IconButton, cx } from "./ui/primitives";
 
 export interface SessionStats {
   messages: number;
@@ -46,15 +46,17 @@ export function TopBar({
   setView,
   openSidebar,
   openBrain,
+  onLogout,
 }: {
   health: Health | null;
   online: boolean | null;
   retry: () => void;
   stats: SessionStats;
-  view: "console" | "customer";
-  setView: (v: "console" | "customer") => void;
+  view: "review" | "console";
+  setView: (v: "review" | "console") => void;
   openSidebar: () => void;
   openBrain: () => void;
+  onLogout: () => void;
 }) {
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b border-line bg-bg/80 px-3 backdrop-blur sm:px-4">
@@ -109,11 +111,11 @@ export function TopBar({
             <Stat icon={Gauge} label="avg latency" value={`${stats.avgLatency} ms`} />
           </div>
         )}
-        <div className="flex rounded-xl bg-white/[0.04] p-0.5 ring-1 ring-inset ring-white/10" role="tablist" aria-label="View">
+        <div className="flex rounded-xl bg-white/[0.04] p-0.5 ring-1 ring-inset ring-white/10" role="tablist" aria-label="Owner views">
           {(
             [
-              ["console", LayoutDashboard, "Console"],
-              ["customer", MessageSquare, "Customer"],
+              ["review", LayoutDashboard, "Review"],
+              ["console", MessageSquare, "Live console"],
             ] as const
           ).map(([key, Icon, label]) => (
             <button
@@ -128,7 +130,7 @@ export function TopBar({
               )}
             >
               <Icon className="size-3.5" aria-hidden />
-              <span className="hidden lg:inline">{label} view</span>
+              <span className="hidden sm:inline">{label}</span>
             </button>
           ))}
         </div>
@@ -137,6 +139,10 @@ export function TopBar({
             <BrainCircuit className="size-4" />
           </IconButton>
         )}
+        <span className="hidden rounded-full bg-orange-500/10 px-2 py-0.5 text-2xs font-semibold text-orange-200 ring-1 ring-inset ring-orange-500/25 md:inline">Owner</span>
+        <IconButton label="Log out" onClick={onLogout}>
+          <LogOut className="size-4" />
+        </IconButton>
       </div>
     </header>
   );

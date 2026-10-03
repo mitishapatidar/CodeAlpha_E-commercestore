@@ -6,9 +6,21 @@ import { Chat } from "./components/Chat";
 import { Sidebar } from "./components/Sidebar";
 import { Storefront } from "./components/Storefront";
 import { TopBar, type SessionStats } from "./components/TopBar";
-import { Button, Drawer, Toasts, type Toast } from "./components/ui";
+import { Button, Drawer, Toasts, type Toast } from "./components/ui/primitives";
 import { uid } from "./format";
-import type { ChatMessage, Customer, Health, Order, Scenario } from "./types";
+import { Login } from "./pages/Login";
+import { OwnerReview } from "./pages/OwnerDashboard";
+import type { ChatMessage, Customer, Health, Order, Scenario, Session } from "./types";
+
+const AUTH_KEY = "novamart.session";
+function loadAuth(): Session | null {
+  try {
+    const raw = sessionStorage.getItem(AUTH_KEY);
+    return raw ? (JSON.parse(raw) as Session) : null;
+  } catch {
+    return null;
+  }
+}
 
 export default function App() {
   const [health, setHealth] = useState<Health | null>(null);
@@ -21,7 +33,8 @@ export default function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
-  const [view, setView] = useState<"console" | "customer">("console");
+  const [view, setView] = useState<"review" | "console">("review");
+  const [auth, setAuth] = useState<Session | null>(loadAuth);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [brainOpen, setBrainOpen] = useState(false);
   const [toasts, setToasts] = useState<Toast[]>([]);
@@ -154,6 +167,45 @@ export default function App() {
     }
   }, [customer, newSession, notify, onError]);
 
+  // ---------------------------------------------------------------- auth
+  const login = useCallback(
+    (sess: Session) => {
+      setAuth(sess);
+      try {
+        sessionStorage.setItem(AUTH_KEY, JSON.stringify(sess));
+      } catch {
+        /* storage unavailable: session lasts until reload */
+      }
+      if (sess.role === "customer") selectCustomer(sess.customer);
+      else {
+        setView("review");
+        setCustomer(null);
+        newSession(true);
+      }
+    },
+    [selectCustomer, newSession],
+  );
+
+  const logout = useCallback(() => {
+    newSession(true);
+    setCustomer(null);
+    setOrders([]);
+    setAuth(null);
+    try {
+      sessionStorage.removeItem(AUTH_KEY);
+    } catch {
+      /* ignore */
+    }
+  }, [newSession]);
+
+  // restore a customer session after reload
+  const restored = useRef(false);
+  useEffect(() => {
+    if (restored.current || !auth) return;
+    restored.current = true;
+    if (auth.role === "customer") selectCustomer(auth.customer);
+  }, [auth, selectCustomer]);
+
   // ---------------------------------------------------------------- derived
   const stats: SessionStats = useMemo(() => {
     const rs = messages.flatMap((m) => (m.response ? [m.response] : []));
@@ -185,6 +237,52 @@ export default function App() {
     />
   );
 
+  const offlineBanner = online === false && (
+    <div className="flex shrink-0 items-center gap-3 border-b border-rose-500/30 bg-rose-500/10 px-4 py-2 text-sm text-rose-200" role="alert">
+      <WifiOff className="size-4 shrink-0" aria-hidden />
+      <span className="min-w-0 flex-1 truncate">
+        Backend offline. Can't reach <span className="font-mono">{API_URL}</span>. Start it with{" "}
+        <span className="font-mono">uvicorn app.main:app --port 8000</span>.
+      </span>
+      <Button variant="danger" onClick={retryConnection}>
+        Retry
+      </Button>
+    </div>
+  );
+
+  // ---------------------------------------------------------------- login
+  if (!auth) {
+    return (
+      <div className="flex h-full flex-col overflow-y-auto">
+        {offlineBanner}
+        <Login onLogin={login} />
+        <Toasts items={toasts} dismiss={dismiss} />
+      </div>
+    );
+  }
+
+  // ---------------------------------------------------------------- customer dashboard
+  if (auth.role === "customer") {
+    return (
+      <div className="flex h-full flex-col overflow-hidden">
+        {offlineBanner}
+        <Storefront
+          customer={customer ?? auth.customer}
+          onLogout={logout}
+          orders={orders}
+          ordersLoading={ordersLoading}
+          messages={messages}
+          sending={sending}
+          onSend={(t) => send(t, undefined, customer ?? auth.customer)}
+          onNewSession={() => newSession()}
+          onError={onError}
+        />
+        <Toasts items={toasts} dismiss={dismiss} />
+      </div>
+    );
+  }
+
+  // ---------------------------------------------------------------- owner dashboard
   return (
     <div className="flex h-full flex-col overflow-hidden">
       <TopBar
@@ -196,22 +294,13 @@ export default function App() {
         setView={setView}
         openSidebar={() => setSidebarOpen(true)}
         openBrain={() => setBrainOpen(true)}
+        onLogout={logout}
       />
+      {offlineBanner}
 
-      {online === false && (
-        <div className="flex shrink-0 items-center gap-3 border-b border-rose-500/30 bg-rose-500/10 px-4 py-2 text-sm text-rose-200" role="alert">
-          <WifiOff className="size-4 shrink-0" aria-hidden />
-          <span className="min-w-0 flex-1 truncate">
-            Backend offline. Can't reach <span className="font-mono">{API_URL}</span>. Start it with{" "}
-            <span className="font-mono">uvicorn app.main:app --port 8000</span>.
-          </span>
-          <Button variant="danger" onClick={retryConnection}>
-            Retry
-          </Button>
-        </div>
-      )}
-
-      {view === "console" ? (
+      {view === "review" ? (
+        <OwnerReview onError={onError} />
+      ) : (
         <div className="flex min-h-0 flex-1">
           <aside className="hidden w-[300px] shrink-0 border-r border-line bg-bg sm:flex sm:flex-col" aria-label="Customers and scenarios">
             {sidebar}
@@ -228,25 +317,13 @@ export default function App() {
               }}
               onSend={(t) => send(t)}
               onNewSession={() => newSession()}
-              view={view}
+              view="console"
             />
           </main>
           <aside className="hidden w-[380px] shrink-0 border-l border-line bg-bg lg:flex lg:flex-col" aria-label="Agent Brain">
             <AgentBrain message={selected} />
           </aside>
         </div>
-      ) : (
-        <Storefront
-          customer={customer}
-          onSelectCustomer={selectCustomer}
-          orders={orders}
-          ordersLoading={ordersLoading}
-          messages={messages}
-          sending={sending}
-          onSend={(t) => send(t)}
-          onNewSession={() => newSession()}
-          onError={onError}
-        />
       )}
 
       <Drawer open={sidebarOpen} side="left" onClose={() => setSidebarOpen(false)} label="Customers and scenarios">

@@ -113,6 +113,45 @@ def products(q: str = "", category: str = "", limit: int = 24) -> list[dict]:
     return out[:limit]
 
 
+@app.get("/customers/{customer_id}/tickets")
+def customer_tickets(customer_id: str, limit: int = 20) -> list[dict]:
+    """Customer complaint history: requests the agent opened this session + recent tickets from the dataset."""
+    from app import tools as t
+    out = []
+    for recs in t._actions_index().values():
+        for r in recs:
+            if r.get("customer_id") == customer_id:
+                out.append({"id": r["id"], "source": "agent", "type": r["type"], "order_id": r.get("order_id"),
+                            "category": (f"Escalated to {r.get('team')}" if r["type"] == "escalation"
+                                         else r.get("category") or r.get("reason") or r["type"]),
+                            "summary": r.get("summary") or r.get("reason") or "", "status": r.get("status"),
+                            "team": r.get("team") or r.get("assigned_team"), "amount": r.get("amount"),
+                            "created_at": r.get("created_at")})
+    for tk in reversed(get_store().tickets_by_customer.get(customer_id, [])):
+        out.append({"id": tk["ticket_id"], "source": "history", "type": "ticket", "order_id": tk.get("order_id"),
+                    "category": tk["category"], "summary": tk["issue_summary"], "status": tk["status"],
+                    "team": tk["assigned_team"], "amount": None,
+                    "created_at": tk["created_at"].isoformat() if tk.get("created_at") else None})
+    out.sort(key=lambda x: x["created_at"] or "", reverse=True)
+    return out[:limit]
+
+
+@app.get("/admin/turns")
+def admin_turns(limit: int = 100) -> list[dict]:
+    """Owner review: the agent's most recent decisions with full trace."""
+    from app.agent import TURN_LOG
+    return list(TURN_LOG)[:limit]
+
+
+@app.get("/admin/actions")
+def admin_actions(limit: int = 200) -> list[dict]:
+    """Owner review: every refund / return / ticket / escalation the agent created."""
+    from app import tools as t
+    recs = [r for rs in t._actions_index().values() for r in rs]
+    recs.sort(key=lambda r: r.get("created_at") or "", reverse=True)
+    return recs[:limit]
+
+
 @app.get("/categories")
 def categories() -> list[dict]:
     counts: dict[str, int] = {}
@@ -129,6 +168,8 @@ def demo_reset() -> dict:
         t.ACTIONS_LOG.unlink()
     t.reset_actions_index()
     SESSIONS._s.clear()
+    from app.agent import TURN_LOG
+    TURN_LOG.clear()
     return {"ok": True}
 
 

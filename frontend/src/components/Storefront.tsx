@@ -10,6 +10,7 @@ import {
   Keyboard,
   Laptop,
   LifeBuoy,
+  LogOut,
   MessageCircle,
   Monitor,
   Mouse,
@@ -34,8 +35,9 @@ import { api } from "../api";
 import { humanDate, inr, pretty, statusTone } from "../format";
 import type { Category, ChatMessage, Customer, Order, Product } from "../types";
 import { Chat } from "./Chat";
+import { CustomerHelp } from "./CustomerHelp";
 import { Avatar } from "./Sidebar";
-import { Chip, Skeleton, cx } from "./ui";
+import { Chip, Skeleton, cx } from "./ui/primitives";
 
 const CAT_ICON: Record<string, LucideIcon> = {
   Smartphones: Smartphone, Laptops: Laptop, Headphones: Headphones, Earbuds: AudioLines, Smartwatches: Watch,
@@ -62,11 +64,10 @@ function useDebounced<T>(value: T, ms = 250): T {
 }
 
 // ------------------------------------------------------------ account menu
-function AccountMenu({ customer, onSelect, onError }: { customer: Customer | null; onSelect: (c: Customer) => void; onError: (m: string) => void }) {
+type StoreTab = "shop" | "orders" | "help";
+
+function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogout: () => void; goto: (t: StoreTab) => void }) {
   const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");
-  const dq = useDebounced(q);
-  const [res, setRes] = useState<Customer[]>([]);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -81,28 +82,20 @@ function AccountMenu({ customer, onSelect, onError }: { customer: Customer | nul
     };
   }, [open]);
 
-  useEffect(() => {
-    if (!open) return;
-    let live = true;
-    api.customers(dq.trim(), 6).then((r) => live && setRes(r)).catch((e: Error) => live && onError(e.message));
-    return () => {
-      live = false;
-    };
-  }, [dq, open, onError]);
-
+  const item = "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-fg hover:bg-white/5";
   return (
     <div className="relative" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        aria-haspopup="dialog"
+        aria-haspopup="menu"
         className="flex items-center gap-2 rounded-xl px-2 py-1.5 text-left transition hover:bg-white/5"
       >
-        {customer ? <Avatar c={customer} small /> : <span className="grid size-7 place-items-center rounded-full bg-white/5"><User className="size-4 text-muted" aria-hidden /></span>}
+        <Avatar c={customer} small />
         <span className="hidden leading-tight md:block">
-          <span className="block text-2xs text-faint">{customer ? "Hello," : "Sign in"}</span>
-          <span className="block max-w-[120px] truncate text-xs font-semibold text-fg">{customer ? customer.first_name : "Choose account"}</span>
+          <span className="block text-2xs text-faint">Hello,</span>
+          <span className="block max-w-[120px] truncate text-xs font-semibold text-fg">{customer.first_name}</span>
         </span>
         <ChevronDown className="size-3.5 text-faint" aria-hidden />
       </button>
@@ -113,37 +106,26 @@ function AccountMenu({ customer, onSelect, onError }: { customer: Customer | nul
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-30 mt-2 w-72 rounded-2xl border border-line-strong bg-elevated p-2 shadow-2xl"
-            role="dialog"
-            aria-label="Choose a demo account"
+            className="absolute right-0 top-full z-30 mt-2 w-64 rounded-2xl border border-line-strong bg-elevated p-2 shadow-2xl"
+            role="menu"
           >
-            <p className="px-2 pb-2 pt-1 text-2xs text-faint">Demo: sign in as any customer from the dataset</p>
-            <input
-              autoFocus
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Name, email or customer ID"
-              className="mb-1 w-full rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-fg placeholder:text-faint focus:border-orange-500/50 focus:outline-none"
-            />
-            <div className="max-h-64 overflow-y-auto">
-              {res.map((c) => (
-                <button
-                  key={c.customer_id}
-                  type="button"
-                  onClick={() => {
-                    onSelect(c);
-                    setOpen(false);
-                    setQ("");
-                  }}
-                  className="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left hover:bg-white/5"
-                >
-                  <Avatar c={c} small />
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm text-fg">{c.first_name} {c.last_name}</span>
-                    <span className="block truncate text-2xs text-faint">{c.email}</span>
-                  </span>
-                </button>
-              ))}
+            <div className="flex items-center gap-2.5 border-b border-line px-2.5 pb-2.5 pt-1">
+              <Avatar c={customer} />
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-semibold text-fg">{customer.first_name} {customer.last_name}</span>
+                <span className="block truncate text-2xs text-faint">{customer.email}</span>
+              </span>
+            </div>
+            <div className="pt-1.5">
+              <button type="button" role="menuitem" className={item} onClick={() => { goto("orders"); setOpen(false); }}>
+                <Package className="size-4 text-muted" aria-hidden /> My Orders
+              </button>
+              <button type="button" role="menuitem" className={item} onClick={() => { goto("help"); setOpen(false); }}>
+                <LifeBuoy className="size-4 text-muted" aria-hidden /> Help & Complaints
+              </button>
+              <button type="button" role="menuitem" className={cx(item, "text-rose-300")} onClick={onLogout}>
+                <LogOut className="size-4" aria-hidden /> Logout
+              </button>
             </div>
           </motion.div>
         )}
@@ -202,7 +184,7 @@ function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) 
 // ------------------------------------------------------------ storefront
 export function Storefront({
   customer,
-  onSelectCustomer,
+  onLogout,
   orders,
   ordersLoading,
   messages,
@@ -211,8 +193,8 @@ export function Storefront({
   onNewSession,
   onError,
 }: {
-  customer: Customer | null;
-  onSelectCustomer: (c: Customer) => void;
+  customer: Customer;
+  onLogout: () => void;
   orders: Order[];
   ordersLoading: boolean;
   messages: ChatMessage[];
@@ -221,7 +203,7 @@ export function Storefront({
   onNewSession: () => void;
   onError: (msg: string) => void;
 }) {
-  const [tab, setTab] = useState<"shop" | "orders">("shop");
+  const [tab, setTab] = useState<StoreTab>("shop");
   const [cats, setCats] = useState<Category[]>([]);
   const [cat, setCat] = useState("");
   const [q, setQ] = useState("");
@@ -254,8 +236,9 @@ export function Storefront({
   }, [chatOpen, messages.length]);
 
   const ask = (text: string) => {
-    setChatOpen(true);
-    if (customer) onSend(text);
+    setChatOpen(false);
+    setTab("help");
+    onSend(text);
   };
 
   return (
@@ -289,6 +272,7 @@ export function Storefront({
               [
                 ["shop", "Shop"],
                 ["orders", "My Orders"],
+                ["help", "Help & Complaints"],
               ] as const
             ).map(([k, label]) => (
               <button
@@ -305,7 +289,7 @@ export function Storefront({
               </button>
             ))}
           </nav>
-          <AccountMenu customer={customer} onSelect={onSelectCustomer} onError={onError} />
+          <AccountMenu customer={customer} onLogout={onLogout} goto={setTab} />
           <span className="relative hidden sm:block" aria-label="Cart (demo)">
             <ShoppingCart className="size-5 text-muted" aria-hidden />
           </span>
@@ -338,7 +322,9 @@ export function Storefront({
       {/* body */}
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto max-w-6xl px-4 py-5">
-          {tab === "shop" ? (
+          {tab === "help" ? (
+            <CustomerHelp customer={customer} messages={messages} sending={sending} onSend={onSend} onNewSession={onNewSession} onError={onError} />
+          ) : tab === "shop" ? (
             <>
               {!q && !cat && (
                 <section className="relative mb-6 overflow-hidden rounded-3xl border border-orange-500/20 bg-[linear-gradient(120deg,rgba(239,68,68,0.22),rgba(249,115,22,0.12)_45%,rgba(17,24,39,0.6))] p-6 sm:p-8">
@@ -350,7 +336,7 @@ export function Storefront({
                     </p>
                     <button
                       type="button"
-                      onClick={() => setChatOpen(true)}
+                      onClick={() => setTab("help")}
                       className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-orange-50"
                     >
                       <LifeBuoy className="size-4" aria-hidden /> Get support
@@ -456,7 +442,7 @@ export function Storefront({
 
       {/* floating support widget */}
       <AnimatePresence>
-        {chatOpen && (
+        {chatOpen && tab !== "help" && (
           <motion.div
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -499,6 +485,7 @@ export function Storefront({
           </motion.div>
         )}
       </AnimatePresence>
+      {tab !== "help" && (
       <button
         type="button"
         onClick={() => setChatOpen((o) => !o)}
@@ -508,6 +495,7 @@ export function Storefront({
         {chatOpen ? <X className="size-5" /> : <MessageCircle className="size-6" />}
         {unread && <span className="absolute right-0.5 top-0.5 size-3 rounded-full bg-emerald-400 ring-2 ring-bg" aria-label="New reply" />}
       </button>
+      )}
     </div>
   );
 }

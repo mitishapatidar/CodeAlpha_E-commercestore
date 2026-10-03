@@ -111,3 +111,46 @@ export interface Category {
   category: string;
   count: number;
 }
+
+export interface CustomerTicket {
+  id: string;
+  source: "agent" | "history";
+  type: string;
+  order_id: string | null;
+  category: string;
+  summary: string;
+  status: string | null;
+  team: string | null;
+  amount: number | null;
+  created_at: string | null;
+}
+
+export interface TurnRecord {
+  id: string;
+  at: string;
+  customer_id: string | null;
+  message: string;
+  response: ChatResponse;
+}
+
+export interface ActionRecord {
+  id: string;
+  type: "refund" | "return" | "ticket" | "escalation";
+  created_at: string;
+  customer_id?: string;
+  order_id?: string | null;
+  amount?: number;
+  reason?: string;
+  team?: string;
+  priority?: string;
+  sla?: string;
+  category?: string;
+  summary?: string;
+  status?: string;
+  resolution?: string;
+  [key: string]: unknown;
+}
+
+export type Session =
+  | { role: "customer"; customer: Customer }
+  | { role: "owner" };

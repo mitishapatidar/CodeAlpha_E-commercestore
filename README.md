@@ -14,6 +14,10 @@ an unauthorised ₹50,000 refund.
 |---|---|---|
 | ![](docs/screenshots/02-otp-contradiction-escalate.jpg) | ![](docs/screenshots/03-prompt-injection.jpg) | ![](docs/screenshots/04-storefront-support-chat.jpg) |
 
+| Customer / owner login | Owner review dashboard |
+|---|---|
+| ![](docs/screenshots/05-login.jpg) | ![](docs/screenshots/06-owner-review.jpg) |
+
 **Demo video:** <DEMO_LINK>
 
 ## Key features
@@ -36,8 +40,15 @@ an unauthorised ₹50,000 refund.
   one escalation per turn with full context and an SLA.
 - **Works without an API key.** A rule-based parser and template writer take over when the LLM is off, fails or
   refuses, so decisions stay identical.
-- **Judge-facing UI.** The React console shows the Agent Brain timeline. A customer-facing storefront has a
-  floating support chat. 13 one-click demo scenarios are built from the real dataset.
+- **Two dashboards behind one login.** The login page works like Amazon/Flipkart: email or customer ID, then a
+  demo OTP (`123456`). A separate **Owner / Staff** sign-in is on the same page.
+  - **Customer dashboard:** the NovaMart storefront, My Orders (Track / Get help), and **Help & Complaints**. That
+    section has an animated AI chat composer with slash-commands and "My support requests", which lists the
+    customer's tickets plus every refund, return or escalation the agent opened for them.
+  - **Owner dashboard:** a **Review** tab with live KPIs (conversations, refunds issued in ₹, escalations,
+    latency), the decision mix, every agent decision with flags, an action queue (refunds, returns, tickets,
+    escalations with team, priority and SLA) and the full Agent Brain trace for any decision. A **Live console**
+    tab holds the 13 one-click demo scenarios built from the real dataset.
 
 ## Architecture (summary)
 
@@ -62,7 +73,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000        # http://localhost:8000/d
 # 2. frontend (second terminal)
 cd frontend
 npm install
-npm run dev                                             # http://localhost:5173
+npm run dev                                             # http://localhost:5173 (customer: demo account + OTP 123456; owner: "Owner / Staff" tab)
 
 # 3. tests (from the repo root)
 pytest -q
@@ -98,6 +109,7 @@ Anthropic Python SDK `anthropic` 1.x. Gemini and OpenAI adapters are included (`
 
 Implements [API_CONTRACT.md](API_CONTRACT.md): `GET /health` · `GET /customers?q=` · `GET /customers/{id}/orders` ·
 `GET /demo-scenarios` · `POST /chat` · `POST /reset`. Extras: `GET /products`, `GET /categories` (storefront),
+`GET /customers/{id}/tickets` (customer complaints), `GET /admin/turns` and `GET /admin/actions` (owner review),
 `GET /tools` (the 10 tool specs) and `POST /demo/reset`.
 
 ```json
@@ -127,16 +139,17 @@ app/
   agent.py          orchestrates one turn; one escalation per turn
   demo.py           13 demo scenarios discovered from the dataset (valid at "now")
   main.py           FastAPI app (API_CONTRACT.md)
-frontend/           Vite + React + TypeScript + Tailwind v4: Agent Console + customer storefront
+frontend/           Vite + React + TypeScript + Tailwind v4 (shadcn structure: src/components/ui, @/lib/utils)
+                    pages/Login · customer storefront + Help & Complaints · owner Review + Live console
 data/               dataset (CSV/JSON/markdown) + policies.json (the only source of numbers)
-tests/              106 pytest tests
+tests/              107 pytest tests
 docs/               ARCHITECTURE · PROMPT_STRATEGY · LIMITATIONS · DEMO_SCRIPT · screenshots/
 ui.py               backup Streamlit console
 ```
 
 ## Test results
 
-**106 / 106 passing** (`pytest -q`, ~4 s, deterministic mode). Coverage includes data loading and policy version
+**107 / 107 passing** (`pytest -q`, ~4 s, deterministic mode). Coverage includes data loading and policy version
 boundaries (2026-05-31 23:59 vs 2026-06-01 00:00 IST), tools and policy maths, the guard (positives and negatives
 per flag), intent parsing and LLM-output validation, the API contract, and scenario tests for all **13 hidden-test
 categories** plus memory, duplicate refunds and every demo scenario. Separately, 900 randomised turns ran with

@@ -18,7 +18,7 @@ import {
 import { useState, type ReactNode } from "react";
 import { DECISION, FLAG_LABEL, WRITE_TOOLS, inr, pretty } from "../format";
 import type { ChatMessage, ToolCall } from "../types";
-import { Chip, DecisionBadge, IconButton, SectionLabel, cx } from "./ui";
+import { Chip, DecisionBadge, IconButton, SectionLabel, cx } from "./ui/primitives";
 
 function compactParams(p: Record<string, unknown>): string {
   return Object.entries(p)
