@@ -89,3 +89,25 @@ export interface ChatMessage {
   scenario?: Scenario;
   error?: boolean;
 }
+
+export interface Product {
+  product_id: string;
+  product_name: string;
+  brand: string;
+  category: string;
+  subcategory: string;
+  price: number;
+  mrp: number;
+  discount_percent: number;
+  rating: number;
+  review_count: number;
+  warranty_months: number;
+  returnable: boolean;
+  status: string;
+  color: string;
+}
+
+export interface Category {
+  category: string;
+  count: number;
+}

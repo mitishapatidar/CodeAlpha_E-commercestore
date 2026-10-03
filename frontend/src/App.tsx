@@ -4,6 +4,7 @@ import { API_URL, api } from "./api";
 import { AgentBrain } from "./components/AgentBrain";
 import { Chat } from "./components/Chat";
 import { Sidebar } from "./components/Sidebar";
+import { Storefront } from "./components/Storefront";
 import { TopBar, type SessionStats } from "./components/TopBar";
 import { Button, Drawer, Toasts, type Toast } from "./components/ui";
 import { uid } from "./format";
@@ -235,21 +236,17 @@ export default function App() {
           </aside>
         </div>
       ) : (
-        <div className="flex min-h-0 flex-1 items-stretch justify-center bg-[radial-gradient(900px_500px_at_50%_0,rgba(249,115,22,0.08),transparent)] p-0 sm:p-6">
-          <div className="flex w-full max-w-2xl flex-col overflow-hidden border-line bg-bg sm:rounded-3xl sm:border sm:shadow-2xl">
-            <div className="brand-gradient h-1 shrink-0" aria-hidden />
-            <Chat
-              customer={customer}
-              messages={messages}
-              sending={sending}
-              selectedId={null}
-              onSelect={() => undefined}
-              onSend={(t) => send(t)}
-              onNewSession={() => newSession()}
-              view={view}
-            />
-          </div>
-        </div>
+        <Storefront
+          customer={customer}
+          onSelectCustomer={selectCustomer}
+          orders={orders}
+          ordersLoading={ordersLoading}
+          messages={messages}
+          sending={sending}
+          onSend={(t) => send(t)}
+          onNewSession={() => newSession()}
+          onError={onError}
+        />
       )}
 
       <Drawer open={sidebarOpen} side="left" onClose={() => setSidebarOpen(false)} label="Customers and scenarios">

@@ -1,4 +1,4 @@
-import type { ChatResponse, Customer, Health, Order, Scenario } from "./types";
+import type { Category, ChatResponse, Customer, Health, Order, Product, Scenario } from "./types";
 
 export const API_URL: string = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") || "http://localhost:8000";
 
@@ -42,5 +42,8 @@ export const api = {
   chat: (body: { customer_id: string; message: string; session_id: string }) =>
     request<ChatResponse>("/chat", { method: "POST", body: JSON.stringify(body), timeoutMs: 90000 }),
   reset: (session_id: string) => request<{ ok: boolean }>("/reset", { method: "POST", body: JSON.stringify({ session_id }) }),
+  products: (q = "", category = "", limit = 24) =>
+    request<Product[]>(`/products?q=${encodeURIComponent(q)}&category=${encodeURIComponent(category)}&limit=${limit}`),
+  categories: () => request<Category[]>("/categories"),
   resetDemo: () => request<{ ok: boolean }>("/demo/reset", { method: "POST" }),
 };

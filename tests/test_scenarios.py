@@ -390,3 +390,14 @@ def test_api_contract_shapes():
     assert {"type", "order_id", "decision", "reason"} <= set(r["intents"][0])
     assert c.post("/reset", json={"session_id": "t1"}).json() == {"ok": True}
     assert "NaN" not in c.get("/demo-scenarios").text
+
+
+def test_storefront_catalog_endpoints():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    c = TestClient(app)
+    cats = c.get("/categories").json()
+    assert len(cats) == 14 and sum(x["count"] for x in cats) == 300
+    ps = c.get("/products", params={"category": "Laptops", "limit": 5}).json()
+    assert 0 < len(ps) <= 5 and all(p["category"] == "Laptops" for p in ps)
+    assert "NaN" not in c.get("/products", params={"limit": 300}).text

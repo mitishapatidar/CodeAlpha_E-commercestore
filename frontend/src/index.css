@@ -97,3 +97,10 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -96,6 +96,31 @@ def reset(req: ResetRequest) -> dict:
 
 
 # ---------------------------------------------------------------- extras
+@app.get("/products")
+def products(q: str = "", category: str = "", limit: int = 24) -> list[dict]:
+    """Catalog for the storefront view (customer-facing UI)."""
+    q, category = q.lower().strip(), category.lower().strip()
+    out = []
+    for p in get_store().products.values():
+        if category and p["category"].lower() != category:
+            continue
+        if q and q not in f"{p['product_name']} {p['brand']} {p['category']} {p['subcategory']}".lower():
+            continue
+        out.append({k: p.get(k) for k in ("product_id", "product_name", "brand", "category", "subcategory", "price", "mrp",
+                                           "discount_percent", "rating", "review_count", "warranty_months", "returnable",
+                                           "status", "color")})
+    out.sort(key=lambda p: (p["status"] != "active", -(p["review_count"] or 0)))
+    return out[:limit]
+
+
+@app.get("/categories")
+def categories() -> list[dict]:
+    counts: dict[str, int] = {}
+    for p in get_store().products.values():
+        counts[p["category"]] = counts.get(p["category"], 0) + 1
+    return [{"category": c, "count": n} for c, n in sorted(counts.items(), key=lambda x: -x[1])]
+
+
 @app.post("/demo/reset")
 def demo_reset() -> dict:
     """Clear actions the agent created (runtime log) and all sessions - for repeatable demos."""
