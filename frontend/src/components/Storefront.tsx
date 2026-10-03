@@ -141,7 +141,7 @@ function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition hover:-translate-y-0.5 hover:border-line-strong hover:shadow-card">
       <div className={cx("relative grid aspect-[4/3] place-items-center bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
-        <Icon className="size-14 text-white/80 drop-shadow-[0_8px_20px_rgba(0,0,0,0.4)] transition group-hover:scale-105" strokeWidth={1.4} aria-hidden />
+        <Icon className="size-14 text-navy-2/80 drop-shadow-[0_6px_14px_rgba(15,17,17,0.15)] transition group-hover:scale-105" strokeWidth={1.4} aria-hidden />
         {p.discount_percent > 0 && (
           <span className="absolute left-2.5 top-2.5 rounded-md bg-rose-500 px-1.5 py-0.5 text-2xs font-bold text-white">
             {Math.round(p.discount_percent)}% off
@@ -452,13 +452,13 @@ export function Storefront({
             role="dialog"
             aria-label="NovaMart support chat"
           >
-            <div className="brand-gradient flex shrink-0 items-center gap-3 px-4 py-3 text-[#0f1111]">
-              <LifeBuoy className="size-5" aria-hidden />
+            <div className="flex shrink-0 items-center gap-3 border-b-2 border-amz-orange bg-navy px-4 py-3 text-white">
+              <LifeBuoy className="size-5 text-amz-orange" aria-hidden />
               <div className="leading-tight">
                 <div className="text-sm font-semibold">NovaMart Support</div>
-                <div className="text-2xs text-white/80">Verified answers from your real order data</div>
+                <div className="text-2xs text-slate-300">Verified answers from your real order data</div>
               </div>
-              <button type="button" aria-label="Close support chat" onClick={() => setChatOpen(false)} className="ml-auto rounded-lg p-1 hover:bg-white/15">
+              <button type="button" aria-label="Close support chat" onClick={() => setChatOpen(false)} className="ml-auto rounded-lg p-1 text-white hover:bg-white/15">
                 <X className="size-4" />
               </button>
             </div>
