@@ -12,7 +12,7 @@ export interface SessionStats {
 export function Logo() {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="brand-gradient grid size-8 place-items-center rounded-xl shadow-[0_6px_18px_-6px_rgba(249,115,22,0.7)]">
+      <div className="brand-gradient grid size-8 place-items-center rounded-xl shadow-[0_6px_18px_-6px_rgba(255,153,0,0.4)]">
         <svg viewBox="0 0 32 32" className="size-5" aria-hidden>
           <path d="M9 22V10l14 12V10" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -29,7 +29,7 @@ export function Logo() {
 
 function Stat({ icon: Icon, label, value }: { icon: typeof Gauge; label: string; value: string }) {
   return (
-    <div className="flex items-center gap-1.5 rounded-lg bg-white/[0.03] px-2 py-1 ring-1 ring-inset ring-white/[0.06]" title={label}>
+    <div className="flex items-center gap-1.5 rounded-lg bg-black/[0.03] px-2 py-1 ring-1 ring-inset ring-black/[0.06]" title={label}>
       <Icon className="size-3.5 text-faint" aria-hidden />
       <span className="text-xs font-semibold tabular-nums text-fg">{value}</span>
       <span className="hidden text-2xs text-faint 2xl:inline">{label}</span>
@@ -59,7 +59,7 @@ export function TopBar({
   onLogout: () => void;
 }) {
   return (
-    <header className="flex h-14 shrink-0 items-center gap-3 border-b border-line bg-bg/80 px-3 backdrop-blur sm:px-4">
+    <header className="flex h-14 shrink-0 items-center gap-3 bg-navy px-3 text-white sm:px-4 [&_.text-fg]:text-white [&_.text-muted]:text-slate-300 [&_.text-faint]:text-slate-400">
       {view === "console" && (
         <IconButton label="Open customers and scenarios" className="sm:hidden" onClick={openSidebar}>
           <PanelLeft className="size-4" />
@@ -68,7 +68,7 @@ export function TopBar({
       <Logo />
 
       <div className="ml-2 hidden items-center gap-2 md:flex">
-        <span className="flex items-center gap-1.5 rounded-full px-2 py-1 text-2xs font-medium ring-1 ring-inset ring-white/10">
+        <span className="flex items-center gap-1.5 rounded-full px-2 py-1 text-2xs font-medium ring-1 ring-inset ring-black/10">
           <span
             className={cx(
               "size-2 rounded-full",
@@ -76,24 +76,24 @@ export function TopBar({
             )}
             aria-hidden
           />
-          <span className={online === false ? "text-rose-300" : "text-muted"}>
+          <span className={online === false ? "text-rose-700" : "text-muted"}>
             {online === null ? "Connecting" : online ? "Live" : "Offline"}
           </span>
         </span>
         {online === false && (
-          <button type="button" onClick={retry} className="inline-flex items-center gap-1 text-2xs font-semibold text-orange-300 hover:text-orange-200">
+          <button type="button" onClick={retry} className="inline-flex items-center gap-1 text-2xs font-semibold text-orange-800 hover:text-orange-800">
             <RefreshCw className="size-3" /> Retry
           </button>
         )}
         {health && (
           <>
-            <Chip className="bg-white/[0.03] text-muted ring-white/10" title={health.model}>
-              <Sparkles className="size-3 text-orange-300" aria-hidden />
+            <Chip className="bg-black/[0.03] text-muted ring-black/10" title={health.model}>
+              <Sparkles className="size-3 text-orange-800" aria-hidden />
               <span className="max-w-[180px] truncate whitespace-nowrap">{health.llm_enabled === false ? "Rules engine · LLM off" : health.model}</span>
             </Chip>
             <div className="hidden items-center gap-1 lg:flex">
               {health.policy_versions.map((v) => (
-                <Chip key={v} mono className="bg-white/[0.03] text-muted ring-white/10" title="Policy version loaded from data">
+                <Chip key={v} mono className="bg-black/[0.03] text-muted ring-black/10" title="Policy version loaded from data">
                   policy {v}
                 </Chip>
               ))}
@@ -111,7 +111,7 @@ export function TopBar({
             <Stat icon={Gauge} label="avg latency" value={`${stats.avgLatency} ms`} />
           </div>
         )}
-        <div className="flex rounded-xl bg-white/[0.04] p-0.5 ring-1 ring-inset ring-white/10" role="tablist" aria-label="Owner views">
+        <div className="flex rounded-xl bg-black/[0.04] p-0.5 ring-1 ring-inset ring-black/10" role="tablist" aria-label="Owner views">
           {(
             [
               ["review", LayoutDashboard, "Review"],
@@ -126,7 +126,7 @@ export function TopBar({
               onClick={() => setView(key)}
               className={cx(
                 "inline-flex items-center gap-1.5 whitespace-nowrap rounded-[10px] px-2.5 py-1 text-xs font-medium transition",
-                view === key ? "bg-elevated text-fg shadow-card ring-1 ring-inset ring-white/10" : "text-muted hover:text-fg",
+                view === key ? "bg-elevated text-fg shadow-card ring-1 ring-inset ring-black/10" : "text-muted hover:text-fg",
               )}
             >
               <Icon className="size-3.5" aria-hidden />
@@ -139,7 +139,7 @@ export function TopBar({
             <BrainCircuit className="size-4" />
           </IconButton>
         )}
-        <span className="hidden rounded-full bg-orange-500/10 px-2 py-0.5 text-2xs font-semibold text-orange-200 ring-1 ring-inset ring-orange-500/25 md:inline">Owner</span>
+        <span className="hidden rounded-full bg-orange-500/10 px-2 py-0.5 text-2xs font-semibold text-orange-800 ring-1 ring-inset ring-orange-500/25 md:inline">Owner</span>
         <IconButton label="Log out" onClick={onLogout}>
           <LogOut className="size-4" />
         </IconButton>

@@ -4,22 +4,28 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-bg: #0b0f17;
-  --color-surface: #111827;
-  --color-elevated: #161e2e;
-  --color-line: #1f2937;
-  --color-line-strong: #2b3648;
-  --color-fg: #e5e7eb;
-  --color-muted: #9ca3af;
-  --color-faint: #6b7280;
-  --color-brand-from: #ef4444;
-  --color-brand-to: #f97316;
+  --color-bg: #eaeded;
+  --color-surface: #ffffff;
+  --color-elevated: #f7f8f8;
+  --color-line: #d5d9d9;
+  --color-line-strong: #bbbfbf;
+  --color-fg: #0f1111;
+  --color-muted: #565959;
+  --color-faint: #6f7373;
+  --color-brand-from: #ffd814;
+  --color-brand-to: #ffc400;
+  --color-navy: #131921;
+  --color-navy-2: #232f3e;
+  --color-navy-3: #37475a;
+  --color-amz-orange: #ff9900;
+  --color-amz-link: #007185;
+  --color-price: #b12704;
 
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
 
-  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.03) inset, 0 8px 24px -12px rgb(0 0 0 / 0.6);
-  --shadow-glow: 0 0 0 1px rgb(249 115 22 / 0.35), 0 0 24px -6px rgb(249 115 22 / 0.45);
+  --shadow-card: 0 1px 2px 0 rgb(15 17 17 / 0.08), 0 6px 18px -10px rgb(15 17 17 / 0.18);
+  --shadow-glow: 0 0 0 2px rgb(255 153 0 / 0.55), 0 4px 16px -6px rgb(255 153 0 / 0.45);
 }
 
 @layer base {
@@ -36,16 +42,16 @@
     font-feature-settings: "cv11", "ss01";
   }
   ::selection {
-    background: rgb(249 115 22 / 0.35);
+    background: rgb(255 153 0 / 0.35);
   }
   :focus-visible {
-    outline: 2px solid #f97316;
+    outline: 2px solid #ff9900;
     outline-offset: 2px;
     border-radius: 8px;
   }
   * {
     scrollbar-width: thin;
-    scrollbar-color: #2b3648 transparent;
+    scrollbar-color: #bbbfbf transparent;
   }
 }
 
@@ -54,7 +60,7 @@
 }
 
 @utility brand-text {
-  background-image: linear-gradient(135deg, #f87171, #fb923c);
+  background-image: linear-gradient(135deg, #e47911, #ff9900);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -79,14 +85,14 @@
 @utility skeleton {
   position: relative;
   overflow: hidden;
-  background: #182131;
+  background: #e3e6e6;
   border-radius: 8px;
   &::after {
     content: "";
     position: absolute;
     inset: 0;
     transform: translateX(-100%);
-    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent);
     animation: shimmer 1.4s infinite;
   }
 }
@@ -107,11 +113,11 @@
 
 /* shadcn/ui semantic tokens used by components in src/components/ui */
 @theme {
-  --color-background: #0b0f17;
-  --color-foreground: #e5e7eb;
-  --color-input: #1f2937;
+  --color-background: #131921;
+  --color-foreground: #ffffff;
+  --color-input: #37475a;
   --color-muted-foreground: #9ca3af;
-  --color-ring: #f97316;
+  --color-ring: #ff9900;
 }
 
 .lab-bg::before {

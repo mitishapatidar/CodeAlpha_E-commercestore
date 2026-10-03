@@ -82,7 +82,7 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
     };
   }, [open]);
 
-  const item = "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-fg hover:bg-white/5";
+  const item = "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-fg hover:bg-black/5";
   return (
     <div className="relative" ref={ref}>
       <button
@@ -90,7 +90,7 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="flex items-center gap-2 rounded-xl px-2 py-1.5 text-left transition hover:bg-white/5"
+        className="flex items-center gap-2 rounded-xl px-2 py-1.5 text-left transition hover:bg-black/5"
       >
         <Avatar c={customer} small />
         <span className="hidden leading-tight md:block">
@@ -123,7 +123,7 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
               <button type="button" role="menuitem" className={item} onClick={() => { goto("help"); setOpen(false); }}>
                 <LifeBuoy className="size-4 text-muted" aria-hidden /> Help & Complaints
               </button>
-              <button type="button" role="menuitem" className={cx(item, "text-rose-300")} onClick={onLogout}>
+              <button type="button" role="menuitem" className={cx(item, "text-rose-700")} onClick={onLogout}>
                 <LogOut className="size-4" aria-hidden /> Logout
               </button>
             </div>
@@ -148,7 +148,7 @@ function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) 
           </span>
         )}
         {out && (
-          <span className="absolute right-2.5 top-2.5 rounded-md bg-black/60 px-1.5 py-0.5 text-2xs font-medium text-slate-200">{pretty(p.status)}</span>
+          <span className="absolute right-2.5 top-2.5 rounded-md bg-black/60 px-1.5 py-0.5 text-2xs font-medium text-slate-700">{pretty(p.status)}</span>
         )}
       </div>
       <div className="flex flex-1 flex-col p-3">
@@ -172,7 +172,7 @@ function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) 
         <button
           type="button"
           onClick={() => onAsk(p)}
-          className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-white/10 transition hover:bg-white/[0.08]"
+          className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-black/[0.04] px-3 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-black/10 transition hover:bg-black/[0.08]"
         >
           <MessageCircle className="size-3.5" aria-hidden /> Ask the assistant
         </button>
@@ -244,7 +244,7 @@ export function Storefront({
   return (
     <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-bg">
       {/* store header */}
-      <div className="shrink-0 border-b border-line bg-surface/80 backdrop-blur">
+      <div className="shrink-0 bg-navy text-white [&_.text-fg]:text-white [&_.text-muted]:text-slate-300 [&_.text-faint]:text-slate-400">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2.5">
           <div className="flex items-center gap-2">
             <span className="brand-gradient grid size-8 place-items-center rounded-lg" aria-hidden>
@@ -264,7 +264,7 @@ export function Storefront({
                 setTab("shop");
               }}
               placeholder="Search for phones, laptops, headphones…"
-              className="w-full rounded-xl border border-line bg-elevated py-2 pl-9 pr-3 text-sm text-fg placeholder:text-faint focus:border-orange-500/50 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+              className="w-full rounded-xl border-2 border-transparent bg-white py-2 pl-9 pr-3 text-sm text-[#0f1111] placeholder:text-[#6f7373] focus:border-amz-orange focus:outline-none focus:ring-2 focus:ring-orange-500/20"
             />
           </label>
           <nav className="flex items-center gap-1" aria-label="Store">
@@ -282,7 +282,7 @@ export function Storefront({
                 aria-current={tab === k ? "page" : undefined}
                 className={cx(
                   "whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium transition",
-                  tab === k ? "bg-white/[0.08] text-fg" : "text-muted hover:text-fg",
+                  tab === k ? "bg-black/[0.08] text-fg" : "text-muted hover:text-fg",
                 )}
               >
                 {label}
@@ -295,7 +295,7 @@ export function Storefront({
           </span>
         </div>
         {tab === "shop" && (
-          <div className="no-scrollbar mx-auto flex max-w-6xl gap-1.5 overflow-x-auto px-4 pb-2.5" role="tablist" aria-label="Categories">
+          <div className="no-scrollbar mx-auto flex max-w-6xl gap-1.5 overflow-x-auto bg-navy-2 px-4 py-2" role="tablist" aria-label="Categories">
             {[{ category: "", count: 0 }, ...cats].map((c) => {
               const Icon = c.category ? CAT_ICON[c.category] ?? Package : BadgePercent;
               return (
@@ -307,7 +307,7 @@ export function Storefront({
                   onClick={() => setCat(c.category)}
                   className={cx(
                     "inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset transition",
-                    cat === c.category ? "brand-gradient text-white ring-transparent" : "bg-white/[0.03] text-muted ring-white/10 hover:text-fg",
+                    cat === c.category ? "brand-gradient text-[#0f1111] ring-transparent" : "bg-black/[0.03] text-muted ring-black/10 hover:text-fg",
                   )}
                 >
                   <Icon className="size-3.5" aria-hidden />
@@ -327,9 +327,9 @@ export function Storefront({
           ) : tab === "shop" ? (
             <>
               {!q && !cat && (
-                <section className="relative mb-6 overflow-hidden rounded-3xl border border-orange-500/20 bg-[linear-gradient(120deg,rgba(239,68,68,0.22),rgba(249,115,22,0.12)_45%,rgba(17,24,39,0.6))] p-6 sm:p-8">
+                <section className="relative mb-6 overflow-hidden rounded-3xl border border-orange-500/20 bg-[linear-gradient(120deg,#232f3e,#37475a)] p-6 sm:p-8">
                   <div className="max-w-lg">
-                    <Chip className="bg-white/10 text-orange-100 ring-white/15">Festive Electronics Sale</Chip>
+                    <Chip className="bg-white/10 text-orange-800 ring-black/15">Festive Electronics Sale</Chip>
                     <h1 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">Up to 40% off top tech</h1>
                     <p className="mt-2 text-sm text-orange-50/80">
                       Phones, laptops, audio and more. Need help with an order? Our assistant checks your real order and policy before it answers.
@@ -356,7 +356,7 @@ export function Storefront({
                     const I = Icon as LucideIcon;
                     return (
                       <div key={t as string} className="flex items-center gap-3 rounded-2xl border border-line bg-surface px-4 py-3">
-                        <I className="size-5 text-orange-300" aria-hidden />
+                        <I className="size-5 text-orange-800" aria-hidden />
                         <div>
                           <div className="text-sm font-medium text-fg">{t as string}</div>
                           <div className="text-2xs text-muted">{s as string}</div>
@@ -399,7 +399,7 @@ export function Storefront({
                 <ul className="space-y-2">
                   {orders.slice(0, 20).map((o) => (
                     <li key={o.order_id} className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4 sm:flex-row sm:items-center">
-                      <div className="grid size-12 shrink-0 place-items-center rounded-xl bg-white/[0.04]">
+                      <div className="grid size-12 shrink-0 place-items-center rounded-xl bg-black/[0.04]">
                         <Package className="size-5 text-muted" aria-hidden />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -419,14 +419,14 @@ export function Storefront({
                         <button
                           type="button"
                           onClick={() => ask(`Where is my order ${o.order_id}?`)}
-                          className="rounded-lg bg-white/[0.04] px-2.5 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-white/10 hover:bg-white/[0.08]"
+                          className="rounded-lg bg-black/[0.04] px-2.5 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-black/10 hover:bg-black/[0.08]"
                         >
                           Track
                         </button>
                         <button
                           type="button"
                           onClick={() => ask(`I need help with my order ${o.order_id}`)}
-                          className="brand-gradient rounded-lg px-2.5 py-1.5 text-xs font-semibold text-white hover:brightness-110"
+                          className="brand-gradient rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#0f1111] hover:brightness-110"
                         >
                           Get help
                         </button>
@@ -452,7 +452,7 @@ export function Storefront({
             role="dialog"
             aria-label="NovaMart support chat"
           >
-            <div className="brand-gradient flex shrink-0 items-center gap-3 px-4 py-3 text-white">
+            <div className="brand-gradient flex shrink-0 items-center gap-3 px-4 py-3 text-[#0f1111]">
               <LifeBuoy className="size-5" aria-hidden />
               <div className="leading-tight">
                 <div className="text-sm font-semibold">NovaMart Support</div>
@@ -490,7 +490,7 @@ export function Storefront({
         type="button"
         onClick={() => setChatOpen((o) => !o)}
         aria-label={chatOpen ? "Close support chat" : "Open support chat"}
-        className="brand-gradient absolute bottom-4 right-4 z-30 grid size-13 place-items-center rounded-full text-white shadow-[0_12px_30px_-8px_rgba(249,115,22,0.8)] transition hover:scale-105"
+        className="brand-gradient absolute bottom-4 right-4 z-30 grid size-13 place-items-center rounded-full text-[#0f1111] shadow-[0_12px_30px_-8px_rgba(255,153,0,0.4)] transition hover:scale-105"
       >
         {chatOpen ? <X className="size-5" /> : <MessageCircle className="size-6" />}
         {unread && <span className="absolute right-0.5 top-0.5 size-3 rounded-full bg-emerald-400 ring-2 ring-bg" aria-label="New reply" />}

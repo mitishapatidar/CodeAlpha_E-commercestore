@@ -52,7 +52,6 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
       setFound(c);
       setStep("otp");
       setOtp(Array(6).fill(""));
-      setTimeout(() => otpRefs.current[0]?.focus(), 50);
     } catch (err) {
       setError(`Can't reach the server: ${(err as Error).message}`);
     } finally {
@@ -60,17 +59,45 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
     }
   };
 
-  const verify = (e?: FormEvent) => {
-    e?.preventDefault();
-    if (otp.join("") !== DEMO_OTP) return setError("Incorrect OTP. (Demo OTP is 123456.)");
+  const finish = (code: string) => {
+    if (code.length < 6) {
+      setError("Please enter all 6 digits of the OTP.");
+      otpRefs.current[Math.min(code.length, 5)]?.focus();
+      return;
+    }
+    if (code !== DEMO_OTP) {
+      setError(`That OTP is incorrect. For this demo use ${DEMO_OTP}.`);
+      setOtp(Array(6).fill(""));
+      setTimeout(() => otpRefs.current[0]?.focus(), 0);
+      return;
+    }
     if (found) onLogin({ role: "customer", customer: found });
   };
 
+  const verify = (e?: FormEvent) => {
+    e?.preventDefault();
+    finish(otp.join(""));
+  };
+
+  /** Type, paste or autofill: digits are spread across the boxes; the form submits itself once all 6 are in. */
   const setDigit = (i: number, v: string) => {
-    const d = v.replace(/\D/g, "").slice(-1);
-    setOtp((o) => o.map((x, j) => (j === i ? d : x)));
+    const digits = v.replace(/\D/g, "");
     setError(null);
-    if (d && i < 5) otpRefs.current[i + 1]?.focus();
+    if (!digits) {
+      setOtp((o) => o.map((x, j) => (j === i ? "" : x)));
+      return;
+    }
+    const next = [...otp];
+    digits.split("").slice(0, 6 - i).forEach((d, k) => (next[i + k] = d));
+    setOtp(next);
+    const filled = next.findIndex((x) => !x);
+    if (filled === -1) finish(next.join(""));
+    else otpRefs.current[filled]?.focus();
+  };
+
+  const useDemoOtp = () => {
+    setOtp(DEMO_OTP.split(""));
+    finish(DEMO_OTP);
   };
 
   return (
@@ -82,7 +109,7 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
         className="grid w-full max-w-4xl overflow-hidden rounded-3xl border border-line bg-surface shadow-2xl md:grid-cols-[1fr_1.15fr]"
       >
         {/* brand panel */}
-        <div className="brand-gradient relative hidden flex-col justify-between p-8 text-white md:flex">
+        <div className="relative hidden flex-col justify-between bg-navy-2 p-8 text-white md:flex">
           <div>
             <div className="flex items-center gap-2">
               <span className="grid size-9 place-items-center rounded-xl bg-white/15">
@@ -126,7 +153,7 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
 
         {/* form panel */}
         <div className="p-6 sm:p-10">
-          <div className="mb-8 flex rounded-xl bg-white/[0.04] p-1 ring-1 ring-inset ring-white/10" role="tablist" aria-label="Sign in as">
+          <div className="mb-8 flex rounded-xl bg-black/[0.04] p-1 ring-1 ring-inset ring-black/10" role="tablist" aria-label="Sign in as">
             {(
               [
                 ["customer", UserRound, "Customer"],
@@ -145,7 +172,7 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                 }}
                 className={cn(
                   "flex flex-1 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium transition",
-                  role === k ? "bg-elevated text-fg shadow-card ring-1 ring-inset ring-white/10" : "text-muted hover:text-fg",
+                  role === k ? "bg-elevated text-fg shadow-card ring-1 ring-inset ring-black/10" : "text-muted hover:text-fg",
                 )}
               >
                 <Icon className="size-4" aria-hidden /> {label}
@@ -161,7 +188,7 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                 <button
                   type="button"
                   onClick={() => onLogin({ role: "owner" })}
-                  className="brand-gradient mt-8 w-full rounded-xl py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgba(249,115,22,0.9)] transition hover:brightness-110"
+                  className="brand-gradient mt-8 w-full rounded-xl py-3 text-sm font-semibold text-[#0f1111] shadow-[0_10px_30px_-12px_rgba(255,153,0,0.45)] transition hover:brightness-110"
                 >
                   Continue to owner dashboard
                 </button>
@@ -186,13 +213,13 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                     setError(null);
                   }}
                   placeholder="e.g. ravi.ali@webmail.example"
-                  className="mt-1.5 w-full rounded-xl border border-line bg-elevated px-4 py-3 text-sm text-fg placeholder:text-faint focus:border-orange-500/60 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                  className="mt-1.5 w-full rounded-xl border border-line bg-elevated px-4 py-3 text-sm text-fg placeholder:text-faint focus:border-amz-orange focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                 />
-                {error && <p className="mt-2 text-xs text-rose-300" role="alert">{error}</p>}
+                {error && <p className="mt-2 text-xs text-rose-700" role="alert">{error}</p>}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="brand-gradient mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgba(249,115,22,0.9)] transition hover:brightness-110 disabled:opacity-60"
+                  className="brand-gradient mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-[#0f1111] shadow-[0_10px_30px_-12px_rgba(255,153,0,0.45)] transition hover:brightness-110 disabled:opacity-60"
                 >
                   {loading && <Loader2 className="size-4 animate-spin" aria-hidden />} Continue
                 </button>
@@ -212,7 +239,7 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                             setIdentifier(c.email);
                             setError(null);
                           }}
-                          className="flex items-center gap-2 rounded-xl border border-line px-2.5 py-2 text-left transition hover:border-orange-500/40 hover:bg-white/[0.03]"
+                          className="flex items-center gap-2 rounded-xl border border-line px-2.5 py-2 text-left transition hover:border-orange-500/40 hover:bg-black/[0.03]"
                         >
                           <Avatar c={c} small />
                           <span className="min-w-0">
@@ -234,7 +261,14 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                 <p className="mt-1 text-sm text-muted">
                   Enter the 6-digit OTP sent to <span className="text-fg">{found && maskEmail(found.email)}</span>
                 </p>
-                <div className="mt-8 flex justify-between gap-2" role="group" aria-label="One-time password">
+                <div
+                  className="mt-8 flex justify-between gap-2"
+                  role="group"
+                  aria-label="One-time password"
+                  onClick={(e) => {
+                    if (e.target === e.currentTarget) otpRefs.current[Math.max(0, otp.findIndex((x) => !x))]?.focus();
+                  }}
+                >
                   {otp.map((d, i) => (
                     <input
                       key={i}
@@ -242,32 +276,36 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                         otpRefs.current[i] = el;
                       }}
                       value={d}
+                      autoFocus={i === 0}
                       inputMode="numeric"
                       autoComplete={i === 0 ? "one-time-code" : "off"}
                       aria-label={`Digit ${i + 1}`}
                       onChange={(e) => setDigit(i, e.target.value)}
                       onKeyDown={(e) => e.key === "Backspace" && !otp[i] && i > 0 && otpRefs.current[i - 1]?.focus()}
                       onPaste={(e) => {
-                        const p = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-                        if (p.length === 6) {
-                          e.preventDefault();
-                          setOtp(p.split(""));
-                        }
+                        e.preventDefault();
+                        setDigit(i, e.clipboardData.getData("text"));
                       }}
-                      className="size-12 rounded-xl border border-line bg-elevated text-center text-lg font-semibold text-fg focus:border-orange-500/60 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                      onFocus={(e) => e.target.select()}
+                      className="size-12 rounded-xl border border-line-strong bg-elevated text-center text-lg font-semibold text-fg caret-orange-400 focus:border-amz-orange focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                     />
                   ))}
                 </div>
-                {error && <p className="mt-3 text-xs text-rose-300" role="alert">{error}</p>}
+                {error && <p className="mt-3 text-xs text-rose-700" role="alert">{error}</p>}
                 <button
                   type="submit"
-                  className="brand-gradient mt-6 w-full rounded-xl py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgba(249,115,22,0.9)] transition hover:brightness-110"
+                  className="brand-gradient mt-6 w-full rounded-xl py-3 text-sm font-semibold text-[#0f1111] shadow-[0_10px_30px_-12px_rgba(255,153,0,0.45)] transition hover:brightness-110"
                 >
                   Verify & sign in
                 </button>
-                <p className="mt-4 rounded-xl border border-dashed border-line p-3 text-center text-2xs text-faint">
-                  Demo OTP: <span className="font-mono font-semibold text-orange-300">{DEMO_OTP}</span> (no SMS is sent)
-                </p>
+                <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-dashed border-line px-3 py-2.5 text-2xs text-faint">
+                  <span>
+                    Demo OTP: <span className="font-mono font-semibold text-orange-800">{DEMO_OTP}</span> (no SMS is sent)
+                  </span>
+                  <button type="button" onClick={useDemoOtp} className="shrink-0 rounded-lg bg-black/[0.05] px-2.5 py-1 font-semibold text-orange-800 ring-1 ring-inset ring-orange-500/25 hover:bg-orange-500/10">
+                    Use demo OTP
+                  </button>
+                </div>
               </motion.form>
             )}
           </AnimatePresence>

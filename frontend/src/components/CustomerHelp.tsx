@@ -51,7 +51,7 @@ export function CustomerHelp({
     <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
       <section aria-label="Support chat" className="min-w-0">
         {!started ? (
-          <div className="overflow-hidden rounded-3xl border border-line bg-[#0a0d14]">
+          <div className="overflow-hidden rounded-3xl border border-line bg-navy">
             <AnimatedAIChat
               className="min-h-[540px]"
               title={`Hi ${customer.first_name}, how can we help?`}
@@ -97,19 +97,19 @@ export function CustomerHelp({
               return (
                 <li key={t.id} className="rounded-2xl border border-line bg-surface p-3">
                   <div className="flex items-center gap-2">
-                    <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-white/[0.04]">
+                    <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-black/[0.04]">
                       <Icon className="size-3.5 text-muted" aria-hidden />
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-xs font-semibold capitalize text-fg">{pretty(t.category)}</span>
                       <span className="block font-mono text-2xs text-faint">{t.id}{t.order_id ? ` · ${t.order_id}` : ""}</span>
                     </span>
-                    {t.source === "agent" && <Chip className="bg-orange-500/10 text-orange-200 ring-orange-500/25">new</Chip>}
+                    {t.source === "agent" && <Chip className="bg-orange-500/10 text-orange-800 ring-orange-500/25">new</Chip>}
                   </div>
                   {t.summary && <p className="mt-2 line-clamp-2 text-2xs leading-relaxed text-muted">{t.summary}</p>}
                   <div className="mt-2 flex flex-wrap items-center gap-1.5 text-2xs text-faint">
                     {t.status && <Chip className={statusTone(t.status)}>{pretty(t.status)}</Chip>}
-                    {t.amount != null && <Chip className="bg-amber-500/10 text-amber-200 ring-amber-500/25">{inr(t.amount)}</Chip>}
+                    {t.amount != null && <Chip className="bg-amber-500/10 text-amber-800 ring-amber-500/25">{inr(t.amount)}</Chip>}
                     <span className="ml-auto">{humanDate(t.created_at)}</span>
                   </div>
                 </li>

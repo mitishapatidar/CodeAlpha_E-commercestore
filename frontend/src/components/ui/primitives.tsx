@@ -13,7 +13,7 @@ export function Chip({ children, className, title, mono }: { children: ReactNode
       className={cx(
         "inline-flex max-w-full items-center gap-1 truncate rounded-full px-2 py-0.5 text-2xs font-medium ring-1 ring-inset",
         mono && "font-mono",
-        className ?? "bg-white/[0.04] text-muted ring-white/10",
+        className ?? "bg-black/[0.04] text-muted ring-black/10",
       )}
     >
       {children}
@@ -60,7 +60,7 @@ export function IconButton({ label, children, className, ...rest }: ButtonHTMLAt
       aria-label={label}
       title={label}
       className={cx(
-        "inline-flex size-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-white/5 hover:text-fg disabled:opacity-40",
+        "inline-flex size-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-black/5 hover:text-fg disabled:opacity-40",
         className,
       )}
       {...rest}
@@ -78,10 +78,10 @@ export function Button({
 }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "ghost" | "danger" }) {
   const v =
     variant === "primary"
-      ? "brand-gradient text-white shadow-[0_6px_20px_-8px_rgba(249,115,22,0.6)] hover:brightness-110"
+      ? "brand-gradient text-[#0f1111] shadow-[0_6px_20px_-8px_rgba(255,153,0,0.35)] hover:brightness-110"
       : variant === "danger"
-        ? "bg-rose-500/10 text-rose-300 ring-1 ring-inset ring-rose-500/30 hover:bg-rose-500/20"
-        : "bg-white/[0.04] text-fg ring-1 ring-inset ring-white/10 hover:bg-white/[0.08]";
+        ? "bg-rose-500/10 text-rose-700 ring-1 ring-inset ring-rose-500/30 hover:bg-rose-500/20"
+        : "bg-black/[0.04] text-fg ring-1 ring-inset ring-black/10 hover:bg-black/[0.08]";
   return (
     <button
       type="button"
@@ -132,12 +132,12 @@ function ToastItem({ t, dismiss }: { t: Toast; dismiss: (id: string) => void }) 
       transition={{ duration: 0.18, ease: "easeOut" }}
       className="pointer-events-auto flex items-start gap-3 rounded-xl border border-line-strong bg-elevated p-3 shadow-card"
     >
-      <Icon className={cx("mt-0.5 size-4 shrink-0", t.kind === "error" ? "text-rose-400" : "text-emerald-400")} aria-hidden />
+      <Icon className={cx("mt-0.5 size-4 shrink-0", t.kind === "error" ? "text-rose-700" : "text-emerald-700")} aria-hidden />
       <p className="min-w-0 flex-1 text-sm text-fg">{t.text}</p>
       {t.action && (
         <button
           type="button"
-          className="text-xs font-semibold text-orange-300 hover:text-orange-200"
+          className="text-xs font-semibold text-orange-800 hover:text-orange-800"
           onClick={() => {
             t.action?.run();
             dismiss(t.id);

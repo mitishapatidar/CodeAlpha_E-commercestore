@@ -91,7 +91,7 @@ export function Sidebar({
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search customer, email, ID"
-            className="w-full rounded-xl border border-line bg-elevated py-2 pl-9 pr-9 text-sm text-fg placeholder:text-faint focus:border-orange-500/50 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+            className="w-full rounded-xl border border-line bg-elevated py-2 pl-9 pr-9 text-sm text-fg placeholder:text-faint focus:border-amz-orange focus:outline-none focus:ring-2 focus:ring-orange-500/20"
           />
           {q ? (
             <button type="button" aria-label="Clear search" onClick={() => setQ("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-faint hover:text-fg">
@@ -122,7 +122,7 @@ export function Sidebar({
                     onSelectCustomer(c);
                     setQ("");
                   }}
-                  className="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left hover:bg-white/5"
+                  className="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left hover:bg-black/5"
                 >
                   <Avatar c={c} small />
                   <span className="min-w-0 flex-1">
@@ -238,9 +238,9 @@ export function Sidebar({
                             disabled={busy}
                             onClick={() => runScenario(s)}
                             title={s.message}
-                            className="group flex w-full items-center gap-2 rounded-xl border border-transparent px-2 py-1.5 text-left transition hover:border-line hover:bg-white/[0.03] disabled:opacity-50"
+                            className="group flex w-full items-center gap-2 rounded-xl border border-transparent px-2 py-1.5 text-left transition hover:border-line hover:bg-black/[0.03] disabled:opacity-50"
                           >
-                            <span className="grid size-6 shrink-0 place-items-center rounded-lg bg-white/[0.04] text-faint transition group-hover:brand-gradient group-hover:text-white">
+                            <span className="grid size-6 shrink-0 place-items-center rounded-lg bg-black/[0.04] text-faint transition group-hover:brand-gradient group-hover:text-[#0f1111]">
                               <Play className="size-3" aria-hidden />
                             </span>
                             <span className="min-w-0 flex-1 truncate text-xs text-fg">{s.title}</span>
@@ -283,7 +283,7 @@ export function Avatar({ c, small }: { c: Pick<Customer, "first_name" | "last_na
   return (
     <span
       className={cx(
-        "grid shrink-0 place-items-center rounded-full bg-gradient-to-br from-slate-600 to-slate-800 font-semibold text-white ring-1 ring-white/10",
+        "grid shrink-0 place-items-center rounded-full bg-gradient-to-br from-slate-600 to-slate-800 font-semibold text-white ring-1 ring-black/10",
         small ? "size-7 text-2xs" : "size-10 text-sm",
       )}
       aria-hidden

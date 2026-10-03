@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 import type { ActionRecord, ChatMessage, Decision, TurnRecord } from "@/types";
 
 const ACTION_META: Record<string, { icon: typeof Ticket; tone: string; label: string }> = {
-  escalation: { icon: ShieldAlert, tone: "text-rose-300 bg-rose-500/10 ring-rose-500/25", label: "Escalation" },
-  refund: { icon: ReceiptIndianRupee, tone: "text-amber-300 bg-amber-500/10 ring-amber-500/25", label: "Refund" },
-  return: { icon: Undo2, tone: "text-sky-300 bg-sky-500/10 ring-sky-500/25", label: "Return" },
-  ticket: { icon: Ticket, tone: "text-slate-300 bg-slate-500/10 ring-slate-500/25", label: "Ticket" },
+  escalation: { icon: ShieldAlert, tone: "text-rose-700 bg-rose-500/10 ring-rose-500/25", label: "Escalation" },
+  refund: { icon: ReceiptIndianRupee, tone: "text-amber-800 bg-amber-500/10 ring-amber-500/25", label: "Refund" },
+  return: { icon: Undo2, tone: "text-sky-700 bg-sky-500/10 ring-sky-500/25", label: "Return" },
+  ticket: { icon: Ticket, tone: "text-slate-700 bg-slate-500/10 ring-slate-500/25", label: "Ticket" },
 };
 
 function Kpi({ label, value, hint, accent }: { label: string; value: string; hint?: string; accent?: string }) {
@@ -84,7 +84,7 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
             <button
               type="button"
               onClick={load}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-white/10 hover:bg-white/[0.08]"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-black/[0.04] px-3 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-black/10 hover:bg-black/[0.08]"
             >
               <RefreshCw className="size-3.5" aria-hidden /> Refresh
             </button>
@@ -96,8 +96,8 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
           ) : (
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               <Kpi label="Conversations" value={String(stats.total)} hint={`${stats.flagged} with risk flags`} />
-              <Kpi label="Refunds issued" value={inr(stats.refundSum)} hint={`${stats.refundCount} refund${stats.refundCount === 1 ? "" : "s"} within policy`} accent="text-amber-200" />
-              <Kpi label="Escalations" value={String(stats.escalations)} hint="handed to human teams" accent="text-rose-200" />
+              <Kpi label="Refunds issued" value={inr(stats.refundSum)} hint={`${stats.refundCount} refund${stats.refundCount === 1 ? "" : "s"} within policy`} accent="text-amber-800" />
+              <Kpi label="Escalations" value={String(stats.escalations)} hint="handed to human teams" accent="text-rose-700" />
               <Kpi label="Avg latency" value={`${stats.avgLatency} ms`} hint="per agent turn" />
             </div>
           )}
@@ -105,7 +105,7 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
           {/* decision mix */}
           <div className="mt-3 rounded-2xl border border-line bg-surface p-4">
             <SectionLabel right={<span className="text-2xs text-faint">click to filter</span>}>Decision mix</SectionLabel>
-            <div className="flex h-2.5 overflow-hidden rounded-full bg-white/[0.04]" aria-hidden>
+            <div className="flex h-2.5 overflow-hidden rounded-full bg-black/[0.04]" aria-hidden>
               {(Object.keys(stats.by) as Decision[]).map((d) =>
                 stats.total ? <div key={d} className={DECISION[d].dot} style={{ width: `${(stats.by[d] / stats.total) * 100}%` }} /> : null,
               )}
@@ -119,7 +119,7 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
                   aria-pressed={filter === d}
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset transition",
-                    filter === d ? "bg-white/[0.08] text-fg ring-white/20" : "text-muted ring-white/10 hover:text-fg",
+                    filter === d ? "bg-black/[0.08] text-fg ring-black/20" : "text-muted ring-black/10 hover:text-fg",
                   )}
                 >
                   {d !== "ALL" && <span className={cn("size-2 rounded-full", DECISION[d].dot)} aria-hidden />}
@@ -168,14 +168,14 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
                               <Chip key={i}>{pretty(it.type)}{it.order_id ? ` · ${it.order_id}` : ""}</Chip>
                             ))}
                             {r.flags.map((f) => (
-                              <Chip key={f} className="bg-rose-500/10 text-rose-200 ring-rose-500/25">
+                              <Chip key={f} className="bg-rose-500/10 text-rose-700 ring-rose-500/25">
                                 <AlertTriangle className="size-3" aria-hidden /> {FLAG_LABEL[f] ?? f}
                               </Chip>
                             ))}
                           </div>
                         </div>
                         <div className="shrink-0 text-right">
-                          {r.refund_amount != null && <div className="text-xs font-semibold text-amber-200">{inr(r.refund_amount)}</div>}
+                          {r.refund_amount != null && <div className="text-xs font-semibold text-amber-800">{inr(r.refund_amount)}</div>}
                           {r.ticket_id && <div className="font-mono text-2xs text-faint">{r.ticket_id}</div>}
                         </div>
                       </motion.button>
@@ -197,7 +197,7 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
                       type="button"
                       onClick={() => setActionFilter(k)}
                       aria-pressed={actionFilter === k}
-                      className={cn("rounded-md px-2 py-0.5 text-2xs font-medium", actionFilter === k ? "bg-white/[0.08] text-fg" : "text-faint hover:text-fg")}
+                      className={cn("rounded-md px-2 py-0.5 text-2xs font-medium", actionFilter === k ? "bg-black/[0.08] text-fg" : "text-faint hover:text-fg")}
                     >
                       {k === "all" ? "All" : ACTION_META[k].label}
                     </button>
@@ -214,7 +214,7 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
             ) : (
               <div className="overflow-hidden rounded-2xl border border-line">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/[0.03] text-2xs uppercase tracking-wider text-faint">
+                  <thead className="bg-black/[0.03] text-2xs uppercase tracking-wider text-faint">
                     <tr>
                       <th className="px-3 py-2 font-medium">Type</th>
                       <th className="px-3 py-2 font-medium">Reference</th>
@@ -240,7 +240,7 @@ export function OwnerReview({ onError }: { onError: (msg: string, retry?: () => 
                             {a.order_id && <div className="font-mono text-faint">{a.order_id}</div>}
                           </td>
                           <td className="max-w-[320px] px-3 py-2 text-muted">
-                            {a.type === "refund" && <span className="font-semibold text-amber-200">{inr(Number(a.amount))}</span>}{" "}
+                            {a.type === "refund" && <span className="font-semibold text-amber-800">{inr(Number(a.amount))}</span>}{" "}
                             {a.type === "escalation" ? (
                               <span>
                                 <span className="text-fg">{a.team}</span> · {a.priority} · <span className="text-faint">{String(a.reason ?? "").slice(0, 120)}</span>

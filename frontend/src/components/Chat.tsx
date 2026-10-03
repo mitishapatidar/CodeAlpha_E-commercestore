@@ -17,7 +17,7 @@ const SUGGESTIONS = [
 
 function AgentAvatar() {
   return (
-    <span className="brand-gradient grid size-8 shrink-0 place-items-center rounded-full shadow-[0_4px_14px_-6px_rgba(249,115,22,0.8)]" aria-hidden>
+    <span className="brand-gradient grid size-8 shrink-0 place-items-center rounded-full shadow-[0_4px_14px_-6px_rgba(255,153,0,0.4)]" aria-hidden>
       <svg viewBox="0 0 32 32" className="size-4">
         <path d="M9 22V10l14 12V10" fill="none" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
@@ -43,7 +43,7 @@ function Thinking() {
               <span
                 className={cx(
                   "rounded-md px-1.5 py-0.5 text-2xs font-medium transition-colors duration-200",
-                  i === step ? "brand-gradient text-white" : i < step ? "bg-white/[0.06] text-fg" : "text-faint",
+                  i === step ? "brand-gradient text-[#0f1111]" : i < step ? "bg-black/[0.06] text-fg" : "text-faint",
                 )}
               >
                 {l}
@@ -81,12 +81,12 @@ function AgentBubble({ m, selected, onSelect, showTrace }: { m: ChatMessage; sel
             <div className="mb-2.5 flex flex-wrap items-center gap-1.5">
               <DecisionBadge decision={r.decision} size="md" />
               {r.refund_amount != null && (
-                <Chip className="bg-amber-500/10 text-amber-200 ring-amber-500/25">
+                <Chip className="bg-amber-500/10 text-amber-800 ring-amber-500/25">
                   <ReceiptIndianRupee className="size-3" aria-hidden /> {inr(r.refund_amount)}
                 </Chip>
               )}
               {r.ticket_id && (
-                <Chip mono className="bg-white/[0.04] text-fg ring-white/10" title="Reference created by the agent">
+                <Chip mono className="bg-black/[0.04] text-fg ring-black/10" title="Reference created by the agent">
                   <Ticket className="size-3" aria-hidden /> {r.ticket_id}
                 </Chip>
               )}
@@ -96,7 +96,7 @@ function AgentBubble({ m, selected, onSelect, showTrace }: { m: ChatMessage; sel
                 </Chip>
               )}
               {r.flags.map((f) => (
-                <Chip key={f} className="bg-rose-500/10 text-rose-200 ring-rose-500/25">
+                <Chip key={f} className="bg-rose-500/10 text-rose-700 ring-rose-500/25">
                   <AlertTriangle className="size-3" aria-hidden /> {FLAG_LABEL[f] ?? f}
                 </Chip>
               ))}
@@ -117,13 +117,13 @@ function AgentBubble({ m, selected, onSelect, showTrace }: { m: ChatMessage; sel
               {m.scenario && (
                 <>
                   <span>·</span>
-                  <span className={m.scenario.expected_decision === r.decision ? "text-emerald-400" : "text-rose-400"}>
+                  <span className={m.scenario.expected_decision === r.decision ? "text-emerald-700" : "text-rose-700"}>
                     expected {m.scenario.expected_decision} {m.scenario.expected_decision === r.decision ? "✓" : "✗"}
                   </span>
                 </>
               )}
               {selected && (
-                <span className="ml-auto inline-flex items-center gap-1 text-orange-300">
+                <span className="ml-auto inline-flex items-center gap-1 text-orange-800">
                   <Eye className="size-3" aria-hidden /> in Agent Brain
                 </span>
               )}
@@ -210,7 +210,7 @@ export function Chat({
       <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-6">
         {messages.length === 0 && !sending ? (
           <div className="mx-auto flex h-full max-w-lg flex-col items-center justify-center text-center">
-            <div className="brand-gradient mb-4 grid size-12 place-items-center rounded-2xl shadow-[0_10px_30px_-10px_rgba(249,115,22,0.8)]">
+            <div className="brand-gradient mb-4 grid size-12 place-items-center rounded-2xl shadow-[0_10px_30px_-10px_rgba(255,153,0,0.4)]">
               <svg viewBox="0 0 32 32" className="size-6" aria-hidden>
                 <path d="M9 22V10l14 12V10" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -250,11 +250,11 @@ export function Chat({
                   {m.role === "customer" ? (
                     <div className="flex justify-end">
                       <div className="max-w-[min(560px,85%)]">
-                        <div className="rounded-2xl rounded-tr-md bg-elevated px-4 py-2.5 text-sm leading-relaxed text-fg ring-1 ring-inset ring-white/[0.06]">
+                        <div className="rounded-2xl rounded-tr-md bg-elevated px-4 py-2.5 text-sm leading-relaxed text-fg ring-1 ring-inset ring-black/[0.06]">
                           <p className="whitespace-pre-wrap break-words">{m.text}</p>
                         </div>
                         <div className="mt-1 px-1 text-right text-2xs text-faint">
-                          {m.scenario && isConsole && <span className="mr-1.5 text-orange-300/80">Scenario · {m.scenario.title}</span>}
+                          {m.scenario && isConsole && <span className="mr-1.5 text-orange-800/80">Scenario · {m.scenario.title}</span>}
                           {timeOf(m.at)}
                         </div>
                       </div>
@@ -272,7 +272,7 @@ export function Chat({
 
       {/* composer */}
       <div className="shrink-0 border-t border-line p-3 sm:p-4">
-        <div className="mx-auto flex max-w-3xl items-end gap-2 rounded-2xl border border-line bg-surface p-2 focus-within:border-orange-500/40 focus-within:ring-2 focus-within:ring-orange-500/15">
+        <div className="mx-auto flex max-w-3xl items-end gap-2 rounded-2xl border border-line bg-surface p-2 focus-within:border-amz-orange focus-within:ring-2 focus-within:ring-orange-500/15">
           <label htmlFor="composer" className="sr-only">
             Message as the customer
           </label>
@@ -292,7 +292,7 @@ export function Chat({
             onClick={submit}
             disabled={!draft.trim() || sending || !customer}
             aria-label="Send message"
-            className="brand-gradient grid size-9 shrink-0 place-items-center rounded-xl text-white transition hover:brightness-110 disabled:opacity-40"
+            className="brand-gradient grid size-9 shrink-0 place-items-center rounded-xl text-[#0f1111] transition hover:brightness-110 disabled:opacity-40"
           >
             <ArrowUp className="size-4" />
           </button>
