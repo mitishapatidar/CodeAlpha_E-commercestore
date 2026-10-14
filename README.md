@@ -177,12 +177,8 @@ Edit only `data/policies.json`: add a version with its `applies_from` (and set `
 one). The running server picks it up on the next request. For a retroactive rule, set
 `meta.version_selection` to `"request_date"`. `pytest -q` shows which decisions changed.
 
-## Team ELEVATE
+## Author
 
-| Member | GitHub | Role |
-|---|---|---|
-| Mitisha Patidar (lead) | [@mitishapatidar](https://github.com/mitishapatidar) | <ROLE> |
-| Khushi | [@skhushi2978-del](https://github.com/skhushi2978-del) | <ROLE> |
-| Samiksha Tiwari | [@tiwarisamiksha729-crypto](https://github.com/tiwarisamiksha729-crypto) | <ROLE> |
+**Mitisha Patidar** · [@mitishapatidar](https://github.com/mitishapatidar)
 
 Built with Claude Code (Claude Opus 5.5) as the coding assistant; prompts are logged in [prompt_log.md](prompt_log.md).
