@@ -7,7 +7,7 @@
   <div>
     <div class="brand">{{ p.brand }}</div>
     <h1>{{ p.name }}</h1>
-    <div class="rate"><span>{{ p.rating|floatformat:1 }} &#9733;</span> {{ p.review_count|intcomma }} ratings</div>
+    <div class="rate">{% if p.review_count %}<span>{{ p.rating|floatformat:1 }} &#9733;</span> {{ p.review_count|intcomma }} ratings{% else %}No ratings yet{% endif %}</div>
     <hr>
     {% if p.discount %}<span class="off-inline">-{{ p.discount }}%</span>{% endif %}
     <span class="big-price">₹{{ p.price|intcomma }}</span>

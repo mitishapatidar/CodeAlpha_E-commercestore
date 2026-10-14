@@ -6,7 +6,7 @@
   <div class="body">
     <div class="brand">{{ p.brand }}</div>
     <a href="{% url 'product_detail' p.pk %}" class="name">{{ p.name }}</a>
-    <div class="rate"><span>{{ p.rating|floatformat:1 }} &#9733;</span> ({{ p.review_count|intcomma }})</div>
+    <div class="rate">{% if p.review_count %}<span>{{ p.rating|floatformat:1 }} &#9733;</span> ({{ p.review_count|intcomma }}){% else %}No ratings yet{% endif %}</div>
     <div class="price">₹{{ p.price|intcomma }} {% if p.mrp > p.price %}<s>₹{{ p.mrp|intcomma }}</s>{% endif %}</div>
     {% if p.in_stock %}
     <form method="post" action="{% url 'cart_add' p.pk %}" class="add-form">{% csrf_token %}

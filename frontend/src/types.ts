@@ -99,7 +99,7 @@ export interface Product {
   price: number;
   mrp: number;
   discount_percent: number;
-  rating: number;
+  rating: number | null;
   review_count: number;
   warranty_months: number;
   returnable: boolean;

@@ -189,10 +189,16 @@ function ProductCard({ p, qty, onAsk, onAdd }: { p: Product; qty: number; onAsk:
           {p.product_name}
         </h3>
         <div className="mt-1.5 flex items-center gap-1 text-2xs">
-          <span className="inline-flex items-center gap-0.5 rounded bg-emerald-600 px-1 py-px font-semibold text-white">
-            {p.rating.toFixed(1)} <Star className="size-2.5 fill-current" aria-hidden />
-          </span>
-          <span className="text-faint">({p.review_count.toLocaleString("en-IN")})</span>
+          {p.rating != null && p.review_count > 0 ? (
+            <>
+              <span className="inline-flex items-center gap-0.5 rounded bg-emerald-600 px-1 py-px font-semibold text-white">
+                {p.rating.toFixed(1)} <Star className="size-2.5 fill-current" aria-hidden />
+              </span>
+              <span className="text-faint">({p.review_count.toLocaleString("en-IN")})</span>
+            </>
+          ) : (
+            <span className="text-faint">No ratings yet</span>
+          )}
         </div>
         <div className="mt-2 flex items-baseline gap-1.5">
           <span className="text-base font-semibold text-fg">{inr(p.price)}</span>
