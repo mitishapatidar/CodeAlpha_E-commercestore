@@ -45,6 +45,8 @@ export const api = {
   products: (q = "", category = "", limit = 24) =>
     request<Product[]>(`/products?q=${encodeURIComponent(q)}&category=${encodeURIComponent(category)}&limit=${limit}`),
   product: (id: string) => request<ProductDetail>(`/products/${encodeURIComponent(id)}`),
+  address: (customerId: string) =>
+    request<{ phone: string; address: string; city: string; state: string; pincode: string }>(`/customers/${encodeURIComponent(customerId)}/address`),
   placeOrder: (body: {
     customer_id: string;
     items: { product_id: string; quantity: number }[];

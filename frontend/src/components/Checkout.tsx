@@ -1,5 +1,5 @@
 import { Banknote, CheckCircle2, CreditCard, Loader2, Lock, MapPin, Smartphone, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../api";
 import { inr } from "../format";
 import type { Customer, PlacedOrder, Product } from "../types";
@@ -49,6 +49,22 @@ export function Checkout({
   const [card, setCard] = useState({ number: "4111 1111 1111 1111", expiry: "12/30", cvv: "123" });
   const [error, setError] = useState<string | null>(null);
   const [placed, setPlaced] = useState<PlacedOrder | null>(null);
+
+  useEffect(() => {
+    api
+      .address(customer.customer_id)
+      .then((a) =>
+        setShip((s) => ({
+          ...s,
+          phone: s.phone || a.phone.replace(/\D/g, "").slice(-10),
+          address: s.address || a.address,
+          city: s.city || a.city,
+          state: s.state || a.state,
+          pincode: s.pincode || a.pincode,
+        })),
+      )
+      .catch(() => undefined);
+  }, [customer.customer_id]);
 
   const addressOk = ship.name.trim() && /^\d{10}$/.test(ship.phone) && ship.address.trim() && ship.city.trim() && ship.state.trim() && /^\d{6}$/.test(ship.pincode);
 

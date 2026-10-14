@@ -57,8 +57,7 @@ def customers(q: str = "", limit: int = 20) -> list[dict]:
         hay = f"{c['customer_id']} {c['first_name']} {c['last_name']} {c['email']}".lower()
         if not q or q in hay:
             out.append({k: c.get(k) for k in ("customer_id", "first_name", "last_name", "email", "city",
-                                               "loyalty_tier", "customer_segment", "account_status", "phone",
-                                               "address", "state", "pincode")})
+                                               "loyalty_tier", "customer_segment", "account_status")})
             if len(out) >= limit:
                 break
     return out
@@ -125,6 +124,15 @@ class PlaceOrder(BaseModel):
 
 
 PAY_METHODS = {"UPI", "credit_card", "debit_card", "cash_on_delivery"}
+
+
+@app.get("/customers/{customer_id}/address")
+def customer_address(customer_id: str) -> dict:
+    """Saved delivery address, used to prefill checkout."""
+    c = get_store().customer(customer_id)
+    if not c:
+        raise HTTPException(404, "Unknown customer")
+    return {k: (str(c[k]) if c.get(k) is not None else "") for k in ("phone", "address", "city", "state", "pincode")}
 
 
 @app.post("/orders")
