@@ -82,6 +82,15 @@ def merge_pending(session: Session, new: list[Intent], text: str, attachments: b
     if not session.pending:
         return new, notes
     generic = all(i.type in ("other", "greeting") for i in new)
+    if not generic and all(p["missing"] == "intent" for p in session.pending):
+        # we only asked what the problem is: the new message is the real request, for the order we already found
+        prev = next((p["intent"] for p in session.pending if p["intent"].get("order_id")), None)
+        for i in new:
+            if prev and not i.order_id:
+                i.order_id = prev["order_id"]
+                i.product_hint = i.product_hint or prev.get("product_hint")
+                notes.append(f"Applied {prev['order_id']} from the previous turn.")
+        return new, notes
     pending_types = {p["intent"]["type"] for p in session.pending}
     # a bare detail ("it's defective", "the Sony one") answers the question we asked; it isn't a new request
     if not generic and all(not i.order_id for i in new) and             all(i.type in ("other", "product_issue") or i.type in pending_types for i in new):

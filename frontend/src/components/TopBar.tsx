@@ -81,14 +81,14 @@ export function TopBar({
           </span>
         </span>
         {online === false && (
-          <button type="button" onClick={retry} className="inline-flex items-center gap-1 text-2xs font-semibold text-orange-800 hover:text-orange-800">
+          <button type="button" onClick={retry} className="inline-flex items-center gap-1 text-2xs font-semibold text-amber-400 hover:text-amber-300">
             <RefreshCw className="size-3" /> Retry
           </button>
         )}
         {health && (
           <>
             <Chip className="bg-black/[0.03] text-muted ring-black/10" title={health.model}>
-              <Sparkles className="size-3 text-orange-800" aria-hidden />
+              <Sparkles className="size-3 text-amber-400" aria-hidden />
               <span className="max-w-[180px] truncate whitespace-nowrap">{health.llm_enabled === false ? "Rules engine · LLM off" : health.model}</span>
             </Chip>
             <div className="hidden items-center gap-1 lg:flex">
@@ -126,7 +126,7 @@ export function TopBar({
               onClick={() => setView(key)}
               className={cx(
                 "inline-flex items-center gap-1.5 whitespace-nowrap rounded-[10px] px-2.5 py-1 text-xs font-medium transition",
-                view === key ? "bg-elevated text-fg shadow-card ring-1 ring-inset ring-black/10" : "text-muted hover:text-fg",
+                view === key ? "bg-white/20 text-white font-semibold shadow-sm ring-1 ring-white/20" : "text-slate-300 hover:text-white hover:bg-white/10",
               )}
             >
               <Icon className="size-3.5" aria-hidden />
@@ -139,7 +139,7 @@ export function TopBar({
             <BrainCircuit className="size-4" />
           </IconButton>
         )}
-        <span className="hidden rounded-full bg-orange-500/10 px-2 py-0.5 text-2xs font-semibold text-orange-800 ring-1 ring-inset ring-orange-500/25 md:inline">Owner</span>
+        <span className="hidden rounded-full bg-orange-500/15 px-2 py-0.5 text-2xs font-semibold text-amber-300 ring-1 ring-inset ring-amber-400/30 md:inline">Owner</span>
         <IconButton label="Log out" onClick={onLogout}>
           <LogOut className="size-4" />
         </IconButton>

@@ -6,7 +6,9 @@ import { Avatar } from "@/components/Sidebar";
 import { cn } from "@/lib/utils";
 import type { Customer, Scenario, Session } from "@/types";
 
-const DEMO_OTP = "123456";
+function generateOtp(): string {
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
 
 function maskEmail(email: string) {
   const [u, d] = email.split("@");
@@ -18,6 +20,7 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
   const [step, setStep] = useState<"id" | "otp">("id");
   const [identifier, setIdentifier] = useState("");
   const [found, setFound] = useState<Customer | null>(null);
+  const [activeOtp, setActiveOtp] = useState<string>(() => generateOtp());
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -50,6 +53,8 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
         return;
       }
       setFound(c);
+      const freshOtp = generateOtp();
+      setActiveOtp(freshOtp);
       setStep("otp");
       setOtp(Array(6).fill(""));
     } catch (err) {
@@ -59,14 +64,22 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
     }
   };
 
+  const resendOtp = () => {
+    const freshOtp = generateOtp();
+    setActiveOtp(freshOtp);
+    setOtp(Array(6).fill(""));
+    setError(null);
+    setTimeout(() => otpRefs.current[0]?.focus(), 50);
+  };
+
   const finish = (code: string) => {
     if (code.length < 6) {
       setError("Please enter all 6 digits of the OTP.");
       otpRefs.current[Math.min(code.length, 5)]?.focus();
       return;
     }
-    if (code !== DEMO_OTP) {
-      setError(`That OTP is incorrect. For this demo use ${DEMO_OTP}.`);
+    if (code !== activeOtp) {
+      setError(`That OTP is incorrect. Please enter code: ${activeOtp}.`);
       setOtp(Array(6).fill(""));
       setTimeout(() => otpRefs.current[0]?.focus(), 0);
       return;
@@ -96,8 +109,8 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
   };
 
   const useDemoOtp = () => {
-    setOtp(DEMO_OTP.split(""));
-    finish(DEMO_OTP);
+    setOtp(activeOtp.split(""));
+    finish(activeOtp);
   };
 
   return (
@@ -300,11 +313,25 @@ export function Login({ onLogin }: { onLogin: (s: Session) => void }) {
                 </button>
                 <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-dashed border-line px-3 py-2.5 text-2xs text-faint">
                   <span>
-                    Demo OTP: <span className="font-mono font-semibold text-orange-800">{DEMO_OTP}</span> (no SMS is sent)
+                    Current OTP: <span className="font-mono text-xs font-bold text-amber-500">{activeOtp}</span>
                   </span>
-                  <button type="button" onClick={useDemoOtp} className="shrink-0 rounded-lg bg-black/[0.05] px-2.5 py-1 font-semibold text-orange-800 ring-1 ring-inset ring-orange-500/25 hover:bg-orange-500/10">
-                    Use demo OTP
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={resendOtp}
+                      className="shrink-0 rounded-lg border border-line bg-surface px-2.5 py-1 font-medium text-muted transition hover:bg-black/5 hover:text-fg"
+                      title="Generate new random OTP"
+                    >
+                      New OTP
+                    </button>
+                    <button
+                      type="button"
+                      onClick={useDemoOtp}
+                      className="shrink-0 rounded-lg bg-orange-500/10 px-2.5 py-1 font-semibold text-orange-600 ring-1 ring-inset ring-orange-500/25 transition hover:bg-orange-500/20"
+                    >
+                      Autofill OTP
+                    </button>
+                  </div>
                 </div>
               </motion.form>
             )}

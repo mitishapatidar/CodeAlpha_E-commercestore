@@ -7,4 +7,5 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },
   server: { port: 5173, host: true },
+  build: { chunkSizeWarningLimit: 800 }, // one small SPA bundle; splitting would only add requests
 });

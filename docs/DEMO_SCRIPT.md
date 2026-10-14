@@ -17,7 +17,7 @@ in the **Agent Brain** on the right.
 | 2:40 | 6. Multi-intent | **Multi-intent → Never arrived + refund + address** | "Three requests in one message. Understand shows three intents with dependencies: the refund is held until the delivery dispute is resolved, and the address can't change on a delivered order, so it asks about the address book instead. Overall decision: ESCALATE." |
 | 3:05 | 7. Legal threat | **Safety / legal → Legal threat** | "'Refund ₹50,000 or I sue.' Legal language always escalates. The agent still states the verified fact that the order value is far lower, never negotiates, and opens one ticket for Customer Experience." |
 | 3:15 | Owner review | Top bar **Review** | "This is the owner's dashboard: every decision we just made, the refunds issued in rupees, escalations with team and SLA, and the trace for any decision." Click a row. |
-| 3:30 | Customer login | Logout (top right) → **Customer** → click a demo account → **Continue** → OTP `123456` | "Customers log in like on any e-commerce site. Demo OTP is 123456." |
+| 3:30 | Customer login | Logout (top right) → **Customer** → click a demo account → **Continue** → **Autofill OTP** | "Customers log in like on any e-commerce site. The demo shows the one-time code on screen instead of sending an SMS." |
 | 3:40 | Help & Complaints | **Help & Complaints** → type "I never received ORD-…" (an order from My Orders) → Enter | "This is the customer's complaint centre. The same verified agent answers, and the new request shows up under My support requests." |
 | 3:55 | Close | — | "107 automated tests across all 13 hidden-test categories, policy changes are a data edit, and every decision is explainable. It's an AI that knows when *not* to act." |
 

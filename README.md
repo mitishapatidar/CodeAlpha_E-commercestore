@@ -41,7 +41,7 @@ an unauthorised ₹50,000 refund.
 - **Works without an API key.** A rule-based parser and template writer take over when the LLM is off, fails or
   refuses, so decisions stay identical.
 - **Two dashboards behind one login.** The login page works like Amazon/Flipkart: email or customer ID, then a
-  demo OTP (`123456`). A separate **Owner / Staff** sign-in is on the same page.
+  one-time code shown on screen (demo: no SMS is sent; "Autofill OTP" fills it). A separate **Owner / Staff** sign-in is on the same page.
   - **Customer dashboard:** the NovaMart storefront, My Orders (Track / Get help), and **Help & Complaints**. That
     section has an animated AI chat composer with slash-commands and "My support requests", which lists the
     customer's tickets plus every refund, return or escalation the agent opened for them.
@@ -73,7 +73,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000        # http://localhost:8000/d
 # 2. frontend (second terminal)
 cd frontend
 npm install
-npm run dev                                             # http://localhost:5173 (customer: demo account + OTP 123456; owner: "Owner / Staff" tab)
+npm run dev                                             # http://localhost:5173 (customer: demo account + the OTP shown on screen; owner: "Owner / Staff" tab)
 
 # 3. tests (from the repo root)
 pytest -q

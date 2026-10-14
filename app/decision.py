@@ -217,9 +217,26 @@ def h_greeting(intent, ctx, out):
 
 def h_other(intent, ctx, out):
     out.decision = "ASK"
+    out.pending = {"intent": intent.model_dump(), "missing": "intent", "options": []}
+    if intent.order_id or intent.product_hint:
+        res = resolve_order(intent, ctx.cid, ctx.tracer, ctx.now)
+        if res.ok:
+            # the customer named an order but not the problem: answer from that order, then ask what's wrong
+            o = res.order
+            out.order_id, out.reasons = o["order_id"], res.reasons
+            items = ", ".join(i["product_name"] for i in res.all_items[:3])
+            dlv = as_date(o.get("actual_delivery_date"))
+            state = (f"delivered on {dlv:%d %b %Y}" if o["delivery_status"] == "delivered" and dlv
+                     else o["order_status"].replace("_", " "))
+            out.message = (f"I've found order {o['order_id']} ({items}), {state}. What's the problem with it - "
+                           "is it damaged, defective, the wrong item, missing, or would you like to return it?")
+            out.pending["intent"] = {**intent.model_dump(), "order_id": o["order_id"]}
+            out.facts = {"order_status": o["order_status"], "delivered_on": str(dlv) if dlv else None}
+            return out
+        if res.status in ("not_found", "not_owned"):
+            return _ask_for_order(out, res, intent, ctx, "help with")
     out.message = ("Could you tell me a bit more about what you need help with? If it's about an order, "
                    "please share the order ID.")
-    out.pending = {"intent": intent.model_dump(), "missing": "intent", "options": []}
     return out
 
 

@@ -14,12 +14,16 @@ import {
   Maximize2,
   Minimize2,
   MessageCircle,
+  Minus,
+  Plus,
+  Trash2,
   Monitor,
   Mouse,
   Package,
   Router,
   Search,
   ShieldCheck,
+  ShoppingBag,
   ShoppingCart,
   Smartphone,
   Speaker,
@@ -32,7 +36,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api";
 import { humanDate, inr, pretty, statusTone } from "../format";
 import type { Category, ChatMessage, Customer, Order, Product } from "../types";
@@ -84,7 +88,8 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
     };
   }, [open]);
 
-  const item = "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-fg hover:bg-black/5";
+  const menuItemClass = "flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-medium !text-slate-200 transition hover:bg-white/10 hover:!text-white";
+
   return (
     <div className="relative" ref={ref}>
       <button
@@ -92,41 +97,60 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="flex items-center gap-2 rounded-xl px-2 py-1.5 text-left transition hover:bg-black/5"
+        className="flex items-center gap-2 rounded-xl px-2 py-1.5 text-left transition hover:bg-white/10"
       >
         <Avatar c={customer} small />
         <span className="hidden leading-tight md:block">
-          <span className="block text-2xs text-faint">Hello,</span>
-          <span className="block max-w-[120px] truncate text-xs font-semibold text-fg">{customer.first_name}</span>
+          <span className="block text-2xs text-slate-400">Hello,</span>
+          <span className="block max-w-[120px] truncate text-xs font-semibold text-white">{customer.first_name}</span>
         </span>
-        <ChevronDown className="size-3.5 text-faint" aria-hidden />
+        <ChevronDown className="size-3.5 text-slate-400" aria-hidden />
       </button>
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0, y: -4, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, scale: 0.98 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-30 mt-2 w-64 rounded-2xl border border-line-strong bg-elevated p-2 shadow-2xl"
+            className="absolute right-0 top-full z-50 mt-2 w-64 rounded-2xl border border-slate-700/80 bg-navy-2 p-2 shadow-2xl"
             role="menu"
           >
-            <div className="flex items-center gap-2.5 border-b border-line px-2.5 pb-2.5 pt-1">
+            <div className="flex items-center gap-2.5 border-b border-slate-700/80 px-2.5 pb-2.5 pt-1.5">
               <Avatar c={customer} />
               <span className="min-w-0">
-                <span className="block truncate text-sm font-semibold text-fg">{customer.first_name} {customer.last_name}</span>
-                <span className="block truncate text-2xs text-faint">{customer.email}</span>
+                <span className="block truncate text-sm font-semibold !text-white">{customer.first_name} {customer.last_name}</span>
+                <span className="block truncate text-2xs !text-slate-400">{customer.email}</span>
               </span>
             </div>
-            <div className="pt-1.5">
-              <button type="button" role="menuitem" className={item} onClick={() => { goto("orders"); setOpen(false); }}>
-                <Package className="size-4 text-muted" aria-hidden /> My Orders
+            <div className="pt-1.5 space-y-0.5">
+              <button
+                type="button"
+                role="menuitem"
+                className={menuItemClass}
+                onClick={() => { goto("orders"); setOpen(false); }}
+              >
+                <Package className="size-4 !text-slate-400" aria-hidden />
+                <span>My Orders</span>
               </button>
-              <button type="button" role="menuitem" className={item} onClick={() => { goto("help"); setOpen(false); }}>
-                <LifeBuoy className="size-4 text-muted" aria-hidden /> Help & Complaints
+              <button
+                type="button"
+                role="menuitem"
+                className={menuItemClass}
+                onClick={() => { goto("help"); setOpen(false); }}
+              >
+                <LifeBuoy className="size-4 !text-slate-400" aria-hidden />
+                <span>Help & Complaints</span>
               </button>
-              <button type="button" role="menuitem" className={cx(item, "text-rose-700")} onClick={onLogout}>
-                <LogOut className="size-4" aria-hidden /> Logout
+              <div className="my-1 border-t border-slate-700/60" />
+              <button
+                type="button"
+                role="menuitem"
+                className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-medium !text-rose-400 transition hover:bg-rose-500/15 hover:!text-rose-300"
+                onClick={onLogout}
+              >
+                <LogOut className="size-4 !text-rose-400" aria-hidden />
+                <span>Logout</span>
               </button>
             </div>
           </motion.div>
@@ -137,7 +161,7 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
 }
 
 // ------------------------------------------------------------ product card
-function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) {
+function ProductCard({ p, qty, onAsk, onAdd }: { p: Product; qty: number; onAsk: (p: Product) => void; onAdd: (p: Product) => void }) {
   const Icon = CAT_ICON[p.category] ?? Package;
   const out = p.status !== "active";
   return (
@@ -150,7 +174,7 @@ function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) 
           </span>
         )}
         {out && (
-          <span className="absolute right-2.5 top-2.5 rounded-md bg-black/60 px-1.5 py-0.5 text-2xs font-medium text-slate-700">{pretty(p.status)}</span>
+          <span className="absolute right-2.5 top-2.5 rounded-md bg-black/60 px-1.5 py-0.5 text-2xs font-medium text-slate-200">{pretty(p.status)}</span>
         )}
       </div>
       <div className="flex flex-1 flex-col p-3">
@@ -173,13 +197,135 @@ function ProductCard({ p, onAsk }: { p: Product; onAsk: (p: Product) => void }) 
         </div>
         <button
           type="button"
+          disabled={out}
+          onClick={() => onAdd(p)}
+          className="brand-gradient mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold text-[#0f1111] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <ShoppingCart className="size-3.5" aria-hidden /> {out ? "Unavailable" : qty > 0 ? `In cart (${qty}) · Add more` : "Add to cart"}
+        </button>
+        <button
+          type="button"
           onClick={() => onAsk(p)}
-          className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-black/[0.04] px-3 py-1.5 text-xs font-medium text-fg ring-1 ring-inset ring-black/10 transition hover:bg-black/[0.08]"
+          className="mt-1.5 inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-1 text-xs font-medium text-amz-link transition hover:bg-black/[0.04] hover:underline"
         >
           <MessageCircle className="size-3.5" aria-hidden /> Ask the assistant
         </button>
       </div>
     </article>
+  );
+}
+
+// ------------------------------------------------------------ cart
+type CartLine = { p: Product; qty: number };
+const FREE_SHIP_AT = 1000;
+const SHIP_FEE = 79;
+
+function loadCart(key: string): Record<string, CartLine> {
+  try {
+    const raw = sessionStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as Record<string, CartLine>) : {};
+  } catch {
+    return {};
+  }
+}
+
+function CartDrawer({
+  lines,
+  onQty,
+  onClose,
+  onCheckout,
+}: {
+  lines: CartLine[];
+  onQty: (id: string, qty: number) => void;
+  onClose: () => void;
+  onCheckout: () => void;
+}) {
+  const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
+  const savings = lines.reduce((s, l) => s + Math.max(0, l.p.mrp - l.p.price) * l.qty, 0);
+  const shipping = subtotal === 0 || subtotal >= FREE_SHIP_AT ? 0 : SHIP_FEE;
+  const count = lines.reduce((s, l) => s + l.qty, 0);
+  const plural = count === 1 ? "" : "s";
+  return (
+    <motion.div className="absolute inset-0 z-40 flex justify-end bg-black/40" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+      <motion.aside
+        initial={{ x: 40, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 40, opacity: 0 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-label="Shopping cart"
+        className="flex h-full w-full max-w-md flex-col bg-surface shadow-2xl"
+      >
+        <div className="flex items-center gap-3 border-b-2 border-amz-orange bg-navy px-4 py-3 text-white">
+          <ShoppingCart className="size-5 text-amz-orange" aria-hidden />
+          <div className="text-sm font-semibold">Your cart · {count} item{plural}</div>
+          <button type="button" aria-label="Close cart" onClick={onClose} className="ml-auto rounded-lg p-1 hover:bg-white/15">
+            <X className="size-4" />
+          </button>
+        </div>
+        {lines.length === 0 ? (
+          <div className="flex flex-1 flex-col items-center justify-center gap-2 p-8 text-center">
+            <ShoppingBag className="size-10 text-faint" aria-hidden />
+            <p className="text-sm font-medium text-fg">Your cart is empty</p>
+            <p className="text-xs text-muted">Add products from the shop to see them here.</p>
+            <button type="button" onClick={onClose} className="brand-gradient mt-2 rounded-xl px-4 py-2 text-xs font-semibold text-[#0f1111]">
+              Continue shopping
+            </button>
+          </div>
+        ) : (
+          <>
+            <ul className="min-h-0 flex-1 divide-y divide-line overflow-y-auto px-4">
+              {lines.map(({ p, qty }) => {
+                const Icon = CAT_ICON[p.category] ?? Package;
+                return (
+                  <li key={p.product_id} className="flex gap-3 py-3">
+                    <div className={cx("grid size-16 shrink-0 place-items-center rounded-xl bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
+                      <Icon className="size-7 text-navy-2/80" strokeWidth={1.5} aria-hidden />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="line-clamp-2 text-sm font-medium leading-snug text-fg">{p.product_name}</div>
+                      <div className="mt-0.5 text-2xs text-emerald-700">In stock · {p.returnable ? "Easy returns" : "Non-returnable"}</div>
+                      <div className="mt-2 flex items-center gap-2">
+                        <div className="flex items-center rounded-lg ring-1 ring-inset ring-line-strong">
+                          <button type="button" aria-label="Decrease quantity" onClick={() => onQty(p.product_id, qty - 1)} className="grid size-7 place-items-center rounded-l-lg hover:bg-black/5">
+                            {qty === 1 ? <Trash2 className="size-3.5 text-rose-700" /> : <Minus className="size-3.5" />}
+                          </button>
+                          <span className="w-7 text-center text-xs font-semibold tabular-nums text-fg">{qty}</span>
+                          <button type="button" aria-label="Increase quantity" disabled={qty >= 10} onClick={() => onQty(p.product_id, qty + 1)} className="grid size-7 place-items-center rounded-r-lg hover:bg-black/5 disabled:opacity-40">
+                            <Plus className="size-3.5" />
+                          </button>
+                        </div>
+                        <button type="button" onClick={() => onQty(p.product_id, 0)} className="text-2xs font-medium text-amz-link hover:underline">
+                          Remove
+                        </button>
+                        <span className="ml-auto text-sm font-semibold tabular-nums text-fg">{inr(p.price * qty)}</span>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="space-y-1.5 border-t border-line bg-bg px-4 py-4 text-sm">
+              <div className="flex justify-between text-muted"><span>Subtotal</span><span className="tabular-nums text-fg">{inr(subtotal)}</span></div>
+              {savings > 0 && <div className="flex justify-between text-emerald-700"><span>You save</span><span className="tabular-nums">−{inr(savings)}</span></div>}
+              <div className="flex justify-between text-muted">
+                <span>Delivery</span>
+                <span className="tabular-nums text-fg">{shipping === 0 ? "FREE" : inr(shipping)}</span>
+              </div>
+              {shipping > 0 && <p className="text-2xs text-muted">Add {inr(FREE_SHIP_AT - subtotal)} more for free delivery.</p>}
+              <div className="flex justify-between border-t border-line pt-2 text-base font-semibold text-fg">
+                <span>Total</span><span className="tabular-nums text-price">{inr(subtotal + shipping)}</span>
+              </div>
+              <button type="button" onClick={onCheckout} className="brand-gradient mt-2 w-full rounded-xl py-2.5 text-sm font-semibold text-[#0f1111] hover:brightness-105">
+                Proceed to buy ({count} item{plural})
+              </button>
+              <p className="text-center text-2xs text-faint">Demo checkout: no payment is taken.</p>
+            </div>
+          </>
+        )}
+      </motion.aside>
+    </motion.div>
   );
 }
 
@@ -214,7 +360,44 @@ export function Storefront({
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMax, setChatMax] = useState(false);
+  const cartKey = `novamart.cart.${customer.customer_id}`;
+  const [cart, setCart] = useState<Record<string, CartLine>>(() => loadCart(cartKey));
+  const [cartOpen, setCartOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const cartLines = useMemo(() => Object.values(cart), [cart]);
+  const cartCount = cartLines.reduce((s, l) => s + l.qty, 0);
   const seen = useRef(messages.length);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(cartKey, JSON.stringify(cart));
+    } catch {
+      /* storage unavailable: the cart still works for this page view */
+    }
+  }, [cart, cartKey]);
+
+  useEffect(() => {
+    if (!toast) return;
+    const h = setTimeout(() => setToast(null), 2600);
+    return () => clearTimeout(h);
+  }, [toast]);
+
+  const addToCart = (p: Product) => {
+    setCart((c) => ({ ...c, [p.product_id]: { p, qty: Math.min(10, (c[p.product_id]?.qty ?? 0) + 1) } }));
+    setToast(`Added to cart: ${p.product_name}`);
+  };
+  const setQty = (id: string, qty: number) =>
+    setCart((c) => {
+      const next = { ...c };
+      if (qty <= 0) delete next[id];
+      else next[id] = { ...next[id], qty: Math.min(10, qty) };
+      return next;
+    });
+  const checkout = () => {
+    setCart({});
+    setCartOpen(false);
+    setToast("Order placed (demo). No payment was taken.");
+  };
   const unread = !chatOpen && messages.length > seen.current;
 
   useEffect(() => {
@@ -285,7 +468,7 @@ export function Storefront({
                 aria-current={tab === k ? "page" : undefined}
                 className={cx(
                   "whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium transition",
-                  tab === k ? "bg-black/[0.08] text-fg" : "text-muted hover:text-fg",
+                  tab === k ? "bg-white/15 text-white font-semibold" : "text-slate-300 hover:text-white hover:bg-white/10",
                 )}
               >
                 {label}
@@ -293,9 +476,20 @@ export function Storefront({
             ))}
           </nav>
           <AccountMenu customer={customer} onLogout={onLogout} goto={setTab} />
-          <span className="relative hidden sm:block" aria-label="Cart (demo)">
-            <ShoppingCart className="size-5 text-muted" aria-hidden />
-          </span>
+          <button
+            type="button"
+            onClick={() => setCartOpen(true)}
+            aria-label={`Open cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`}
+            className="relative flex shrink-0 items-center gap-1 rounded-xl px-2 py-1.5 transition hover:bg-white/10"
+          >
+            <ShoppingCart className="size-6 text-white" aria-hidden />
+            <span className="hidden text-xs font-semibold text-white lg:inline">Cart</span>
+            {cartCount > 0 && (
+              <span className="absolute -top-0.5 left-5 grid min-w-5 place-items-center rounded-full bg-amz-orange px-1 text-2xs font-bold text-[#0f1111]">
+                {cartCount}
+              </span>
+            )}
+          </button>
         </div>
         {tab === "shop" && (
           <div className="no-scrollbar mx-auto flex max-w-6xl gap-1.5 overflow-x-auto bg-navy-2 px-4 py-2" role="tablist" aria-label="Categories">
@@ -326,13 +520,13 @@ export function Storefront({
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto max-w-6xl px-4 py-5">
           {tab === "help" ? (
-            <CustomerHelp customer={customer} messages={messages} sending={sending} onSend={onSend} onNewSession={onNewSession} onError={onError} />
+            <CustomerHelp customer={customer} orders={orders} messages={messages} sending={sending} onSend={onSend} onNewSession={onNewSession} onError={onError} />
           ) : tab === "shop" ? (
             <>
               {!q && !cat && (
                 <section className="relative mb-6 overflow-hidden rounded-3xl border border-orange-500/20 bg-[linear-gradient(120deg,#232f3e,#37475a)] p-6 sm:p-8">
                   <div className="max-w-lg">
-                    <Chip className="bg-white/10 text-orange-800 ring-black/15">Festive Electronics Sale</Chip>
+                    <Chip className="bg-white/10 text-amber-300 ring-white/15">Festive Electronics Sale</Chip>
                     <h1 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">Up to 40% off top tech</h1>
                     <p className="mt-2 text-sm text-orange-50/80">
                       Phones, laptops, audio and more. Need help with an order? Our assistant checks your real order and policy before it answers.
@@ -359,7 +553,7 @@ export function Storefront({
                     const I = Icon as LucideIcon;
                     return (
                       <div key={t as string} className="flex items-center gap-3 rounded-2xl border border-line bg-surface px-4 py-3">
-                        <I className="size-5 text-orange-800" aria-hidden />
+                        <I className="size-5 text-amber-500" aria-hidden />
                         <div>
                           <div className="text-sm font-medium text-fg">{t as string}</div>
                           <div className="text-2xs text-muted">{s as string}</div>
@@ -384,7 +578,7 @@ export function Storefront({
               ) : (
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
                   {products.map((p) => (
-                    <ProductCard key={p.product_id} p={p} onAsk={(x) => ask(`Tell me about the ${x.product_name}`)} />
+                    <ProductCard key={p.product_id} p={p} qty={cart[p.product_id]?.qty ?? 0} onAdd={addToCart} onAsk={(x) => ask(`Tell me about the ${x.product_name}`)} />
                   ))}
                 </div>
               )}
@@ -428,7 +622,7 @@ export function Storefront({
                         </button>
                         <button
                           type="button"
-                          onClick={() => ask(`I need help with my order ${o.order_id}`)}
+                          onClick={() => ask(o.items?.length ? `I have a problem with my ${o.items[0]} from order ${o.order_id}` : `I need help with my order ${o.order_id}`)}
                           className="brand-gradient rounded-lg px-2.5 py-1.5 text-xs font-semibold text-[#0f1111] hover:brightness-110"
                         >
                           Get help
@@ -442,6 +636,25 @@ export function Storefront({
           )}
         </div>
       </div>
+
+      {/* cart drawer + toast */}
+      <AnimatePresence>
+        {cartOpen && <CartDrawer lines={cartLines} onQty={setQty} onClose={() => setCartOpen(false)} onCheckout={checkout} />}
+      </AnimatePresence>
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            role="status"
+            className="absolute inset-x-0 top-16 z-50 mx-auto flex w-fit max-w-[calc(100%-2rem)] items-center gap-2 rounded-xl bg-navy px-4 py-2.5 text-xs font-medium text-white shadow-2xl ring-1 ring-amz-orange/50"
+          >
+            <ShoppingCart className="size-4 shrink-0 text-amz-orange" aria-hidden />
+            <span className="truncate">{toast}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* floating support widget */}
       <AnimatePresence>

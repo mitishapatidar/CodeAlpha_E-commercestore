@@ -1,13 +1,13 @@
 import { CircleHelp, Headset, Inbox, PackageSearch, ReceiptIndianRupee, RotateCcw, ShieldAlert, Ticket } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "@/api";
 import { Chat } from "@/components/Chat";
 import { AnimatedAIChat, type CommandSuggestion } from "@/components/ui/animated-ai-chat";
 import { Chip, SectionLabel, Skeleton } from "@/components/ui/primitives";
 import { humanDate, inr, pretty, statusTone } from "@/format";
-import type { ChatMessage, Customer, CustomerTicket } from "@/types";
+import type { ChatMessage, Customer, CustomerTicket, Order } from "@/types";
 
-const COMMANDS: CommandSuggestion[] = [
+const BASE_COMMANDS: CommandSuggestion[] = [
   { icon: <PackageSearch className="h-4 w-4" />, label: "Track order", description: "Where is my order?", prefix: "/track", template: "Where is my order " },
   { icon: <RotateCcw className="h-4 w-4" />, label: "Return / refund", description: "Damaged, defective or changed mind", prefix: "/return", template: "I want to return my order " },
   { icon: <CircleHelp className="h-4 w-4" />, label: "Product help", description: "Specs, warranty, compatibility", prefix: "/product", template: "Tell me about the " },
@@ -18,6 +18,7 @@ const TYPE_ICON: Record<string, typeof Ticket> = { refund: ReceiptIndianRupee, r
 
 export function CustomerHelp({
   customer,
+  orders,
   messages,
   sending,
   onSend,
@@ -25,6 +26,7 @@ export function CustomerHelp({
   onError,
 }: {
   customer: Customer;
+  orders: Order[];
   messages: ChatMessage[];
   sending: boolean;
   onSend: (text: string) => void;
@@ -46,6 +48,18 @@ export function CustomerHelp({
   }, [customer.customer_id, agentReplies, onError]);
 
   const started = messages.length > 0 || sending;
+  const recent = useMemo(() => [...orders].sort((a, b) => b.order_date.localeCompare(a.order_date)).slice(0, 4), [orders]);
+  const commands = useMemo<CommandSuggestion[]>(() => {
+    const latest = recent[0];
+    if (!latest) return BASE_COMMANDS;
+    const item = latest.items?.[0] ?? "order";
+    return [
+      { ...BASE_COMMANDS[0], description: `Latest: ${latest.order_id} (${pretty(latest.order_status)})`, template: `Where is my order ${latest.order_id}?` },
+      { ...BASE_COMMANDS[1], description: `${item} · ${latest.order_id}`, template: `I want to return the ${item} from order ${latest.order_id} because ` },
+      BASE_COMMANDS[2],
+      BASE_COMMANDS[3],
+    ];
+  }, [recent]);
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
@@ -58,7 +72,7 @@ export function CustomerHelp({
               subtitle="Track orders, raise complaints, returns and refunds. Every answer is checked against your real orders."
               placeholder="Describe your issue, e.g. “My headphones from ORD-001234 arrived damaged”"
               assistantName="Nova"
-              commands={COMMANDS}
+              commands={commands}
               onSubmit={onSend}
               busy={sending}
             />
@@ -80,7 +94,36 @@ export function CustomerHelp({
         )}
       </section>
 
-      <aside aria-label="My support requests">
+      <aside aria-label="My orders and support requests" className="space-y-5">
+        {recent.length > 0 && (
+          <div>
+            <SectionLabel>Need help with an order?</SectionLabel>
+            <ul className="space-y-2">
+              {recent.map((o) => {
+                const item = o.items?.[0];
+                return (
+                  <li key={o.order_id} className="rounded-2xl border border-line bg-surface p-3">
+                    <div className="truncate text-xs font-semibold text-fg" title={o.items?.join(", ")}>{o.items?.join(", ") || o.order_id}</div>
+                    <div className="mt-1 flex flex-wrap items-center gap-1.5 text-2xs text-faint">
+                      <span className="font-mono">{o.order_id}</span>
+                      <Chip className={statusTone(o.order_status)}>{pretty(o.order_status)}</Chip>
+                      <span className="ml-auto tabular-nums text-muted">{inr(o.total_amount)}</span>
+                    </div>
+                    <div className="mt-2 flex gap-1.5">
+                      <button type="button" disabled={sending} onClick={() => onSend(`Where is my order ${o.order_id}?`)} className="flex-1 rounded-lg px-2 py-1 text-2xs font-medium text-fg ring-1 ring-inset ring-line-strong hover:bg-black/[0.04] disabled:opacity-50">
+                        Track
+                      </button>
+                      <button type="button" disabled={sending} onClick={() => onSend(item ? `I have a problem with my ${item} from order ${o.order_id}` : `I need help with my order ${o.order_id}`)} className="brand-gradient flex-1 rounded-lg px-2 py-1 text-2xs font-semibold text-[#0f1111] hover:brightness-105 disabled:opacity-50">
+                        Report a problem
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+        <div>
         <SectionLabel right={<span className="text-2xs text-faint">{tickets?.length ?? ""}</span>}>My support requests</SectionLabel>
         {tickets === null ? (
           <div className="space-y-2">{[0, 1, 2].map((i) => <Skeleton key={i} className="h-20 rounded-2xl" />)}</div>
@@ -117,6 +160,7 @@ export function CustomerHelp({
             })}
           </ul>
         )}
+        </div>
       </aside>
     </div>
   );
