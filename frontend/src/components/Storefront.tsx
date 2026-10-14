@@ -11,8 +11,6 @@ import {
   Laptop,
   LifeBuoy,
   LogOut,
-  Maximize2,
-  Minimize2,
   MessageCircle,
   Minus,
   Plus,
@@ -31,7 +29,6 @@ import {
   Tablet,
   Truck,
   Undo2,
-  User,
   Watch,
   X,
   type LucideIcon,
@@ -40,7 +37,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api";
 import { humanDate, inr, pretty, statusTone } from "../format";
 import type { Category, ChatMessage, Customer, Order, Product } from "../types";
-import { Chat } from "./Chat";
 import { CustomerHelp } from "./CustomerHelp";
 import { Avatar } from "./Sidebar";
 import { Chip, Skeleton, cx } from "./ui/primitives";
@@ -358,15 +354,12 @@ export function Storefront({
   const dq = useDebounced(q);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatMax, setChatMax] = useState(false);
   const cartKey = `novamart.cart.${customer.customer_id}`;
   const [cart, setCart] = useState<Record<string, CartLine>>(() => loadCart(cartKey));
   const [cartOpen, setCartOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const cartLines = useMemo(() => Object.values(cart), [cart]);
   const cartCount = cartLines.reduce((s, l) => s + l.qty, 0);
-  const seen = useRef(messages.length);
 
   useEffect(() => {
     try {
@@ -398,7 +391,6 @@ export function Storefront({
     setCartOpen(false);
     setToast("Order placed (demo). No payment was taken.");
   };
-  const unread = !chatOpen && messages.length > seen.current;
 
   useEffect(() => {
     api.categories().then(setCats).catch((e: Error) => onError(`Could not load categories: ${e.message}`));
@@ -417,12 +409,8 @@ export function Storefront({
     };
   }, [dq, cat, onError]);
 
-  useEffect(() => {
-    if (chatOpen) seen.current = messages.length;
-  }, [chatOpen, messages.length]);
 
   const ask = (text: string) => {
-    setChatOpen(false);
     setTab("help");
     onSend(text);
   };
@@ -656,70 +644,17 @@ export function Storefront({
         )}
       </AnimatePresence>
 
-      {/* floating support widget */}
-      <AnimatePresence>
-        {chatOpen && tab !== "help" && (
-          <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.98 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className={cx("absolute z-30 flex flex-col overflow-hidden rounded-3xl border border-line-strong bg-bg shadow-2xl transition-[inset,width,height] duration-200", chatMax ? "inset-4 bottom-20" : "bottom-20 right-4 h-[min(560px,calc(100%-9rem))] w-[min(400px,calc(100%-2rem))]")}
-            role="dialog"
-            aria-label="NovaMart support chat"
-          >
-            <div className="flex shrink-0 items-center gap-3 border-b-2 border-amz-orange bg-navy px-4 py-3 text-white">
-              <LifeBuoy className="size-5 text-amz-orange" aria-hidden />
-              <div className="leading-tight">
-                <div className="text-sm font-semibold">NovaMart Support</div>
-                <div className="text-2xs text-slate-300">Verified answers from your real order data</div>
-              </div>
-              <button
-                type="button"
-                aria-label={chatMax ? "Minimise chat" : "Maximise chat"}
-                title={chatMax ? "Minimise" : "Maximise"}
-                onClick={() => setChatMax((m) => !m)}
-                className="ml-auto rounded-lg p-1 text-white hover:bg-white/15"
-              >
-                {chatMax ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
-              </button>
-              <button type="button" aria-label="Close support chat" onClick={() => setChatOpen(false)} className="rounded-lg p-1 text-white hover:bg-white/15">
-                <X className="size-4" />
-              </button>
-            </div>
-            {customer ? (
-              <div className="min-h-0 flex-1">
-                <Chat
-                  customer={customer}
-                  messages={messages}
-                  sending={sending}
-                  selectedId={null}
-                  onSelect={() => undefined}
-                  onSend={onSend}
-                  onNewSession={onNewSession}
-                  view="customer"
-                />
-              </div>
-            ) : (
-              <div className="flex flex-1 flex-col items-center justify-center gap-2 p-6 text-center">
-                <User className="size-8 text-faint" aria-hidden />
-                <p className="text-sm font-medium text-fg">Sign in to chat with support</p>
-                <p className="text-xs text-muted">Use the account menu at the top right to pick a demo customer.</p>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* support button: opens the full Help & Complaints page (same agent, same chat) */}
       {tab !== "help" && (
       <button
         type="button"
-        onClick={() => setChatOpen((o) => !o)}
-        aria-label={chatOpen ? "Close support chat" : "Open support chat"}
+        onClick={() => setTab("help")}
+        aria-label="Open Help & Complaints"
+        title="Help & Complaints"
         className="brand-gradient absolute bottom-4 right-4 z-30 grid size-13 place-items-center rounded-full text-[#0f1111] shadow-[0_12px_30px_-8px_rgba(255,153,0,0.4)] transition hover:scale-105"
       >
-        {chatOpen ? <X className="size-5" /> : <MessageCircle className="size-6" />}
-        {unread && <span className="absolute right-0.5 top-0.5 size-3 rounded-full bg-emerald-400 ring-2 ring-bg" aria-label="New reply" />}
-      </button>
+        <MessageCircle className="size-6" />
+              </button>
       )}
     </div>
   );
