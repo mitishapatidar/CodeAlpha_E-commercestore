@@ -96,6 +96,28 @@ def reset(req: ResetRequest) -> dict:
 
 
 # ---------------------------------------------------------------- extras
+CARD_FIELDS = ("product_id", "product_name", "brand", "category", "subcategory", "price", "mrp",
+               "discount_percent", "rating", "review_count", "warranty_months", "returnable",
+               "status", "color", "image_url")
+
+
+@app.get("/products/{product_id}")
+def product_detail(product_id: str) -> dict:
+    """Full product page: catalogue row, spec sheet and related products."""
+    store = get_store()
+    p = store.products.get(product_id)
+    if not p:
+        raise HTTPException(404, f"Unknown product {product_id}")
+    card = lambda r: {k: r.get(k) for k in CARD_FIELDS}
+    related = [r for r in store.products.values() if r["category"] == p["category"] and r["product_id"] != product_id
+               and r["status"] == "active"]
+    related.sort(key=lambda r: (r["subcategory"] != p["subcategory"], -(r["review_count"] or 0)))
+    spec = store.specs.get(product_id, {})
+    return {**card(p), "description": p.get("description", ""), "stock_quantity": p.get("stock_quantity"),
+            "replacement_available": p.get("replacement_available"), "specs": spec.get("specs", {}),
+            "related": [card(r) for r in related[:4]]}
+
+
 @app.get("/products")
 def products(q: str = "", category: str = "", limit: int = 24) -> list[dict]:
     """Catalog for the storefront view (customer-facing UI)."""
@@ -106,9 +128,7 @@ def products(q: str = "", category: str = "", limit: int = 24) -> list[dict]:
             continue
         if q and q not in f"{p['product_name']} {p['brand']} {p['category']} {p['subcategory']}".lower():
             continue
-        out.append({k: p.get(k) for k in ("product_id", "product_name", "brand", "category", "subcategory", "price", "mrp",
-                                           "discount_percent", "rating", "review_count", "warranty_months", "returnable",
-                                           "status", "color", "image_url")})
+        out.append({k: p.get(k) for k in CARD_FIELDS})
     out.sort(key=lambda p: (p["status"] != "active", -(p["review_count"] or 0)))
     return out[:limit]
 

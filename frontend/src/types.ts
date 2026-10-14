@@ -108,6 +108,14 @@ export interface Product {
   image_url?: string;
 }
 
+export interface ProductDetail extends Product {
+  description: string;
+  stock_quantity: number | null;
+  replacement_available: boolean | null;
+  specs: Record<string, string>;
+  related: Product[];
+}
+
 export interface Category {
   category: string;
   count: number;

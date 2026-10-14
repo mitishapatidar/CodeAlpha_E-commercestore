@@ -39,6 +39,7 @@ import { api } from "../api";
 import { humanDate, inr, pretty, statusTone } from "../format";
 import type { Category, ChatMessage, Customer, Order, Product } from "../types";
 import { CustomerHelp } from "./CustomerHelp";
+import { ProductPage } from "./ProductPage";
 import { Avatar } from "./Sidebar";
 import { Chip, Skeleton, cx } from "./ui/primitives";
 
@@ -69,6 +70,7 @@ function useDebounced<T>(value: T, ms = 250): T {
 // ------------------------------------------------------------ account menu
 type StoreTab = "shop" | "orders" | "help";
 const TABS: StoreTab[] = ["shop", "orders", "help"];
+const pidFromHash = () => window.location.hash.match(/^#product\/([\w-]+)$/)?.[1] ?? null;
 const tabFromHash = (): StoreTab => {
   const h = window.location.hash.slice(1) as StoreTab;
   return TABS.includes(h) ? h : "shop";
@@ -163,12 +165,12 @@ function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogou
 }
 
 // ------------------------------------------------------------ product card
-function ProductCard({ p, qty, onAsk, onAdd }: { p: Product; qty: number; onAsk: (p: Product) => void; onAdd: (p: Product) => void }) {
+function ProductCard({ p, qty, onAsk, onAdd, onOpen }: { p: Product; qty: number; onAsk: (p: Product) => void; onAdd: (p: Product) => void; onOpen: (id: string) => void }) {
   const Icon = CAT_ICON[p.category] ?? Package;
   const out = p.status !== "active";
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition hover:-translate-y-0.5 hover:border-line-strong hover:shadow-card">
-      <div className={cx("relative grid aspect-[4/3] place-items-center overflow-hidden bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
+      <div onClick={() => onOpen(p.product_id)} className={cx("relative grid aspect-[4/3] cursor-pointer place-items-center overflow-hidden bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
         {p.image_url ? (
           <img src={p.image_url} alt={p.product_name} loading="lazy" className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-105" />
         ) : (
@@ -186,7 +188,9 @@ function ProductCard({ p, qty, onAsk, onAdd }: { p: Product; qty: number; onAsk:
       <div className="flex flex-1 flex-col p-3">
         <div className="text-2xs font-medium uppercase tracking-wider text-faint">{p.brand}</div>
         <h3 className="mt-0.5 line-clamp-2 min-h-[2.5rem] text-sm font-medium leading-snug text-fg" title={p.product_name}>
-          {p.product_name}
+          <button type="button" onClick={() => onOpen(p.product_id)} className="text-left hover:text-[#c7511f] hover:underline">
+            {p.product_name}
+          </button>
         </h3>
         <div className="mt-1.5 flex items-center gap-1 text-2xs">
           {p.rating != null && p.review_count > 0 ? (
@@ -365,14 +369,25 @@ export function Storefront({
 }) {
   // each tab is a URL hash (#shop / #orders / #help) so the browser Back button works
   const [tab, setTabState] = useState<StoreTab>(tabFromHash);
+  const [pid, setPid] = useState<string | null>(pidFromHash);
   const setTab = useCallback((t: StoreTab) => {
-    if (t !== tabFromHash()) window.history.pushState(null, "", `#${t}`);
+    if (t !== tabFromHash() || pidFromHash()) window.history.pushState(null, "", `#${t}`);
     setTabState(t);
+    setPid(null);
+  }, []);
+  const openProduct = useCallback((id: string) => {
+    window.history.pushState(null, "", `#product/${id}`);
+    setTabState("shop");
+    setPid(id);
+    document.querySelector("[data-store-scroll]")?.scrollTo({ top: 0 });
   }, []);
   const goBack = () => (window.history.length > 1 ? window.history.back() : setTab("shop"));
 
   useEffect(() => {
-    const onPop = () => setTabState(tabFromHash());
+    const onPop = () => {
+      setTabState(tabFromHash());
+      setPid(pidFromHash());
+    };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, []);
@@ -403,8 +418,8 @@ export function Storefront({
     return () => clearTimeout(h);
   }, [toast]);
 
-  const addToCart = (p: Product) => {
-    setCart((c) => ({ ...c, [p.product_id]: { p, qty: Math.min(10, (c[p.product_id]?.qty ?? 0) + 1) } }));
+  const addToCart = (p: Product, n = 1) => {
+    setCart((c) => ({ ...c, [p.product_id]: { p, qty: Math.min(10, (c[p.product_id]?.qty ?? 0) + n) } }));
     setToast(`Added to cart: ${p.product_name}`);
   };
   const setQty = (id: string, qty: number) =>
@@ -533,14 +548,26 @@ export function Storefront({
       </div>
 
       {/* body */}
-      <div className="min-h-0 flex-1 overflow-y-auto">
+      <div className="min-h-0 flex-1 overflow-y-auto" data-store-scroll>
         <div className="mx-auto max-w-6xl px-4 py-5">
-          {tab !== "shop" && (
+          {(tab !== "shop" || pid) && (
             <button type="button" onClick={goBack} className="mb-3 inline-flex items-center gap-1 text-sm font-medium text-amz-link hover:underline">
               <ChevronLeft className="size-4" aria-hidden /> Back
             </button>
           )}
-          {tab === "help" ? (
+          {pid ? (
+            <ProductPage
+              id={pid}
+              onAdd={addToCart}
+              onBuyNow={(p, n) => {
+                addToCart(p, n);
+                setCartOpen(true);
+              }}
+              onAsk={(x) => ask(`Tell me about the ${x.product_name}`)}
+              onOpen={openProduct}
+              onError={onError}
+            />
+          ) : tab === "help" ? (
             <CustomerHelp customer={customer} orders={orders} messages={messages} sending={sending} onSend={onSend} onNewSession={onNewSession} onError={onError} />
           ) : tab === "shop" ? (
             <>
@@ -599,7 +626,7 @@ export function Storefront({
               ) : (
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
                   {products.map((p) => (
-                    <ProductCard key={p.product_id} p={p} qty={cart[p.product_id]?.qty ?? 0} onAdd={addToCart} onAsk={(x) => ask(`Tell me about the ${x.product_name}`)} />
+                    <ProductCard key={p.product_id} p={p} qty={cart[p.product_id]?.qty ?? 0} onAdd={(x) => addToCart(x)} onOpen={openProduct} onAsk={(x) => ask(`Tell me about the ${x.product_name}`)} />
                   ))}
                 </div>
               )}
