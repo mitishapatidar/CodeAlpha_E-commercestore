@@ -1,6 +1,25 @@
-# NovaMart Support Agent (Team ELEVATE · Mantra Yudha)
+# NovaMart – E-commerce Store with Support Agent
 
-> **CodeAlpha Task 1 (Simple E-commerce Store):** the Django + SQLite + HTML/CSS/JS store is in [`django_store/`](django_store/README.md). Run it with `cd django_store && python manage.py migrate && python manage.py load_products && python manage.py runserver 8080`.
+NovaMart is an electronics e-commerce store with a built-in AI customer-support agent.
+
+| Part | What it is | Tech | Run |
+|---|---|---|---|
+| **Store** (CodeAlpha Task 1) | Product listing, product details page, database-backed shopping cart, checkout and order processing, user registration/login | Django · SQLite · HTML, CSS, JavaScript | `cd django_store && python manage.py migrate && python manage.py load_products && python manage.py runserver 8080` → http://localhost:8080 |
+| **Support agent** | Answers order, return, refund and product questions from the customer's real orders, with policy checks | FastAPI · Python rules engine (optional LLM) · React | see [Quick start](#quick-start) → http://localhost:5173 |
+
+Store details: [`django_store/README.md`](django_store/README.md).
+
+## Store features
+
+- **Product listings:** 300 products with search, category chips and pagination.
+- **Product details page:** price, discount, specs, stock, warranty, returns and related products.
+- **Shopping cart:** saved in the database per user; instant add-to-cart (JavaScript `fetch`), quantity +/−, delete.
+- **Order processing:** checkout with address validation → order saved, stock reduced, cart cleared; tracking
+  Placed → Processing → Shipped → Delivered; customer cancellation restores stock; staff update status in `/admin/`.
+- **User registration/login:** Django authentication with hashed passwords.
+- **Database:** SQLite tables for products, users, cart items, orders and order items.
+
+## Support agent
 
 **An AI customer-support agent that verifies before it acts.** NovaMart's customers can be confused, contradictory
 or deliberately misleading, so our agent treats every message as a *claim*, not a fact. Each turn goes through
