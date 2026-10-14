@@ -5,6 +5,7 @@ import {
   Cable,
   Camera,
   ChevronDown,
+  ChevronLeft,
   Gamepad2,
   Headphones,
   Keyboard,
@@ -33,7 +34,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api";
 import { humanDate, inr, pretty, statusTone } from "../format";
 import type { Category, ChatMessage, Customer, Order, Product } from "../types";
@@ -67,6 +68,11 @@ function useDebounced<T>(value: T, ms = 250): T {
 
 // ------------------------------------------------------------ account menu
 type StoreTab = "shop" | "orders" | "help";
+const TABS: StoreTab[] = ["shop", "orders", "help"];
+const tabFromHash = (): StoreTab => {
+  const h = window.location.hash.slice(1) as StoreTab;
+  return TABS.includes(h) ? h : "shop";
+};
 
 function AccountMenu({ customer, onLogout, goto }: { customer: Customer; onLogout: () => void; goto: (t: StoreTab) => void }) {
   const [open, setOpen] = useState(false);
@@ -347,7 +353,19 @@ export function Storefront({
   onNewSession: () => void;
   onError: (msg: string) => void;
 }) {
-  const [tab, setTab] = useState<StoreTab>("shop");
+  // each tab is a URL hash (#shop / #orders / #help) so the browser Back button works
+  const [tab, setTabState] = useState<StoreTab>(tabFromHash);
+  const setTab = useCallback((t: StoreTab) => {
+    if (t !== tabFromHash()) window.history.pushState(null, "", `#${t}`);
+    setTabState(t);
+  }, []);
+  const goBack = () => (window.history.length > 1 ? window.history.back() : setTab("shop"));
+
+  useEffect(() => {
+    const onPop = () => setTabState(tabFromHash());
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
   const [cats, setCats] = useState<Category[]>([]);
   const [cat, setCat] = useState("");
   const [q, setQ] = useState("");
@@ -507,6 +525,11 @@ export function Storefront({
       {/* body */}
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto max-w-6xl px-4 py-5">
+          {tab !== "shop" && (
+            <button type="button" onClick={goBack} className="mb-3 inline-flex items-center gap-1 text-sm font-medium text-amz-link hover:underline">
+              <ChevronLeft className="size-4" aria-hidden /> Back
+            </button>
+          )}
           {tab === "help" ? (
             <CustomerHelp customer={customer} orders={orders} messages={messages} sending={sending} onSend={onSend} onNewSession={onNewSession} onError={onError} />
           ) : tab === "shop" ? (
