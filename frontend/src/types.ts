@@ -18,6 +18,18 @@ export interface Customer {
   loyalty_tier: string;
   customer_segment: string;
   account_status: string;
+  phone?: string | null;
+  address?: string | null;
+  state?: string | null;
+  pincode?: string | number | null;
+}
+
+export interface PlacedOrder {
+  order_id: string;
+  total_amount: number;
+  payment_status: string;
+  order_status: string;
+  estimated_delivery_date: string;
 }
 
 export interface Order {

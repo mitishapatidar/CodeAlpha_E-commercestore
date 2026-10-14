@@ -39,6 +39,7 @@ import { api } from "../api";
 import { humanDate, inr, pretty, statusTone } from "../format";
 import type { Category, ChatMessage, Customer, Order, Product } from "../types";
 import { CustomerHelp } from "./CustomerHelp";
+import { Checkout, orderTotals } from "./Checkout";
 import { ProductPage } from "./ProductPage";
 import { Avatar } from "./Sidebar";
 import { Chip, Skeleton, cx } from "./ui/primitives";
@@ -234,7 +235,6 @@ function ProductCard({ p, qty, onAsk, onAdd, onOpen }: { p: Product; qty: number
 // ------------------------------------------------------------ cart
 type CartLine = { p: Product; qty: number };
 const FREE_SHIP_AT = 1000;
-const SHIP_FEE = 79;
 
 function loadCart(key: string): Record<string, CartLine> {
   try {
@@ -256,9 +256,8 @@ function CartDrawer({
   onClose: () => void;
   onCheckout: () => void;
 }) {
-  const subtotal = lines.reduce((s, l) => s + l.p.price * l.qty, 0);
+  const { subtotal, shipping, tax, total } = orderTotals(lines);
   const savings = lines.reduce((s, l) => s + Math.max(0, l.p.mrp - l.p.price) * l.qty, 0);
-  const shipping = subtotal === 0 || subtotal >= FREE_SHIP_AT ? 0 : SHIP_FEE;
   const count = lines.reduce((s, l) => s + l.qty, 0);
   const plural = count === 1 ? "" : "s";
   return (
@@ -329,14 +328,15 @@ function CartDrawer({
                 <span>Delivery</span>
                 <span className="tabular-nums text-fg">{shipping === 0 ? "FREE" : inr(shipping)}</span>
               </div>
+              <div className="flex justify-between text-muted"><span>GST (18%)</span><span className="tabular-nums text-fg">{inr(tax)}</span></div>
               {shipping > 0 && <p className="text-2xs text-muted">Add {inr(FREE_SHIP_AT - subtotal)} more for free delivery.</p>}
               <div className="flex justify-between border-t border-line pt-2 text-base font-semibold text-fg">
-                <span>Total</span><span className="tabular-nums text-price">{inr(subtotal + shipping)}</span>
+                <span>Total</span><span className="tabular-nums text-price">{inr(total)}</span>
               </div>
               <button type="button" onClick={onCheckout} className="brand-gradient mt-2 w-full rounded-xl py-2.5 text-sm font-semibold text-[#0f1111] hover:brightness-105">
                 Proceed to buy ({count} item{plural})
               </button>
-              <p className="text-center text-2xs text-faint">Demo checkout: no payment is taken.</p>
+              <p className="text-center text-2xs text-faint">Secure checkout · UPI, cards and Cash on Delivery</p>
             </div>
           </>
         )}
@@ -356,6 +356,7 @@ export function Storefront({
   onSend,
   onNewSession,
   onError,
+  onOrderPlaced,
 }: {
   customer: Customer;
   onLogout: () => void;
@@ -366,7 +367,9 @@ export function Storefront({
   onSend: (text: string) => void;
   onNewSession: () => void;
   onError: (msg: string) => void;
+  onOrderPlaced: () => void;
 }) {
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   // each tab is a URL hash (#shop / #orders / #help) so the browser Back button works
   const [tab, setTabState] = useState<StoreTab>(tabFromHash);
   const [pid, setPid] = useState<string | null>(pidFromHash);
@@ -430,9 +433,8 @@ export function Storefront({
       return next;
     });
   const checkout = () => {
-    setCart({});
     setCartOpen(false);
-    setToast("Order placed (demo). No payment was taken.");
+    setCheckoutOpen(true);
   };
 
   useEffect(() => {
@@ -685,6 +687,21 @@ export function Storefront({
         </div>
       </div>
 
+      {checkoutOpen && (
+          <Checkout
+            customer={customer}
+            lines={cartLines}
+            onClose={() => setCheckoutOpen(false)}
+            onPlaced={() => {
+              setCart({});
+              onOrderPlaced();
+            }}
+            onViewOrders={() => {
+              setCheckoutOpen(false);
+              setTab("orders");
+            }}
+          />
+        )}
       {/* cart drawer + toast */}
       <AnimatePresence>
         {cartOpen && <CartDrawer lines={cartLines} onQty={setQty} onClose={() => setCartOpen(false)} onCheckout={checkout} />}

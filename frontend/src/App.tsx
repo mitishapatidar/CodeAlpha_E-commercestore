@@ -276,6 +276,10 @@ export default function App() {
           onSend={(t) => send(t, undefined, customer ?? auth.customer)}
           onNewSession={() => newSession()}
           onError={onError}
+          onOrderPlaced={() => {
+            const who = customer ?? auth.customer;
+            api.orders(who.customer_id).then(setOrders).catch(() => undefined);
+          }}
         />
         <Toasts items={toasts} dismiss={dismiss} />
       </div>

@@ -57,7 +57,8 @@ def customers(q: str = "", limit: int = 20) -> list[dict]:
         hay = f"{c['customer_id']} {c['first_name']} {c['last_name']} {c['email']}".lower()
         if not q or q in hay:
             out.append({k: c.get(k) for k in ("customer_id", "first_name", "last_name", "email", "city",
-                                               "loyalty_tier", "customer_segment", "account_status")})
+                                               "loyalty_tier", "customer_segment", "account_status", "phone",
+                                               "address", "state", "pincode")})
             if len(out) >= limit:
                 break
     return out
@@ -99,6 +100,83 @@ def reset(req: ResetRequest) -> dict:
 CARD_FIELDS = ("product_id", "product_name", "brand", "category", "subcategory", "price", "mrp",
                "discount_percent", "rating", "review_count", "warranty_months", "returnable",
                "status", "color", "image_url")
+
+
+class OrderLine(BaseModel):
+    product_id: str
+    quantity: int
+
+
+class ShippingInfo(BaseModel):
+    name: str
+    phone: str
+    address: str
+    city: str
+    state: str
+    pincode: str
+
+
+class PlaceOrder(BaseModel):
+    customer_id: str
+    items: list[OrderLine]
+    shipping: ShippingInfo
+    payment_method: str  # UPI | credit_card | cash_on_delivery
+    payment_ref: str | None = None
+
+
+PAY_METHODS = {"UPI", "credit_card", "debit_card", "cash_on_delivery"}
+
+
+@app.post("/orders")
+def place_order(req: PlaceOrder) -> dict:
+    """Storefront checkout: validates the cart against live stock and saves the order like any other order,
+    so My Orders, tracking and the support agent all see it."""
+    from datetime import timedelta
+    store = get_store()
+    if not store.customer(req.customer_id):
+        raise HTTPException(404, "Unknown customer")
+    if req.payment_method not in PAY_METHODS:
+        raise HTTPException(422, "Unsupported payment method")
+    s = req.shipping
+    if not (s.phone.isdigit() and len(s.phone) == 10 and s.pincode.isdigit() and len(s.pincode) == 6 and s.address.strip()):
+        raise HTTPException(422, "Enter a valid 10-digit phone, 6-digit PIN code and address")
+    lines: dict[str, int] = {}
+    for ln in req.items:
+        lines[ln.product_id] = lines.get(ln.product_id, 0) + ln.quantity
+    if not lines:
+        raise HTTPException(422, "Cart is empty")
+    for pid, q in lines.items():
+        p = store.products.get(pid)
+        if not p or p["status"] != "active":
+            raise HTTPException(409, f"{pid} is no longer available")
+        if not 1 <= q <= 10 or q > int(p["stock_quantity"] or 0):
+            raise HTTPException(409, f"Only {p['stock_quantity']} of {p['product_name']} in stock")
+
+    now = config.now_ist()
+    oid_n, item_n = store.next_ids()
+    order_id = f"ORD-{oid_n:06d}"
+    items = []
+    for k, (pid, q) in enumerate(lines.items()):
+        price = int(store.products[pid]["price"])
+        items.append({"order_item_id": f"OI-{item_n + k:06d}", "order_id": order_id, "product_id": pid, "quantity": q,
+                      "unit_price": price, "discount": 0, "final_price": price * q, "item_status": "ordered",
+                      "return_status": "none", "refund_amount": 0})
+    subtotal = sum(i["final_price"] for i in items)
+    shipping = 0 if subtotal >= 1000 else 79
+    tax = round(subtotal * 0.18)
+    prepaid = req.payment_method != "cash_on_delivery"
+    order = {"order_id": order_id, "customer_id": req.customer_id, "order_date": now.isoformat(),
+             "order_status": "confirmed" if prepaid else "placed", "payment_method": req.payment_method,
+             "payment_status": "paid" if prepaid else "pending", "subtotal": subtotal, "discount": 0,
+             "shipping_fee": shipping, "tax": tax, "total_amount": subtotal + shipping + tax,
+             "shipping_address": f"{s.name}, {s.address}, {s.city}, {s.state} - {s.pincode} (ph {s.phone})",
+             "city": s.city, "state": s.state, "estimated_delivery_date": (now + timedelta(days=4)).date().isoformat(),
+             "actual_delivery_date": None, "tracking_number": None, "courier": None, "delivery_status": "not_dispatched",
+             "delivery_otp_verified": False, "cancellation_status": "none", "refund_status": "none",
+             "payment_ref": req.payment_ref}
+    store.add_order(order, items)
+    return {"order_id": order_id, "total_amount": order["total_amount"], "payment_status": order["payment_status"],
+            "order_status": order["order_status"], "estimated_delivery_date": order["estimated_delivery_date"]}
 
 
 @app.get("/products/{product_id}")

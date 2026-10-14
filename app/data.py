@@ -79,6 +79,7 @@ class DataStore:
         self.frames: dict[str, pd.DataFrame] = {}
         self._load()
         self._index()
+        self._replay_placed()
 
     # ------------------------------------------------------------------ load
     def _load(self) -> None:
@@ -97,6 +98,43 @@ class DataStore:
         for conv in self.conversations:
             conv["started_at_dt"] = _to_dt(conv.get("started_at"))
         self.specs = _parse_specs(self.data_dir / "products")
+
+    # ------------------------------------------------------- placed orders
+    def _placed_path(self) -> Path:
+        from app.config import RUNTIME_DIR
+        return RUNTIME_DIR / "placed_orders.jsonl"
+
+    def _replay_placed(self) -> None:
+        """Orders placed through the storefront live in runtime/placed_orders.jsonl and survive restarts."""
+        path = self._placed_path()
+        if path.exists():
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    rec = json.loads(line)
+                    self._apply_order(rec["order"], rec["items"])
+
+    def _apply_order(self, order: dict, items: list[dict]) -> None:
+        order = {**order, "order_date": _to_dt(order["order_date"]),
+                 "estimated_delivery_date": datetime.fromisoformat(order["estimated_delivery_date"]).date()}
+        self.orders[order["order_id"]] = order
+        self.orders_by_customer[order["customer_id"]].insert(0, order["order_id"])
+        self.items_by_order[order["order_id"]] = items
+        for it in items:
+            p = self.products.get(it["product_id"])
+            if p and p.get("stock_quantity") is not None:
+                p["stock_quantity"] = max(0, int(p["stock_quantity"]) - int(it["quantity"]))
+
+    def add_order(self, order: dict, items: list[dict]) -> None:
+        path = self._placed_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"order": order, "items": items}, default=str) + "\n")
+        self._apply_order(order, items)
+
+    def next_ids(self) -> tuple[int, int]:
+        num = lambda s: int(str(s).split("-")[1])
+        last_item = max((num(i["order_item_id"]) for its in self.items_by_order.values() for i in its), default=0)
+        return max(num(o) for o in self.orders) + 1, last_item + 1
 
     # ----------------------------------------------------------------- index
     def _index(self) -> None:

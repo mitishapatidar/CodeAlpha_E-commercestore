@@ -1,4 +1,4 @@
-import type { ActionRecord, Category, ChatResponse, Customer, CustomerTicket, Health, Order, Product, ProductDetail, Scenario, TurnRecord } from "./types";
+import type { ActionRecord, Category, ChatResponse, Customer, CustomerTicket, Health, Order, PlacedOrder, Product, ProductDetail, Scenario, TurnRecord } from "./types";
 
 export const API_URL: string = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") || "http://localhost:8000";
 
@@ -45,6 +45,13 @@ export const api = {
   products: (q = "", category = "", limit = 24) =>
     request<Product[]>(`/products?q=${encodeURIComponent(q)}&category=${encodeURIComponent(category)}&limit=${limit}`),
   product: (id: string) => request<ProductDetail>(`/products/${encodeURIComponent(id)}`),
+  placeOrder: (body: {
+    customer_id: string;
+    items: { product_id: string; quantity: number }[];
+    shipping: { name: string; phone: string; address: string; city: string; state: string; pincode: string };
+    payment_method: string;
+    payment_ref?: string;
+  }) => request<PlacedOrder>("/orders", { method: "POST", body: JSON.stringify(body) }),
   categories: () => request<Category[]>("/categories"),
   tickets: (customerId: string) => request<CustomerTicket[]>(`/customers/${encodeURIComponent(customerId)}/tickets`),
   turns: (limit = 100) => request<TurnRecord[]>(`/admin/turns?limit=${limit}`),
