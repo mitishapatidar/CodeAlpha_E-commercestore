@@ -1,4 +1,5 @@
 # NovaMart Support Agent (Team ELEVATE · Mantra Yudha)
+n> **CodeAlpha Task 1 (Simple E-commerce Store):** the Django + SQLite + HTML/CSS/JS store is in [`django_store/`](django_store/README.md). Run it with `cd django_store && python manage.py migrate && python manage.py load_products && python manage.py runserver 8080`.
 
 **An AI customer-support agent that verifies before it acts.** NovaMart's customers can be confused, contradictory
 or deliberately misleading, so our agent treats every message as a *claim*, not a fact. Each turn goes through

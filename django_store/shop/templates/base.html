@@ -1,0 +1,37 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Shop{% endblock %} · NovaMart</title>
+<link rel="stylesheet" href="{% static 'shop/style.css' %}">
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <a href="{% url 'home' %}" class="logo">Nova<span>Mart</span></a>
+    <form class="search" action="{% url 'home' %}">
+      <input name="q" value="{{ q|default:'' }}" placeholder="Search for phones, laptops, headphones…" aria-label="Search products">
+      <button aria-label="Search">&#128269;</button>
+    </form>
+    <nav class="nav">
+      {% if user.is_authenticated %}
+        <a href="{% url 'orders' %}"><small>Hello, {{ user.first_name|default:user.username }}</small><b>My Orders</b></a>
+        <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="linkbtn"><small>&nbsp;</small><b>Logout</b></button></form>
+      {% else %}
+        <a href="{% url 'login' %}"><small>Hello, sign in</small><b>Account</b></a>
+        <a href="{% url 'register' %}"><small>New here?</small><b>Register</b></a>
+      {% endif %}
+      <a href="{% url 'cart' %}" class="cart" aria-label="Cart">&#128722;<span id="cart-count" class="badge">{{ cart_count }}</span><b>Cart</b></a>
+    </nav>
+  </div>
+  <div class="cats"><div class="wrap chips">
+    <a href="{% url 'home' %}" class="chip {% if not cat %}on{% endif %}">All</a>
+    {% for c in categories %}<a href="{% url 'home' %}?category={{ c|urlencode }}" class="chip {% if cat == c %}on{% endif %}">{{ c }}</a>{% endfor %}
+  </div></div>
+</header>
+<div id="toasts">{% for m in messages %}<div class="toast {{ m.tags }}">{{ m }}</div>{% endfor %}</div>
+<main class="wrap">{% block content %}{% endblock %}</main>
+<footer class="foot"><div class="wrap">NovaMart · CodeAlpha Task 1 · Django + SQLite · HTML, CSS &amp; JavaScript</div></footer>
+<script src="{% static 'shop/app.js' %}"></script>
+</body>
+</html>

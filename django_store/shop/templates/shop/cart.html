@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% load humanize %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<div class="two-col">
+<section class="panel">
+  <h1>Shopping Cart</h1>
+  {% for i in items %}
+  <div class="line">
+    <a href="{% url 'product_detail' i.product.pk %}" class="mini"><span class="cat-icon">{{ i.product.category|slice:":1" }}</span></a>
+    <div class="grow">
+      <a href="{% url 'product_detail' i.product.pk %}" class="name">{{ i.product.name }}</a>
+      <div class="ok small">In stock</div>
+      <form method="post" action="{% url 'cart_update' i.product.pk %}" class="qty">{% csrf_token %}
+        <button name="quantity" value="{{ i.quantity|add:'-1' }}" aria-label="Decrease">−</button>
+        <span>{{ i.quantity }}</span>
+        <button name="quantity" value="{{ i.quantity|add:'1' }}" aria-label="Increase">+</button>
+        <button name="quantity" value="0" class="link">Delete</button>
+      </form>
+    </div>
+    <b>₹{{ i.line_total|intcomma }}</b>
+  </div>
+  {% empty %}
+  <p class="empty">Your cart is empty. <a href="{% url 'home' %}">Continue shopping</a></p>
+  {% endfor %}
+</section>
+{% if items %}
+<aside class="panel summary">
+  <div class="row"><span>Subtotal ({{ count }} item{{ count|pluralize }})</span><span>₹{{ subtotal|intcomma }}</span></div>
+  <div class="row"><span>Delivery</span><span>{% if shipping %}₹{{ shipping }}{% else %}FREE{% endif %}</span></div>
+  <div class="row total"><span>Total</span><span>₹{{ total|intcomma }}</span></div>
+  <a href="{% url 'checkout' %}" class="btn wide">Proceed to checkout</a>
+</aside>
+{% endif %}
+</div>
+{% endblock %}

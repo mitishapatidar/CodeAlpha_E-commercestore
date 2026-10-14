@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% load humanize %}
+{% block title %}My Orders{% endblock %}
+{% block content %}
+<h1>My Orders</h1>
+{% for o in orders %}
+<a href="{% url 'order_detail' o.pk %}" class="panel order">
+  <div><b>Order #{{ o.pk }}</b> <span class="status {{ o.status }}">{{ o.get_status_display }}</span>
+  <div class="muted small">{{ o.created_at|date:"d M Y, h:i A" }} · {{ o.items.all|length }} item{{ o.items.all|length|pluralize }}</div>
+  <div class="small">{% for it in o.items.all|slice:":3" %}{{ it.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</div></div>
+  <b>₹{{ o.total|intcomma }}</b>
+</a>
+{% empty %}<p class="empty">No orders yet. <a href="{% url 'home' %}">Start shopping</a></p>{% endfor %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not q and not cat and page.number == 1 %}
+<section class="hero">
+  <h1>Up to 40% off top tech</h1>
+  <p>Phones, laptops, audio and more. Free delivery on orders above ₹1,000.</p>
+</section>
+{% endif %}
+<div class="head-row"><h2>{% if q %}Results for “{{ q }}”{% elif cat %}{{ cat }}{% else %}Trending now{% endif %}</h2>
+<span class="muted">{{ page.paginator.count }} products</span></div>
+{% if page.object_list %}
+<div class="grid">{% for p in page.object_list %}{% include "shop/_card.html" %}{% endfor %}</div>
+{% if page.has_other_pages %}<nav class="pager">
+  {% if page.has_previous %}<a href="?q={{ q|urlencode }}&category={{ cat|urlencode }}&page={{ page.previous_page_number }}">&larr; Prev</a>{% endif %}
+  <span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+  {% if page.has_next %}<a href="?q={{ q|urlencode }}&category={{ cat|urlencode }}&page={{ page.next_page_number }}">Next &rarr;</a>{% endif %}
+</nav>{% endif %}
+{% else %}<p class="empty">No products match your search.</p>{% endif %}
+{% endblock %}

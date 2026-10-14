@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<form method="post" class="panel form auth" novalidate>{% csrf_token %}
+  <h1>Sign in</h1>
+  {% if form.non_field_errors %}<div class="err box">{% for e in form.non_field_errors %}{{ e }} {% endfor %}</div>{% endif %}
+  {% for f in form %}
+  <label class="field">{{ f.label }}{{ f }}{% for e in f.errors %}<span class="err">{{ e }}</span>{% endfor %}</label>
+  {% endfor %}
+  {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+  <button class="btn wide">Sign in</button>
+  <p class="muted small center">New to NovaMart? <a href="{% url 'register' %}">Create your account</a></p>
+</form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}{% load humanize %}
+{% block title %}{{ p.name }}{% endblock %}
+{% block content %}
+<nav class="crumbs"><a href="{% url 'home' %}">Home</a> › <a href="{% url 'home' %}?category={{ p.category|urlencode }}">{{ p.category }}</a> › {{ p.name }}</nav>
+<section class="detail">
+  <div class="big-thumb"><span class="cat-icon">{{ p.category|slice:":1" }}</span></div>
+  <div>
+    <div class="brand">{{ p.brand }}</div>
+    <h1>{{ p.name }}</h1>
+    <div class="rate"><span>{{ p.rating|floatformat:1 }} &#9733;</span> {{ p.review_count|intcomma }} ratings</div>
+    <hr>
+    {% if p.discount %}<span class="off-inline">-{{ p.discount }}%</span>{% endif %}
+    <span class="big-price">₹{{ p.price|intcomma }}</span>
+    {% if p.mrp > p.price %}<div class="muted">M.R.P.: <s>₹{{ p.mrp|intcomma }}</s> · Inclusive of all taxes</div>{% endif %}
+    <p class="desc">{{ p.description }}</p>
+    <table class="specs">
+      <tr><th>Brand</th><td>{{ p.brand }}</td></tr>
+      <tr><th>Category</th><td>{{ p.category }}</td></tr>
+      {% if p.color %}<tr><th>Colour</th><td>{{ p.color }}</td></tr>{% endif %}
+      <tr><th>Warranty</th><td>{{ p.warranty_months }} months</td></tr>
+      <tr><th>Returns</th><td>{% if p.returnable %}Easy returns{% else %}Non-returnable{% endif %}</td></tr>
+    </table>
+  </div>
+  <aside class="buybox">
+    <div class="big-price">₹{{ p.price|intcomma }}</div>
+    <p class="{% if p.in_stock %}ok{% else %}bad{% endif %}">{% if p.in_stock %}In stock{% if p.stock < 10 %} · only {{ p.stock }} left{% endif %}{% else %}Currently unavailable{% endif %}</p>
+    <p class="muted">{% if p.price >= 1000 %}FREE delivery{% else %}Delivery ₹79 (free above ₹1,000){% endif %}</p>
+    {% if p.in_stock %}
+    <form method="post" action="{% url 'cart_add' p.pk %}" class="add-form">{% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}"><button class="btn wide">Add to cart</button>
+    </form>
+    <form method="post" action="{% url 'cart_add' p.pk %}">{% csrf_token %}
+      <input type="hidden" name="next" value="{% url 'checkout' %}"><button class="btn alt wide">Buy now</button>
+    </form>
+    {% endif %}
+  </aside>
+</section>
+{% if related %}<h2>More in {{ p.category }}</h2>
+<div class="grid">{% for p in related %}{% include "shop/_card.html" %}{% endfor %}</div>{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}{% load humanize %}
+{% block title %}Order #{{ order.pk }}{% endblock %}
+{% block content %}
+<div class="head-row"><h1>Order #{{ order.pk }}</h1><span class="status {{ order.status }}">{{ order.get_status_display }}</span></div>
+<p class="muted">Placed on {{ order.created_at|date:"d M Y, h:i A" }} · {{ order.get_payment_display }}</p>
+{% if order.status != "cancelled" %}
+<ol class="track">{% for s in steps %}<li class="{% if forloop.counter0 <= order.step %}done{% endif %}">{{ s|capfirst }}</li>{% endfor %}</ol>
+{% endif %}
+<div class="two-col">
+<section class="panel">
+  {% for it in order.items.all %}
+  <div class="line"><div class="grow">{% if it.product %}<a href="{% url 'product_detail' it.product.pk %}" class="name">{{ it.name }}</a>{% else %}{{ it.name }}{% endif %}
+  <div class="muted small">₹{{ it.price|intcomma }} × {{ it.quantity }}</div></div><b>₹{{ it.line_total|intcomma }}</b></div>
+  {% endfor %}
+</section>
+<aside class="panel summary">
+  <h2>Delivering to</h2>
+  <p class="small">{{ order.full_name }}<br>{{ order.address }}<br>{{ order.city }} - {{ order.pincode }}<br>&#9742; {{ order.phone }}</p>
+  <div class="row"><span>Subtotal</span><span>₹{{ order.subtotal|intcomma }}</span></div>
+  <div class="row"><span>Delivery</span><span>{% if order.shipping %}₹{{ order.shipping }}{% else %}FREE{% endif %}</span></div>
+  <div class="row total"><span>Total</span><span>₹{{ order.total|intcomma }}</span></div>
+  {% if order.cancellable %}
+  <form method="post" action="{% url 'order_cancel' order.pk %}" data-confirm="Cancel this order?">{% csrf_token %}<button class="btn ghost wide">Cancel order</button></form>
+  {% endif %}
+</aside>
+</div>
+{% endblock %}

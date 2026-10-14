@@ -25,3 +25,6 @@ runtime/
 
 # Organiser material (not ours to redistribute)
 Mantra_Yudha_Handbook_for_Participants.pdf
+
+# Django store
+django_store/db.sqlite3

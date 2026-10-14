@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% load humanize %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="two-col">
+<form method="post" class="panel form" novalidate>{% csrf_token %}
+  <h1>Delivery address</h1>
+  {% for f in form %}
+  <label class="field">{{ f.label }}{{ f }}{% for e in f.errors %}<span class="err">{{ e }}</span>{% endfor %}</label>
+  {% endfor %}
+  <button class="btn wide">Place order · ₹{{ total|intcomma }}</button>
+</form>
+<aside class="panel summary">
+  <h2>Order summary</h2>
+  {% for i in items %}<div class="row small"><span>{{ i.product.name }} × {{ i.quantity }}</span><span>₹{{ i.line_total|intcomma }}</span></div>{% endfor %}
+  <div class="row"><span>Delivery</span><span>{% if shipping %}₹{{ shipping }}{% else %}FREE{% endif %}</span></div>
+  <div class="row total"><span>Total</span><span>₹{{ total|intcomma }}</span></div>
+</aside>
+</div>
+{% endblock %}
