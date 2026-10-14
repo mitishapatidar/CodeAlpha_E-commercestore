@@ -216,7 +216,25 @@ def products(q: str = "", category: str = "", limit: int = 24) -> list[dict]:
             continue
         out.append({k: p.get(k) for k in CARD_FIELDS})
     out.sort(key=lambda p: (p["status"] != "active", -(p["review_count"] or 0)))
+    if not q and not category:
+        out = featured_order(out)
     return out[:limit]
+
+
+FEATURED = ["Smartphones", "Earbuds", "Headphones", "Smartwatches", "Laptops", "Tablets", "Speakers", "Cameras"]
+
+
+def featured_order(products: list[dict]) -> list[dict]:
+    """Home page: phones, earbuds, headphones... first, one of each in turn (best-reviewed first), then the rest."""
+    by_cat: dict[str, list[dict]] = {}
+    for p in products:
+        if p["status"] == "active":
+            by_cat.setdefault(p["category"], []).append(p)
+    lead = []
+    while any(by_cat.get(c) for c in FEATURED):
+        lead += [by_cat[c].pop(0) for c in FEATURED if by_cat.get(c)]
+    seen = {p["product_id"] for p in lead}
+    return lead + [p for p in products if p["product_id"] not in seen]
 
 
 @app.get("/customers/{customer_id}/tickets")

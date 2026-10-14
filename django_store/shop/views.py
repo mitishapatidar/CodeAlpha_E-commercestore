@@ -12,6 +12,18 @@ from .forms import CheckoutForm, RegisterForm
 from .models import CartItem, Order, OrderItem, Product, cart_totals
 
 MAX_QTY = 10
+FEATURED = ["Smartphones", "Earbuds", "Headphones", "Smartwatches", "Laptops", "Tablets", "Speakers", "Cameras"]
+
+
+def featured_order(products):
+    """Home page: phones, earbuds, headphones... first, one of each in turn (best-reviewed first), then the rest."""
+    by_cat = {}
+    for p in products:
+        by_cat.setdefault(p.category, []).append(p)
+    lead = []
+    while any(by_cat.get(c) for c in FEATURED):
+        lead += [by_cat[c].pop(0) for c in FEATURED if by_cat.get(c)]
+    return lead + [p for c, ps in by_cat.items() if c not in FEATURED for p in ps]
 
 
 def home(request):
@@ -21,6 +33,8 @@ def home(request):
         products = products.filter(Q(name__icontains=q) | Q(brand__icontains=q) | Q(category__icontains=q))
     if cat:
         products = products.filter(category=cat)
+    if not q and not cat:
+        products = featured_order(products)
     page = Paginator(products, 24).get_page(request.GET.get("page"))
     return render(request, "shop/home.html", {"page": page, "q": q, "cat": cat})
 
