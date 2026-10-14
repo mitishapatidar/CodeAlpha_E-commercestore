@@ -2,9 +2,9 @@
 
 Specification sheets for products in this category. Prices/stock live in `products.csv`; this file carries extra technical detail.
 
-## Voltix Beat Air 700 (PROD-00095)
+## Sony WH-1000XM5 (Forest Green) (PROD-00095)
 
-- **SKU:** VOL-HEA-6858-FOR  |  **Brand:** Voltix  |  **Subcategory:** Over-ear ANC  |  **Colour:** Forest Green
+- **SKU:** VOL-HEA-6858-FOR  |  **Brand:** Sony  |  **Subcategory:** Over-ear ANC  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.23 kg
 
@@ -17,11 +17,11 @@ Specification sheets for products in this category. Prices/stock live in `produc
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Voltix Beat Air 700 is a over-ear anc from Voltix featuring driver: 10 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Includes all in-box accessories listed on the spec sheet.
+Sony WH-1000XM5 (Forest Green) is a over-ear anc from Sony featuring driver: 10 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Includes all in-box accessories listed on the spec sheet.
 
-## Skylark Audio Prime 100 (PROD-00096)
+## JBL Tune 520BT (Charcoal) (PROD-00096)
 
-- **SKU:** SKY-HEA-7533-CHA  |  **Brand:** Skylark  |  **Subcategory:** On-ear Wireless  |  **Colour:** Charcoal
+- **SKU:** SKY-HEA-7533-CHA  |  **Brand:** JBL  |  **Subcategory:** On-ear Wireless  |  **Colour:** Charcoal
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.41 kg
 
@@ -34,11 +34,11 @@ Voltix Beat Air 700 is a over-ear anc from Voltix featuring driver: 10 mm, batte
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Skylark Audio Prime 100 is a on-ear wireless from Skylark featuring driver: 10 mm, battery: 20 hours, noise cancellation: Passive. Engineered for long-term use.
+JBL Tune 520BT (Charcoal) is a on-ear wireless from JBL featuring driver: 10 mm, battery: 20 hours, noise cancellation: Passive. Engineered for long-term use.
 
-## Skylark Audio Pro 700 (PROD-00097)
+## Sony WH-CH520 (Charcoal) (PROD-00097)
 
-- **SKU:** SKY-HEA-4993-CHA  |  **Brand:** Skylark  |  **Subcategory:** On-ear Wireless  |  **Colour:** Charcoal
+- **SKU:** SKY-HEA-4993-CHA  |  **Brand:** Sony  |  **Subcategory:** On-ear Wireless  |  **Colour:** Charcoal
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.14 kg
 
@@ -51,11 +51,11 @@ Skylark Audio Prime 100 is a on-ear wireless from Skylark featuring driver: 10 m
 | Water resistance | None |
 | Charging port | USB-C |
 
-Skylark Audio Pro 700 is a on-ear wireless from Skylark featuring driver: 40 mm, battery: 8 hours, noise cancellation: None. Designed with Indian conditions in mind.
+Sony WH-CH520 (Charcoal) is a on-ear wireless from Sony featuring driver: 40 mm, battery: 8 hours, noise cancellation: None. Designed with Indian conditions in mind.
 
-## SoundNest Core X1 (PROD-00098)
+## HyperX Cloud II (Sand Beige) (PROD-00098)
 
-- **SKU:** SOU-HEA-8631-SAN  |  **Brand:** SoundNest  |  **Subcategory:** Gaming Headset  |  **Colour:** Sand Beige
+- **SKU:** SOU-HEA-8631-SAN  |  **Brand:** HyperX  |  **Subcategory:** Gaming Headset  |  **Colour:** Sand Beige
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.26 kg
 
@@ -68,11 +68,11 @@ Skylark Audio Pro 700 is a on-ear wireless from Skylark featuring driver: 40 mm,
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-SoundNest Core X1 is a gaming headset from SoundNest featuring driver: 12 mm, battery: 40 hours, noise cancellation: Hybrid ANC. Includes all in-box accessories listed on the spec sheet.
+HyperX Cloud II (Sand Beige) is a gaming headset from HyperX featuring driver: 12 mm, battery: 40 hours, noise cancellation: Hybrid ANC. Includes all in-box accessories listed on the spec sheet.
 
-## Auralix Prime 100 (PROD-00099)
+## Audio-Technica ATH-M50x (Charcoal) (PROD-00099)
 
-- **SKU:** AUR-HEA-9614-CHA  |  **Brand:** Auralix  |  **Subcategory:** Over-ear Wired  |  **Colour:** Charcoal
+- **SKU:** AUR-HEA-9614-CHA  |  **Brand:** Audio-Technica  |  **Subcategory:** Over-ear Wired  |  **Colour:** Charcoal
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.34 kg
 
@@ -85,11 +85,11 @@ SoundNest Core X1 is a gaming headset from SoundNest featuring driver: 12 mm, ba
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Auralix Prime 100 is a over-ear wired from Auralix featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
+Audio-Technica ATH-M50x (Charcoal) is a over-ear wired from Audio-Technica featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
 
-## Auralix Go X1 (PROD-00100)
+## Bose QuietComfort Ultra Headphones (Space Grey) (PROD-00100)
 
-- **SKU:** AUR-HEA-7019-SPA  |  **Brand:** Auralix  |  **Subcategory:** Over-ear ANC  |  **Colour:** Space Grey
+- **SKU:** AUR-HEA-7019-SPA  |  **Brand:** Bose  |  **Subcategory:** Over-ear ANC  |  **Colour:** Space Grey
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.27 kg
 
@@ -102,11 +102,11 @@ Auralix Prime 100 is a over-ear wired from Auralix featuring driver: 11 mm, batt
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Auralix Go X1 is a over-ear anc from Auralix featuring driver: 50 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Built for everyday reliability.
+Bose QuietComfort Ultra Headphones (Space Grey) is a over-ear anc from Bose featuring driver: 50 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Built for everyday reliability.
 
-## Voltix Beat Plus 300 (PROD-00101)
+## boAt Rockerz 450 (Graphite) (PROD-00101)
 
-- **SKU:** VOL-HEA-8218-GRA  |  **Brand:** Voltix  |  **Subcategory:** On-ear Wireless  |  **Colour:** Graphite
+- **SKU:** VOL-HEA-8218-GRA  |  **Brand:** boAt  |  **Subcategory:** On-ear Wireless  |  **Colour:** Graphite
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.25 kg
 
@@ -119,11 +119,11 @@ Auralix Go X1 is a over-ear anc from Auralix featuring driver: 50 mm, battery: 6
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Voltix Beat Plus 300 is a on-ear wireless from Voltix featuring driver: 40 mm, battery: 8 hours, noise cancellation: None. Popular with students and professionals alike.
+boAt Rockerz 450 (Graphite) is a on-ear wireless from boAt featuring driver: 40 mm, battery: 8 hours, noise cancellation: None. Popular with students and professionals alike.
 
-## Voltix Beat Neo X1 (PROD-00102)
+## boAt Rockerz 255 Pro+ (Graphite) (PROD-00102)
 
-- **SKU:** VOL-HEA-5633-GRA  |  **Brand:** Voltix  |  **Subcategory:** Neckband  |  **Colour:** Graphite
+- **SKU:** VOL-HEA-5633-GRA  |  **Brand:** boAt  |  **Subcategory:** Neckband  |  **Colour:** Graphite
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.3 kg
 
@@ -136,11 +136,11 @@ Voltix Beat Plus 300 is a on-ear wireless from Voltix featuring driver: 40 mm, b
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Voltix Beat Neo X1 is a neckband from Voltix featuring driver: 13 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
+boAt Rockerz 255 Pro+ (Graphite) is a neckband from boAt featuring driver: 13 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
 
-## Auralix Edge 100 (PROD-00103)
+## Sony MDR-7506 (White) (PROD-00103)
 
-- **SKU:** AUR-HEA-3970-WHI  |  **Brand:** Auralix  |  **Subcategory:** Over-ear Wired  |  **Colour:** White
+- **SKU:** AUR-HEA-3970-WHI  |  **Brand:** Sony  |  **Subcategory:** Over-ear Wired  |  **Colour:** White
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.24 kg
 
@@ -153,11 +153,11 @@ Voltix Beat Neo X1 is a neckband from Voltix featuring driver: 13 mm, battery: 8
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Auralix Edge 100 is a over-ear wired from Auralix featuring driver: 13 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Popular with students and professionals alike.
+Sony MDR-7506 (White) is a over-ear wired from Sony featuring driver: 13 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Popular with students and professionals alike.
 
-## SoundNest Ultra X1 (PROD-00104)
+## Sennheiser Momentum 4 Wireless (Graphite) (PROD-00104)
 
-- **SKU:** SOU-HEA-5668-GRA  |  **Brand:** SoundNest  |  **Subcategory:** Over-ear ANC  |  **Colour:** Graphite
+- **SKU:** SOU-HEA-5668-GRA  |  **Brand:** Sennheiser  |  **Subcategory:** Over-ear ANC  |  **Colour:** Graphite
 - **Warranty:** 6 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.25 kg
 
@@ -170,11 +170,11 @@ Auralix Edge 100 is a over-ear wired from Auralix featuring driver: 13 mm, batte
 | Water resistance | None |
 | Charging port | USB-C |
 
-SoundNest Ultra X1 is a over-ear anc from SoundNest featuring driver: 13 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Popular with students and professionals alike.
+Sennheiser Momentum 4 Wireless (Graphite) is a over-ear anc from Sennheiser featuring driver: 13 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Popular with students and professionals alike.
 
-## Voltix Beat Prime 100 (PROD-00105)
+## Apple AirPods Max (Rose Gold) (PROD-00105)
 
-- **SKU:** VOL-HEA-5208-ROS  |  **Brand:** Voltix  |  **Subcategory:** Over-ear ANC  |  **Colour:** Rose Gold
+- **SKU:** VOL-HEA-5208-ROS  |  **Brand:** Apple  |  **Subcategory:** Over-ear ANC  |  **Colour:** Rose Gold
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.42 kg
 
@@ -187,11 +187,11 @@ SoundNest Ultra X1 is a over-ear anc from SoundNest featuring driver: 13 mm, bat
 | Water resistance | None |
 | Charging port | USB-C |
 
-Voltix Beat Prime 100 is a over-ear anc from Voltix featuring driver: 13 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Built for everyday reliability.
+Apple AirPods Max (Rose Gold) is a over-ear anc from Apple featuring driver: 13 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Built for everyday reliability.
 
-## SoundNest Air 300 (PROD-00106)
+## Sennheiser HD 560S (Space Grey) (PROD-00106)
 
-- **SKU:** SOU-HEA-1528-SPA  |  **Brand:** SoundNest  |  **Subcategory:** Over-ear Wired  |  **Colour:** Space Grey
+- **SKU:** SOU-HEA-1528-SPA  |  **Brand:** Sennheiser  |  **Subcategory:** Over-ear Wired  |  **Colour:** Space Grey
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.26 kg
 
@@ -204,11 +204,11 @@ Voltix Beat Prime 100 is a over-ear anc from Voltix featuring driver: 13 mm, bat
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-SoundNest Air 300 is a over-ear wired from SoundNest featuring driver: 40 mm, battery: 60 hours, noise cancellation: Adaptive ANC. A balanced pick for its class.
+Sennheiser HD 560S (Space Grey) is a over-ear wired from Sennheiser featuring driver: 40 mm, battery: 60 hours, noise cancellation: Adaptive ANC. A balanced pick for its class.
 
-## Auralix Spark 500 (PROD-00107)
+## OnePlus Bullets Wireless Z2 (Black) (PROD-00107)
 
-- **SKU:** AUR-HEA-4685-BLA  |  **Brand:** Auralix  |  **Subcategory:** Neckband  |  **Colour:** Black
+- **SKU:** AUR-HEA-4685-BLA  |  **Brand:** OnePlus  |  **Subcategory:** Neckband  |  **Colour:** Black
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.44 kg
 
@@ -221,11 +221,11 @@ SoundNest Air 300 is a over-ear wired from SoundNest featuring driver: 40 mm, ba
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Auralix Spark 500 is a neckband from Auralix featuring driver: 10 mm, battery: 8 hours, noise cancellation: None. Includes all in-box accessories listed on the spec sheet.
+OnePlus Bullets Wireless Z2 (Black) is a neckband from OnePlus featuring driver: 10 mm, battery: 8 hours, noise cancellation: None. Includes all in-box accessories listed on the spec sheet.
 
-## Voltix Beat Ultra 500 (PROD-00108)
+## AKG K92 (Forest Green) (PROD-00108)
 
-- **SKU:** VOL-HEA-7131-FOR  |  **Brand:** Voltix  |  **Subcategory:** Over-ear Wired  |  **Colour:** Forest Green
+- **SKU:** VOL-HEA-7131-FOR  |  **Brand:** AKG  |  **Subcategory:** Over-ear Wired  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.33 kg
 
@@ -238,11 +238,11 @@ Auralix Spark 500 is a neckband from Auralix featuring driver: 10 mm, battery: 8
 | Water resistance | None |
 | Charging port | USB-C |
 
-Voltix Beat Ultra 500 is a over-ear wired from Voltix featuring driver: 50 mm, battery: 12 hours, noise cancellation: Passive. Popular with students and professionals alike.
+AKG K92 (Forest Green) is a over-ear wired from AKG featuring driver: 50 mm, battery: 12 hours, noise cancellation: Passive. Popular with students and professionals alike.
 
-## Voltix Beat Plus 100 (PROD-00109)
+## Logitech G Pro X Gaming Headset (Silver) (PROD-00109)
 
-- **SKU:** VOL-HEA-6288-SIL  |  **Brand:** Voltix  |  **Subcategory:** Gaming Headset  |  **Colour:** Silver
+- **SKU:** VOL-HEA-6288-SIL  |  **Brand:** Logitech G  |  **Subcategory:** Gaming Headset  |  **Colour:** Silver
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.15 kg
 
@@ -255,11 +255,11 @@ Voltix Beat Ultra 500 is a over-ear wired from Voltix featuring driver: 50 mm, b
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Voltix Beat Plus 100 is a gaming headset from Voltix featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. A balanced pick for its class.
+Logitech G Pro X Gaming Headset (Silver) is a gaming headset from Logitech G featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. A balanced pick for its class.
 
-## Auralix Ultra X1 (PROD-00110)
+## JBL Tune 215BT (Midnight Blue) (PROD-00110)
 
-- **SKU:** AUR-HEA-7611-MID  |  **Brand:** Auralix  |  **Subcategory:** Neckband  |  **Colour:** Midnight Blue
+- **SKU:** AUR-HEA-7611-MID  |  **Brand:** JBL  |  **Subcategory:** Neckband  |  **Colour:** Midnight Blue
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.33 kg
 
@@ -272,11 +272,11 @@ Voltix Beat Plus 100 is a gaming headset from Voltix featuring driver: 11 mm, ba
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Auralix Ultra X1 is a neckband from Auralix featuring driver: 11 mm, battery: 60 hours, noise cancellation: Adaptive ANC. A balanced pick for its class.
+JBL Tune 215BT (Midnight Blue) is a neckband from JBL featuring driver: 11 mm, battery: 60 hours, noise cancellation: Adaptive ANC. A balanced pick for its class.
 
-## Skylark Audio Air 500 (PROD-00111)
+## Audio-Technica ATH-M50x (Space Grey) (PROD-00111)
 
-- **SKU:** SKY-HEA-4864-SPA  |  **Brand:** Skylark  |  **Subcategory:** Over-ear Wired  |  **Colour:** Space Grey
+- **SKU:** SKY-HEA-4864-SPA  |  **Brand:** Audio-Technica  |  **Subcategory:** Over-ear Wired  |  **Colour:** Space Grey
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.39 kg
 
@@ -289,11 +289,11 @@ Auralix Ultra X1 is a neckband from Auralix featuring driver: 11 mm, battery: 60
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Skylark Audio Air 500 is a over-ear wired from Skylark featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Designed with Indian conditions in mind.
+Audio-Technica ATH-M50x (Space Grey) is a over-ear wired from Audio-Technica featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Designed with Indian conditions in mind.
 
-## Auralix Max 700 (PROD-00112)
+## Skullcandy Riff Wireless 2 (Charcoal) (PROD-00112)
 
-- **SKU:** AUR-HEA-1112-CHA  |  **Brand:** Auralix  |  **Subcategory:** On-ear Wireless  |  **Colour:** Charcoal
+- **SKU:** AUR-HEA-1112-CHA  |  **Brand:** Skullcandy  |  **Subcategory:** On-ear Wireless  |  **Colour:** Charcoal
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.32 kg
 
@@ -306,11 +306,11 @@ Skylark Audio Air 500 is a over-ear wired from Skylark featuring driver: 11 mm, 
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Auralix Max 700 is a on-ear wireless from Auralix featuring driver: 40 mm, battery: 12 hours, noise cancellation: Passive. Designed with Indian conditions in mind.
+Skullcandy Riff Wireless 2 (Charcoal) is a on-ear wireless from Skullcandy featuring driver: 40 mm, battery: 12 hours, noise cancellation: Passive. Designed with Indian conditions in mind.
 
-## Auralix Neo 700 (PROD-00113)
+## Sony MDR-7506 (Sand Beige) (PROD-00113)
 
-- **SKU:** AUR-HEA-9403-SAN  |  **Brand:** Auralix  |  **Subcategory:** Over-ear Wired  |  **Colour:** Sand Beige
+- **SKU:** AUR-HEA-9403-SAN  |  **Brand:** Sony  |  **Subcategory:** Over-ear Wired  |  **Colour:** Sand Beige
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.28 kg
 
@@ -323,11 +323,11 @@ Auralix Max 700 is a on-ear wireless from Auralix featuring driver: 40 mm, batte
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Auralix Neo 700 is a over-ear wired from Auralix featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
+Sony MDR-7506 (Sand Beige) is a over-ear wired from Sony featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
 
-## SoundNest Ultra 100 (PROD-00114)
+## Razer BlackShark V2 X (White) (PROD-00114)
 
-- **SKU:** SOU-HEA-9503-WHI  |  **Brand:** SoundNest  |  **Subcategory:** Gaming Headset  |  **Colour:** White
+- **SKU:** SOU-HEA-9503-WHI  |  **Brand:** Razer  |  **Subcategory:** Gaming Headset  |  **Colour:** White
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.44 kg
 
@@ -340,11 +340,11 @@ Auralix Neo 700 is a over-ear wired from Auralix featuring driver: 11 mm, batter
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-SoundNest Ultra 100 is a gaming headset from SoundNest featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Designed with Indian conditions in mind.
+Razer BlackShark V2 X (White) is a gaming headset from Razer featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Designed with Indian conditions in mind.
 
-## Auralix Prime X1 (PROD-00115)
+## Sennheiser HD 560S (Titanium) (PROD-00115)
 
-- **SKU:** AUR-HEA-1435-TIT  |  **Brand:** Auralix  |  **Subcategory:** Over-ear Wired  |  **Colour:** Titanium
+- **SKU:** AUR-HEA-1435-TIT  |  **Brand:** Sennheiser  |  **Subcategory:** Over-ear Wired  |  **Colour:** Titanium
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.32 kg
 
@@ -357,11 +357,11 @@ SoundNest Ultra 100 is a gaming headset from SoundNest featuring driver: 11 mm, 
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Auralix Prime X1 is a over-ear wired from Auralix featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. A balanced pick for its class.
+Sennheiser HD 560S (Titanium) is a over-ear wired from Sennheiser featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. A balanced pick for its class.
 
-## Voltix Beat One 700 (PROD-00116)
+## Audio-Technica ATH-M50x (Forest Green) (PROD-00116)
 
-- **SKU:** VOL-HEA-7678-FOR  |  **Brand:** Voltix  |  **Subcategory:** Over-ear Wired  |  **Colour:** Forest Green
+- **SKU:** VOL-HEA-7678-FOR  |  **Brand:** Audio-Technica  |  **Subcategory:** Over-ear Wired  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.28 kg
 
@@ -374,4 +374,4 @@ Auralix Prime X1 is a over-ear wired from Auralix featuring driver: 11 mm, batte
 | Water resistance | None |
 | Charging port | USB-C |
 
-Voltix Beat One 700 is a over-ear wired from Voltix featuring driver: 11 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Popular with students and professionals alike.
+Audio-Technica ATH-M50x (Forest Green) is a over-ear wired from Audio-Technica featuring driver: 11 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Popular with students and professionals alike.

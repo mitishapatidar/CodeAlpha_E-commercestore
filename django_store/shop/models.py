@@ -19,6 +19,7 @@ class Product(models.Model):
     warranty_months = models.PositiveIntegerField(default=12)
     returnable = models.BooleanField(default=True)
     color = models.CharField(max_length=40, blank=True)
+    image_url = models.URLField(max_length=300, blank=True)
     active = models.BooleanField(default=True)
 
     class Meta:

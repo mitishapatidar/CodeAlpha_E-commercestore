@@ -20,6 +20,7 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}h1{fo
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s}
 .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}.card .body{padding:12px;display:flex;flex-direction:column;gap:4px;flex:1}
 .thumb,.big-thumb,.mini{display:grid;place-items:center;background:linear-gradient(135deg,#dfe7f2,#f4f6f8);position:relative;aspect-ratio:4/3}
+.thumb,.big-thumb,.mini{overflow:hidden}.thumb img,.big-thumb img,.mini img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.card:hover .thumb img{transform:scale(1.05)}
 .cat-icon{width:64px;height:64px;border-radius:16px;background:var(--navy2);color:var(--orange);display:grid;place-items:center;font-size:30px;font-weight:800}
 .off{position:absolute;left:8px;top:8px;background:#cc0c39;color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px}
 .brand{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
@@ -31,7 +32,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}h1{fo
 .btn.ghost{background:#fff;border-color:var(--line)}.btn.wide{width:100%;margin-top:8px}.card .btn{width:100%;margin-top:6px}
 .crumbs{font-size:12px;color:var(--muted);margin-bottom:10px}
 .detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 260px;gap:24px;background:#fff;border-radius:10px;padding:20px}
-.big-thumb{border-radius:10px}.big-thumb .cat-icon{width:120px;height:120px;font-size:56px;border-radius:28px}
+.big-thumb{border-radius:10px}.big-thumb .thumb,.big-thumb,.mini{overflow:hidden}.thumb img,.big-thumb img,.mini img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.card:hover .thumb img{transform:scale(1.05)}
+.cat-icon{width:120px;height:120px;font-size:56px;border-radius:28px}
 .detail h1{font-size:22px;margin:4px 0}.detail hr{border:0;border-top:1px solid var(--line);margin:12px 0}
 .big-price{font-size:28px;font-weight:500}.off-inline{color:#cc0c39;font-size:24px;margin-right:8px}.desc{margin:14px 0}
 .specs{border-collapse:collapse;width:100%}.specs th{text-align:left;width:120px;color:var(--muted);font-weight:500}.specs th,.specs td{padding:6px 0;border-bottom:1px solid #eee}
@@ -40,7 +42,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}h1{fo
 .panel{background:#fff;border-radius:10px;padding:18px;display:block}.summary .row{display:flex;justify-content:space-between;gap:10px;padding:5px 0}
 .summary .total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-size:17px;font-weight:700;color:var(--price)}
 .line{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #eee}.grow{flex:1;min-width:0}
-.mini{width:90px;flex-shrink:0;border-radius:8px}.mini .cat-icon{width:44px;height:44px;font-size:20px;border-radius:12px}
+.mini{width:90px;flex-shrink:0;border-radius:8px}.mini .thumb,.big-thumb,.mini{overflow:hidden}.thumb img,.big-thumb img,.mini img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.card:hover .thumb img{transform:scale(1.05)}
+.cat-icon{width:44px;height:44px;font-size:20px;border-radius:12px}
 .qty{display:flex;align-items:center;gap:6px;margin-top:6px}.qty button{border:1px solid var(--line);background:#f0f2f2;border-radius:8px;width:30px;height:28px;cursor:pointer;font-size:16px}
 .qty span{min-width:22px;text-align:center;font-weight:600}.qty .link{width:auto;border:0;background:none;color:var(--link);font-size:12px}
 .form{max-width:640px}.auth{max-width:400px;margin:20px auto}.field{display:block;margin-bottom:12px;font-weight:600;font-size:13px}

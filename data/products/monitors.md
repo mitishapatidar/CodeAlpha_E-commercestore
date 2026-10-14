@@ -2,9 +2,9 @@
 
 Specification sheets for products in this category. Prices/stock live in `products.csv`; this file carries extra technical detail.
 
-## Orbitron Display Pro 22 (PROD-00177)
+## LG 27UL550 27-inch 4K (Forest Green) (PROD-00177)
 
-- **SKU:** ORB-MON-6390-FOR  |  **Brand:** Orbitron  |  **Subcategory:** 4K Monitor  |  **Colour:** Forest Green
+- **SKU:** ORB-MON-6390-FOR  |  **Brand:** LG  |  **Subcategory:** 4K Monitor  |  **Colour:** Forest Green
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 4.17 kg
 
@@ -17,11 +17,11 @@ Specification sheets for products in this category. Prices/stock live in `produc
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Orbitron Display Pro 22 is a 4k monitor from Orbitron featuring size: 24-inch, resolution: FHD, refresh rate: 100 Hz. Backed by NovaMart-certified service.
+LG 27UL550 27-inch 4K (Forest Green) is a 4k monitor from LG featuring size: 24-inch, resolution: FHD, refresh rate: 100 Hz. Backed by NovaMart-certified service.
 
-## Zenova Frame Core 22 (PROD-00178)
+## Dell SE2422H 24-inch (Sand Beige) (PROD-00178)
 
-- **SKU:** ZEN-MON-7611-SAN  |  **Brand:** Zenova  |  **Subcategory:** Office Monitor  |  **Colour:** Sand Beige
+- **SKU:** ZEN-MON-7611-SAN  |  **Brand:** Dell  |  **Subcategory:** Office Monitor  |  **Colour:** Sand Beige
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 3.82 kg
 
@@ -34,11 +34,11 @@ Orbitron Display Pro 22 is a 4k monitor from Orbitron featuring size: 24-inch, r
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame Core 22 is a office monitor from Zenova featuring size: 24-inch, resolution: QHD, refresh rate: 144 Hz. Includes all in-box accessories listed on the spec sheet.
+Dell SE2422H 24-inch (Sand Beige) is a office monitor from Dell featuring size: 24-inch, resolution: QHD, refresh rate: 144 Hz. Includes all in-box accessories listed on the spec sheet.
 
-## Zenova Frame Spark 22 (PROD-00179)
+## LG 34WP65C 34-inch UltraWide (Silver) (PROD-00179)
 
-- **SKU:** ZEN-MON-3936-SIL  |  **Brand:** Zenova  |  **Subcategory:** Ultrawide  |  **Colour:** Silver
+- **SKU:** ZEN-MON-3936-SIL  |  **Brand:** LG  |  **Subcategory:** Ultrawide  |  **Colour:** Silver
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 7.27 kg
 
@@ -51,11 +51,11 @@ Zenova Frame Core 22 is a office monitor from Zenova featuring size: 24-inch, re
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame Spark 22 is a ultrawide from Zenova featuring size: 24-inch, resolution: FHD, refresh rate: 75 Hz. Built for everyday reliability.
+LG 34WP65C 34-inch UltraWide (Silver) is a ultrawide from LG featuring size: 24-inch, resolution: FHD, refresh rate: 75 Hz. Built for everyday reliability.
 
-## ByteCore Vision Spark 24 (PROD-00180)
+## ASUS TUF VG249Q1A 165Hz (Black) (PROD-00180)
 
-- **SKU:** BYT-MON-3441-BLA  |  **Brand:** ByteCore  |  **Subcategory:** Gaming Monitor  |  **Colour:** Black
+- **SKU:** BYT-MON-3441-BLA  |  **Brand:** ASUS  |  **Subcategory:** Gaming Monitor  |  **Colour:** Black
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 7.36 kg
 
@@ -68,11 +68,11 @@ Zenova Frame Spark 22 is a ultrawide from Zenova featuring size: 24-inch, resolu
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-ByteCore Vision Spark 24 is a gaming monitor from ByteCore featuring size: 24-inch, resolution: FHD, refresh rate: 60 Hz. A balanced pick for its class.
+ASUS TUF VG249Q1A 165Hz (Black) is a gaming monitor from ASUS featuring size: 24-inch, resolution: FHD, refresh rate: 60 Hz. A balanced pick for its class.
 
-## ByteCore Vision Air 22 (PROD-00181)
+## Samsung Odyssey G5 34-inch (Silver) (PROD-00181)
 
-- **SKU:** BYT-MON-4694-SIL  |  **Brand:** ByteCore  |  **Subcategory:** Ultrawide  |  **Colour:** Silver
+- **SKU:** BYT-MON-4694-SIL  |  **Brand:** Samsung  |  **Subcategory:** Ultrawide  |  **Colour:** Silver
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 9.03 kg
 
@@ -85,11 +85,11 @@ ByteCore Vision Spark 24 is a gaming monitor from ByteCore featuring size: 24-in
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-ByteCore Vision Air 22 is a ultrawide from ByteCore featuring size: 34-inch, resolution: 4K UHD, refresh rate: 240 Hz. Designed with Indian conditions in mind.
+Samsung Odyssey G5 34-inch (Silver) is a ultrawide from Samsung featuring size: 34-inch, resolution: 4K UHD, refresh rate: 240 Hz. Designed with Indian conditions in mind.
 
-## Orbitron Display Edge 27 (PROD-00182)
+## Acer Nitro VG240Y 180Hz (Black) (PROD-00182)
 
-- **SKU:** ORB-MON-5640-BLA  |  **Brand:** Orbitron  |  **Subcategory:** Gaming Monitor  |  **Colour:** Black
+- **SKU:** ORB-MON-5640-BLA  |  **Brand:** Acer  |  **Subcategory:** Gaming Monitor  |  **Colour:** Black
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 5.61 kg
 
@@ -102,11 +102,11 @@ ByteCore Vision Air 22 is a ultrawide from ByteCore featuring size: 34-inch, res
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Orbitron Display Edge 27 is a gaming monitor from Orbitron featuring size: 27-inch, resolution: QHD, refresh rate: 165 Hz. Designed with Indian conditions in mind.
+Acer Nitro VG240Y 180Hz (Black) is a gaming monitor from Acer featuring size: 27-inch, resolution: QHD, refresh rate: 165 Hz. Designed with Indian conditions in mind.
 
-## Zenova Frame Ultra 22 (PROD-00183)
+## Samsung ViewFinity S8 27-inch (Forest Green) (PROD-00183)
 
-- **SKU:** ZEN-MON-1664-FOR  |  **Brand:** Zenova  |  **Subcategory:** 4K Monitor  |  **Colour:** Forest Green
+- **SKU:** ZEN-MON-1664-FOR  |  **Brand:** Samsung  |  **Subcategory:** 4K Monitor  |  **Colour:** Forest Green
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 7.58 kg
 
@@ -119,11 +119,11 @@ Orbitron Display Edge 27 is a gaming monitor from Orbitron featuring size: 27-in
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame Ultra 22 is a 4k monitor from Zenova featuring size: 27-inch, resolution: QHD, refresh rate: 100 Hz. Engineered for long-term use.
+Samsung ViewFinity S8 27-inch (Forest Green) is a 4k monitor from Samsung featuring size: 27-inch, resolution: QHD, refresh rate: 100 Hz. Engineered for long-term use.
 
-## ByteCore Vision Spark 27 (PROD-00184)
+## LG 24MP400 24-inch (Graphite) (PROD-00184)
 
-- **SKU:** BYT-MON-6435-GRA  |  **Brand:** ByteCore  |  **Subcategory:** Office Monitor  |  **Colour:** Graphite
+- **SKU:** BYT-MON-6435-GRA  |  **Brand:** LG  |  **Subcategory:** Office Monitor  |  **Colour:** Graphite
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 4.18 kg
 
@@ -136,11 +136,11 @@ Zenova Frame Ultra 22 is a 4k monitor from Zenova featuring size: 27-inch, resol
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-ByteCore Vision Spark 27 is a office monitor from ByteCore featuring size: 22-inch, resolution: QHD, refresh rate: 144 Hz. Backed by NovaMart-certified service.
+LG 24MP400 24-inch (Graphite) is a office monitor from LG featuring size: 22-inch, resolution: QHD, refresh rate: 144 Hz. Backed by NovaMart-certified service.
 
-## ByteCore Vision Ultra 27 (PROD-00185)
+## LG UltraGear 27GN750 (White) (PROD-00185)
 
-- **SKU:** BYT-MON-5722-WHI  |  **Brand:** ByteCore  |  **Subcategory:** Gaming Monitor  |  **Colour:** White
+- **SKU:** BYT-MON-5722-WHI  |  **Brand:** LG  |  **Subcategory:** Gaming Monitor  |  **Colour:** White
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 8.05 kg
 
@@ -153,11 +153,11 @@ ByteCore Vision Spark 27 is a office monitor from ByteCore featuring size: 22-in
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-ByteCore Vision Ultra 27 is a gaming monitor from ByteCore featuring size: 27-inch, resolution: FHD, refresh rate: 60 Hz. Engineered for long-term use.
+LG UltraGear 27GN750 (White) is a gaming monitor from LG featuring size: 27-inch, resolution: FHD, refresh rate: 60 Hz. Engineered for long-term use.
 
-## Zenova Frame Ultra 32 (PROD-00186)
+## Dell S2722QC 27-inch 4K (White) (PROD-00186)
 
-- **SKU:** ZEN-MON-5124-WHI  |  **Brand:** Zenova  |  **Subcategory:** 4K Monitor  |  **Colour:** White
+- **SKU:** ZEN-MON-5124-WHI  |  **Brand:** Dell  |  **Subcategory:** 4K Monitor  |  **Colour:** White
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 5.46 kg
 
@@ -170,11 +170,11 @@ ByteCore Vision Ultra 27 is a gaming monitor from ByteCore featuring size: 27-in
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame Ultra 32 is a 4k monitor from Zenova featuring size: 27-inch, resolution: QHD, refresh rate: 100 Hz. A balanced pick for its class.
+Dell S2722QC 27-inch 4K (White) is a 4k monitor from Dell featuring size: 27-inch, resolution: QHD, refresh rate: 100 Hz. A balanced pick for its class.
 
-## Orbitron Display Neo 32 (PROD-00187)
+## ASUS ZenScreen MB16ACV (Black) (PROD-00187)
 
-- **SKU:** ORB-MON-4051-BLA  |  **Brand:** Orbitron  |  **Subcategory:** Portable Monitor  |  **Colour:** Black
+- **SKU:** ORB-MON-4051-BLA  |  **Brand:** ASUS  |  **Subcategory:** Portable Monitor  |  **Colour:** Black
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 5.81 kg
 
@@ -187,11 +187,11 @@ Zenova Frame Ultra 32 is a 4k monitor from Zenova featuring size: 27-inch, resol
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Orbitron Display Neo 32 is a portable monitor from Orbitron featuring size: 27-inch, resolution: FHD, refresh rate: 60 Hz. Backed by NovaMart-certified service.
+ASUS ZenScreen MB16ACV (Black) is a portable monitor from ASUS featuring size: 27-inch, resolution: FHD, refresh rate: 60 Hz. Backed by NovaMart-certified service.
 
-## Zenova Frame Spark 24 (PROD-00188)
+## Dell S3422DW 34-inch (Midnight Blue) (PROD-00188)
 
-- **SKU:** ZEN-MON-2080-MID  |  **Brand:** Zenova  |  **Subcategory:** Ultrawide  |  **Colour:** Midnight Blue
+- **SKU:** ZEN-MON-2080-MID  |  **Brand:** Dell  |  **Subcategory:** Ultrawide  |  **Colour:** Midnight Blue
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 8.88 kg
 
@@ -204,11 +204,11 @@ Orbitron Display Neo 32 is a portable monitor from Orbitron featuring size: 27-i
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame Spark 24 is a ultrawide from Zenova featuring size: 34-inch, resolution: 4K UHD, refresh rate: 240 Hz. Engineered for long-term use.
+Dell S3422DW 34-inch (Midnight Blue) is a ultrawide from Dell featuring size: 34-inch, resolution: 4K UHD, refresh rate: 240 Hz. Engineered for long-term use.
 
-## ByteCore Vision Pro 24 (PROD-00189)
+## Acer EK220Q 21.5-inch (Silver) (PROD-00189)
 
-- **SKU:** BYT-MON-7317-SIL  |  **Brand:** ByteCore  |  **Subcategory:** Office Monitor  |  **Colour:** Silver
+- **SKU:** BYT-MON-7317-SIL  |  **Brand:** Acer  |  **Subcategory:** Office Monitor  |  **Colour:** Silver
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 5.44 kg
 
@@ -221,11 +221,11 @@ Zenova Frame Spark 24 is a ultrawide from Zenova featuring size: 34-inch, resolu
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-ByteCore Vision Pro 24 is a office monitor from ByteCore featuring size: 34-inch, resolution: 4K UHD, refresh rate: 240 Hz. Backed by NovaMart-certified service.
+Acer EK220Q 21.5-inch (Silver) is a office monitor from Acer featuring size: 34-inch, resolution: 4K UHD, refresh rate: 240 Hz. Backed by NovaMart-certified service.
 
-## Zenova Frame One 32 (PROD-00190)
+## Samsung LS24C310 24-inch (Black) (PROD-00190)
 
-- **SKU:** ZEN-MON-2900-BLA  |  **Brand:** Zenova  |  **Subcategory:** Office Monitor  |  **Colour:** Black
+- **SKU:** ZEN-MON-2900-BLA  |  **Brand:** Samsung  |  **Subcategory:** Office Monitor  |  **Colour:** Black
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 5.56 kg
 
@@ -238,11 +238,11 @@ ByteCore Vision Pro 24 is a office monitor from ByteCore featuring size: 34-inch
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame One 32 is a office monitor from Zenova featuring size: 22-inch, resolution: FHD, refresh rate: 60 Hz. Backed by NovaMart-certified service.
+Samsung LS24C310 24-inch (Black) is a office monitor from Samsung featuring size: 22-inch, resolution: FHD, refresh rate: 60 Hz. Backed by NovaMart-certified service.
 
-## Orbitron Display Go 22 (PROD-00191)
+## MSI MAG 342CQR (Charcoal) (PROD-00191)
 
-- **SKU:** ORB-MON-4557-CHA  |  **Brand:** Orbitron  |  **Subcategory:** Ultrawide  |  **Colour:** Charcoal
+- **SKU:** ORB-MON-4557-CHA  |  **Brand:** MSI  |  **Subcategory:** Ultrawide  |  **Colour:** Charcoal
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 8.54 kg
 
@@ -255,11 +255,11 @@ Zenova Frame One 32 is a office monitor from Zenova featuring size: 22-inch, res
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Orbitron Display Go 22 is a ultrawide from Orbitron featuring size: 24-inch, resolution: QHD, refresh rate: 144 Hz. Backed by NovaMart-certified service.
+MSI MAG 342CQR (Charcoal) is a ultrawide from MSI featuring size: 24-inch, resolution: QHD, refresh rate: 144 Hz. Backed by NovaMart-certified service.
 
-## PixelForge View Spark 27 (PROD-00192)
+## Dell SE2422H 24-inch (Ocean Blue) (PROD-00192)
 
-- **SKU:** PIX-MON-9579-OCE  |  **Brand:** PixelForge  |  **Subcategory:** Office Monitor  |  **Colour:** Ocean Blue
+- **SKU:** PIX-MON-9579-OCE  |  **Brand:** Dell  |  **Subcategory:** Office Monitor  |  **Colour:** Ocean Blue
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 7.03 kg
 
@@ -272,11 +272,11 @@ Orbitron Display Go 22 is a ultrawide from Orbitron featuring size: 24-inch, res
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-PixelForge View Spark 27 is a office monitor from PixelForge featuring size: 34-inch, resolution: QHD, refresh rate: 144 Hz. A balanced pick for its class.
+Dell SE2422H 24-inch (Ocean Blue) is a office monitor from Dell featuring size: 34-inch, resolution: QHD, refresh rate: 144 Hz. A balanced pick for its class.
 
-## ByteCore Vision Prime 34 (PROD-00193)
+## BenQ EW2880U 28-inch (Forest Green) (PROD-00193)
 
-- **SKU:** BYT-MON-6134-FOR  |  **Brand:** ByteCore  |  **Subcategory:** 4K Monitor  |  **Colour:** Forest Green
+- **SKU:** BYT-MON-6134-FOR  |  **Brand:** BenQ  |  **Subcategory:** 4K Monitor  |  **Colour:** Forest Green
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 7.15 kg
 
@@ -289,11 +289,11 @@ PixelForge View Spark 27 is a office monitor from PixelForge featuring size: 34-
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-ByteCore Vision Prime 34 is a 4k monitor from ByteCore featuring size: 34-inch, resolution: QHD, refresh rate: 100 Hz. A balanced pick for its class.
+BenQ EW2880U 28-inch (Forest Green) is a 4k monitor from BenQ featuring size: 34-inch, resolution: QHD, refresh rate: 100 Hz. A balanced pick for its class.
 
-## Zenova Frame Core 24 (PROD-00194)
+## Lenovo ThinkVision M14 (White) (PROD-00194)
 
-- **SKU:** ZEN-MON-3771-WHI  |  **Brand:** Zenova  |  **Subcategory:** Portable Monitor  |  **Colour:** White
+- **SKU:** ZEN-MON-3771-WHI  |  **Brand:** Lenovo  |  **Subcategory:** Portable Monitor  |  **Colour:** White
 - **Warranty:** 36 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 8.6 kg
 
@@ -306,4 +306,4 @@ ByteCore Vision Prime 34 is a 4k monitor from ByteCore featuring size: 34-inch, 
 | Ports | HDMI 2.0, DisplayPort 1.4, USB-C (select models) |
 | Stand | Tilt / height adjustable |
 
-Zenova Frame Core 24 is a portable monitor from Zenova featuring size: 27-inch, resolution: FHD, refresh rate: 75 Hz. Popular with students and professionals alike.
+Lenovo ThinkVision M14 (White) is a portable monitor from Lenovo featuring size: 27-inch, resolution: FHD, refresh rate: 75 Hz. Popular with students and professionals alike.

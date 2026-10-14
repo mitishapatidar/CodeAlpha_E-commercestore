@@ -168,8 +168,12 @@ function ProductCard({ p, qty, onAsk, onAdd }: { p: Product; qty: number; onAsk:
   const out = p.status !== "active";
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition hover:-translate-y-0.5 hover:border-line-strong hover:shadow-card">
-      <div className={cx("relative grid aspect-[4/3] place-items-center bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
-        <Icon className="size-14 text-navy-2/80 drop-shadow-[0_6px_14px_rgba(15,17,17,0.15)] transition group-hover:scale-105" strokeWidth={1.4} aria-hidden />
+      <div className={cx("relative grid aspect-[4/3] place-items-center overflow-hidden bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
+        {p.image_url ? (
+          <img src={p.image_url} alt={p.product_name} loading="lazy" className="absolute inset-0 size-full object-cover transition duration-300 group-hover:scale-105" />
+        ) : (
+          <Icon className="size-14 text-navy-2/80 drop-shadow-[0_6px_14px_rgba(15,17,17,0.15)] transition group-hover:scale-105" strokeWidth={1.4} aria-hidden />
+        )}
         {p.discount_percent > 0 && (
           <span className="absolute left-2.5 top-2.5 rounded-md bg-rose-500 px-1.5 py-0.5 text-2xs font-bold text-white">
             {Math.round(p.discount_percent)}% off
@@ -282,8 +286,8 @@ function CartDrawer({
                 const Icon = CAT_ICON[p.category] ?? Package;
                 return (
                   <li key={p.product_id} className="flex gap-3 py-3">
-                    <div className={cx("grid size-16 shrink-0 place-items-center rounded-xl bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
-                      <Icon className="size-7 text-navy-2/80" strokeWidth={1.5} aria-hidden />
+                    <div className={cx("grid size-16 shrink-0 place-items-center overflow-hidden rounded-xl bg-gradient-to-br", CAT_TINT[p.category] ?? "from-slate-500/20 to-slate-700/10")}>
+                      {p.image_url ? <img src={p.image_url} alt="" className="size-full object-cover" /> : <Icon className="size-7 text-navy-2/80" strokeWidth={1.5} aria-hidden />}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="line-clamp-2 text-sm font-medium leading-snug text-fg">{p.product_name}</div>

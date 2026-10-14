@@ -108,7 +108,7 @@ def products(q: str = "", category: str = "", limit: int = 24) -> list[dict]:
             continue
         out.append({k: p.get(k) for k in ("product_id", "product_name", "brand", "category", "subcategory", "price", "mrp",
                                            "discount_percent", "rating", "review_count", "warranty_months", "returnable",
-                                           "status", "color")})
+                                           "status", "color", "image_url")})
     out.sort(key=lambda p: (p["status"] != "active", -(p["review_count"] or 0)))
     return out[:limit]
 

@@ -2,9 +2,9 @@
 
 Specification sheets for products in this category. Prices/stock live in `products.csv`; this file carries extra technical detail.
 
-## Auralix Buds One 3 (PROD-00049)
+## JBL Endurance Peak 3 (Forest Green) (PROD-00049)
 
-- **SKU:** AUR-EAR-5051-FOR  |  **Brand:** Auralix  |  **Subcategory:** Sports Earbuds  |  **Colour:** Forest Green
+- **SKU:** AUR-EAR-5051-FOR  |  **Brand:** JBL  |  **Subcategory:** Sports Earbuds  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.05 kg
 
@@ -17,11 +17,11 @@ Specification sheets for products in this category. Prices/stock live in `produc
 | Water resistance | None |
 | Charging port | USB-C |
 
-Auralix Buds One 3 is a sports earbuds from Auralix featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Backed by NovaMart-certified service.
+JBL Endurance Peak 3 (Forest Green) is a sports earbuds from JBL featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Backed by NovaMart-certified service.
 
-## Voltix Air Neo Lite (PROD-00050)
+## Samsung Galaxy Buds2 Pro (Rose Gold) (PROD-00050)
 
-- **SKU:** VOL-EAR-5286-ROS  |  **Brand:** Voltix  |  **Subcategory:** True Wireless  |  **Colour:** Rose Gold
+- **SKU:** VOL-EAR-5286-ROS  |  **Brand:** Samsung  |  **Subcategory:** True Wireless  |  **Colour:** Rose Gold
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.1 kg
 
@@ -34,11 +34,11 @@ Auralix Buds One 3 is a sports earbuds from Auralix featuring driver: 11 mm, bat
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Voltix Air Neo Lite is a true wireless from Voltix featuring driver: 12 mm, battery: 8 hours, noise cancellation: None. Popular with students and professionals alike.
+Samsung Galaxy Buds2 Pro (Rose Gold) is a true wireless from Samsung featuring driver: 12 mm, battery: 8 hours, noise cancellation: None. Popular with students and professionals alike.
 
-## Lumora Beats Air ANC (PROD-00051)
+## OnePlus Buds 3 (Black) (PROD-00051)
 
-- **SKU:** LUM-EAR-5360-BLA  |  **Brand:** Lumora  |  **Subcategory:** True Wireless  |  **Colour:** Black
+- **SKU:** LUM-EAR-5360-BLA  |  **Brand:** OnePlus  |  **Subcategory:** True Wireless  |  **Colour:** Black
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** no
 - **Weight:** 0.1 kg
 
@@ -51,11 +51,11 @@ Voltix Air Neo Lite is a true wireless from Voltix featuring driver: 12 mm, batt
 | Water resistance | None |
 | Charging port | USB-C |
 
-Lumora Beats Air ANC is a true wireless from Lumora featuring driver: 10 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Engineered for long-term use.
+OnePlus Buds 3 (Black) is a true wireless from OnePlus featuring driver: 10 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Engineered for long-term use.
 
-## Voltix Air Spark Pro (PROD-00052)
+## Beats Powerbeats Pro (Titanium) (PROD-00052)
 
-- **SKU:** VOL-EAR-4020-TIT  |  **Brand:** Voltix  |  **Subcategory:** Sports Earbuds  |  **Colour:** Titanium
+- **SKU:** VOL-EAR-4020-TIT  |  **Brand:** Beats  |  **Subcategory:** Sports Earbuds  |  **Colour:** Titanium
 - **Warranty:** 6 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** no
 - **Weight:** 0.06 kg
 
@@ -68,11 +68,11 @@ Lumora Beats Air ANC is a true wireless from Lumora featuring driver: 10 mm, bat
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Voltix Air Spark Pro is a sports earbuds from Voltix featuring driver: 40 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Includes all in-box accessories listed on the spec sheet.
+Beats Powerbeats Pro (Titanium) is a sports earbuds from Beats featuring driver: 40 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Includes all in-box accessories listed on the spec sheet.
 
-## Lumora Beats Ultra Pro (PROD-00053)
+## Apple AirPods Pro (2nd Gen) (Sand Beige) (PROD-00053)
 
-- **SKU:** LUM-EAR-6282-SAN  |  **Brand:** Lumora  |  **Subcategory:** ANC Earbuds  |  **Colour:** Sand Beige
+- **SKU:** LUM-EAR-6282-SAN  |  **Brand:** Apple  |  **Subcategory:** ANC Earbuds  |  **Colour:** Sand Beige
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.1 kg
 
@@ -85,11 +85,11 @@ Voltix Air Spark Pro is a sports earbuds from Voltix featuring driver: 40 mm, ba
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Lumora Beats Ultra Pro is a anc earbuds from Lumora featuring driver: 11 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Built for everyday reliability.
+Apple AirPods Pro (2nd Gen) (Sand Beige) is a anc earbuds from Apple featuring driver: 11 mm, battery: 20 hours, noise cancellation: Hybrid ANC. Built for everyday reliability.
 
-## Skylark Buds Spark Lite (PROD-00054)
+## Sony WF-1000XM5 (Ocean Blue) (PROD-00054)
 
-- **SKU:** SKY-EAR-3188-OCE  |  **Brand:** Skylark  |  **Subcategory:** ANC Earbuds  |  **Colour:** Ocean Blue
+- **SKU:** SKY-EAR-3188-OCE  |  **Brand:** Sony  |  **Subcategory:** ANC Earbuds  |  **Colour:** Ocean Blue
 - **Warranty:** 6 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.05 kg
 
@@ -102,11 +102,11 @@ Lumora Beats Ultra Pro is a anc earbuds from Lumora featuring driver: 11 mm, bat
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Skylark Buds Spark Lite is a anc earbuds from Skylark featuring driver: 40 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Designed with Indian conditions in mind.
+Sony WF-1000XM5 (Ocean Blue) is a anc earbuds from Sony featuring driver: 40 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Designed with Indian conditions in mind.
 
-## Lumora Beats Flex Pro (PROD-00055)
+## Nothing Ear (2) (Black) (PROD-00055)
 
-- **SKU:** LUM-EAR-4595-BLA  |  **Brand:** Lumora  |  **Subcategory:** True Wireless  |  **Colour:** Black
+- **SKU:** LUM-EAR-4595-BLA  |  **Brand:** Nothing  |  **Subcategory:** True Wireless  |  **Colour:** Black
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.04 kg
 
@@ -119,11 +119,11 @@ Skylark Buds Spark Lite is a anc earbuds from Skylark featuring driver: 40 mm, b
 | Water resistance | None |
 | Charging port | USB-C |
 
-Lumora Beats Flex Pro is a true wireless from Lumora featuring driver: 12 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Popular with students and professionals alike.
+Nothing Ear (2) (Black) is a true wireless from Nothing featuring driver: 12 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Popular with students and professionals alike.
 
-## Lumora Beats Lite Lite (PROD-00056)
+## Jabra Elite 8 Active (White) (PROD-00056)
 
-- **SKU:** LUM-EAR-5254-WHI  |  **Brand:** Lumora  |  **Subcategory:** Sports Earbuds  |  **Colour:** White
+- **SKU:** LUM-EAR-5254-WHI  |  **Brand:** Jabra  |  **Subcategory:** Sports Earbuds  |  **Colour:** White
 - **Warranty:** 6 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.07 kg
 
@@ -136,11 +136,11 @@ Lumora Beats Flex Pro is a true wireless from Lumora featuring driver: 12 mm, ba
 | Water resistance | None |
 | Charging port | USB-C |
 
-Lumora Beats Lite Lite is a sports earbuds from Lumora featuring driver: 50 mm, battery: 12 hours, noise cancellation: Passive. Includes all in-box accessories listed on the spec sheet.
+Jabra Elite 8 Active (White) is a sports earbuds from Jabra featuring driver: 50 mm, battery: 12 hours, noise cancellation: Passive. Includes all in-box accessories listed on the spec sheet.
 
-## SoundNest Pods Spark Lite (PROD-00057)
+## Bose QuietComfort Ultra Earbuds (White) (PROD-00057)
 
-- **SKU:** SOU-EAR-3365-WHI  |  **Brand:** SoundNest  |  **Subcategory:** ANC Earbuds  |  **Colour:** White
+- **SKU:** SOU-EAR-3365-WHI  |  **Brand:** Bose  |  **Subcategory:** ANC Earbuds  |  **Colour:** White
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.12 kg
 
@@ -153,11 +153,11 @@ Lumora Beats Lite Lite is a sports earbuds from Lumora featuring driver: 50 mm, 
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-SoundNest Pods Spark Lite is a anc earbuds from SoundNest featuring driver: 12 mm, battery: 12 hours, noise cancellation: Passive. A balanced pick for its class.
+Bose QuietComfort Ultra Earbuds (White) is a anc earbuds from Bose featuring driver: 12 mm, battery: 12 hours, noise cancellation: Passive. A balanced pick for its class.
 
-## Skylark Buds Edge 3 (PROD-00058)
+## Sennheiser Momentum True Wireless 4 (Silver) (PROD-00058)
 
-- **SKU:** SKY-EAR-2368-SIL  |  **Brand:** Skylark  |  **Subcategory:** ANC Earbuds  |  **Colour:** Silver
+- **SKU:** SKY-EAR-2368-SIL  |  **Brand:** Sennheiser  |  **Subcategory:** ANC Earbuds  |  **Colour:** Silver
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.05 kg
 
@@ -170,11 +170,11 @@ SoundNest Pods Spark Lite is a anc earbuds from SoundNest featuring driver: 12 m
 | Water resistance | IPX5 |
 | Charging port | USB-C |
 
-Skylark Buds Edge 3 is a anc earbuds from Skylark featuring driver: 50 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Designed with Indian conditions in mind.
+Sennheiser Momentum True Wireless 4 (Silver) is a anc earbuds from Sennheiser featuring driver: 50 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Designed with Indian conditions in mind.
 
-## Skylark Buds Prime Pro (PROD-00059)
+## Sony MDR-EX15AP (White) (PROD-00059)
 
-- **SKU:** SKY-EAR-1611-WHI  |  **Brand:** Skylark  |  **Subcategory:** Wired Earphones  |  **Colour:** White
+- **SKU:** SKY-EAR-1611-WHI  |  **Brand:** Sony  |  **Subcategory:** Wired Earphones  |  **Colour:** White
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.1 kg
 
@@ -187,11 +187,11 @@ Skylark Buds Edge 3 is a anc earbuds from Skylark featuring driver: 50 mm, batte
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Skylark Buds Prime Pro is a wired earphones from Skylark featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. A balanced pick for its class.
+Sony MDR-EX15AP (White) is a wired earphones from Sony featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. A balanced pick for its class.
 
-## SoundNest Pods Plus Lite (PROD-00060)
+## boAt Airdopes 141 (Black) (PROD-00060)
 
-- **SKU:** SOU-EAR-7772-BLA  |  **Brand:** SoundNest  |  **Subcategory:** Sports Earbuds  |  **Colour:** Black
+- **SKU:** SOU-EAR-7772-BLA  |  **Brand:** boAt  |  **Subcategory:** Sports Earbuds  |  **Colour:** Black
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.05 kg
 
@@ -204,11 +204,11 @@ Skylark Buds Prime Pro is a wired earphones from Skylark featuring driver: 11 mm
 | Water resistance | None |
 | Charging port | USB-C |
 
-SoundNest Pods Plus Lite is a sports earbuds from SoundNest featuring driver: 40 mm, battery: 40 hours, noise cancellation: Hybrid ANC. Engineered for long-term use.
+boAt Airdopes 141 (Black) is a sports earbuds from boAt featuring driver: 40 mm, battery: 40 hours, noise cancellation: Hybrid ANC. Engineered for long-term use.
 
-## Lumora Beats Prime 1 (PROD-00061)
+## JBL Wave Beam (Graphite) (PROD-00061)
 
-- **SKU:** LUM-EAR-2594-GRA  |  **Brand:** Lumora  |  **Subcategory:** True Wireless  |  **Colour:** Graphite
+- **SKU:** LUM-EAR-2594-GRA  |  **Brand:** JBL  |  **Subcategory:** True Wireless  |  **Colour:** Graphite
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.05 kg
 
@@ -221,11 +221,11 @@ SoundNest Pods Plus Lite is a sports earbuds from SoundNest featuring driver: 40
 | Water resistance | None |
 | Charging port | USB-C |
 
-Lumora Beats Prime 1 is a true wireless from Lumora featuring driver: 11 mm, battery: 20 hours, noise cancellation: Passive. A balanced pick for its class.
+JBL Wave Beam (Graphite) is a true wireless from JBL featuring driver: 11 mm, battery: 20 hours, noise cancellation: Passive. A balanced pick for its class.
 
-## SoundNest Pods Air 2 (PROD-00062)
+## JBL C100SI (White) (PROD-00062)
 
-- **SKU:** SOU-EAR-3220-WHI  |  **Brand:** SoundNest  |  **Subcategory:** Wired Earphones  |  **Colour:** White
+- **SKU:** SOU-EAR-3220-WHI  |  **Brand:** JBL  |  **Subcategory:** Wired Earphones  |  **Colour:** White
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** no
 - **Weight:** 0.08 kg
 
@@ -238,11 +238,11 @@ Lumora Beats Prime 1 is a true wireless from Lumora featuring driver: 11 mm, bat
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-SoundNest Pods Air 2 is a wired earphones from SoundNest featuring driver: 50 mm, battery: 8 hours, noise cancellation: None. Backed by NovaMart-certified service.
+JBL C100SI (White) is a wired earphones from JBL featuring driver: 50 mm, battery: 8 hours, noise cancellation: None. Backed by NovaMart-certified service.
 
-## Lumora Beats Flex 2 (PROD-00063)
+## JBL Endurance Peak 3 (Silver) (PROD-00063)
 
-- **SKU:** LUM-EAR-3604-SIL  |  **Brand:** Lumora  |  **Subcategory:** Sports Earbuds  |  **Colour:** Silver
+- **SKU:** LUM-EAR-3604-SIL  |  **Brand:** JBL  |  **Subcategory:** Sports Earbuds  |  **Colour:** Silver
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.07 kg
 
@@ -255,11 +255,11 @@ SoundNest Pods Air 2 is a wired earphones from SoundNest featuring driver: 50 mm
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Lumora Beats Flex 2 is a sports earbuds from Lumora featuring driver: 13 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Designed with Indian conditions in mind.
+JBL Endurance Peak 3 (Silver) is a sports earbuds from JBL featuring driver: 13 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Designed with Indian conditions in mind.
 
-## Lumora Beats Lite ANC (PROD-00064)
+## boAt BassHeads 100 (Ocean Blue) (PROD-00064)
 
-- **SKU:** LUM-EAR-4874-OCE  |  **Brand:** Lumora  |  **Subcategory:** Wired Earphones  |  **Colour:** Ocean Blue
+- **SKU:** LUM-EAR-4874-OCE  |  **Brand:** boAt  |  **Subcategory:** Wired Earphones  |  **Colour:** Ocean Blue
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 0.08 kg
 
@@ -272,11 +272,11 @@ Lumora Beats Flex 2 is a sports earbuds from Lumora featuring driver: 13 mm, bat
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Lumora Beats Lite ANC is a wired earphones from Lumora featuring driver: 11 mm, battery: 12 hours, noise cancellation: None. Backed by NovaMart-certified service.
+boAt BassHeads 100 (Ocean Blue) is a wired earphones from boAt featuring driver: 11 mm, battery: 12 hours, noise cancellation: None. Backed by NovaMart-certified service.
 
-## Lumora Beats Spark Pro (PROD-00065)
+## boAt Airdopes 311 Pro (Graphite) (PROD-00065)
 
-- **SKU:** LUM-EAR-8095-GRA  |  **Brand:** Lumora  |  **Subcategory:** True Wireless  |  **Colour:** Graphite
+- **SKU:** LUM-EAR-8095-GRA  |  **Brand:** boAt  |  **Subcategory:** True Wireless  |  **Colour:** Graphite
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.11 kg
 
@@ -289,11 +289,11 @@ Lumora Beats Lite ANC is a wired earphones from Lumora featuring driver: 11 mm, 
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Lumora Beats Spark Pro is a true wireless from Lumora featuring driver: 50 mm, battery: 12 hours, noise cancellation: Passive. Built for everyday reliability.
+boAt Airdopes 311 Pro (Graphite) is a true wireless from boAt featuring driver: 50 mm, battery: 12 hours, noise cancellation: Passive. Built for everyday reliability.
 
-## Lumora Beats Prime 3 (PROD-00066)
+## Apple AirPods Pro (2nd Gen) (Graphite) (PROD-00066)
 
-- **SKU:** LUM-EAR-6798-GRA  |  **Brand:** Lumora  |  **Subcategory:** ANC Earbuds  |  **Colour:** Graphite
+- **SKU:** LUM-EAR-6798-GRA  |  **Brand:** Apple  |  **Subcategory:** ANC Earbuds  |  **Colour:** Graphite
 - **Warranty:** 6 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.08 kg
 
@@ -306,11 +306,11 @@ Lumora Beats Spark Pro is a true wireless from Lumora featuring driver: 50 mm, b
 | Water resistance | IPX7 |
 | Charging port | USB-C |
 
-Lumora Beats Prime 3 is a anc earbuds from Lumora featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
+Apple AirPods Pro (2nd Gen) (Graphite) is a anc earbuds from Apple featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Built for everyday reliability.
 
-## Voltix Air Plus 3 (PROD-00067)
+## Samsung Galaxy Buds2 Pro (Forest Green) (PROD-00067)
 
-- **SKU:** VOL-EAR-3091-FOR  |  **Brand:** Voltix  |  **Subcategory:** True Wireless  |  **Colour:** Forest Green
+- **SKU:** VOL-EAR-3091-FOR  |  **Brand:** Samsung  |  **Subcategory:** True Wireless  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.09 kg
 
@@ -323,11 +323,11 @@ Lumora Beats Prime 3 is a anc earbuds from Lumora featuring driver: 11 mm, batte
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Voltix Air Plus 3 is a true wireless from Voltix featuring driver: 50 mm, battery: 20 hours, noise cancellation: Hybrid ANC. A balanced pick for its class.
+Samsung Galaxy Buds2 Pro (Forest Green) is a true wireless from Samsung featuring driver: 50 mm, battery: 20 hours, noise cancellation: Hybrid ANC. A balanced pick for its class.
 
-## Voltix Air Neo 2 (PROD-00068)
+## Sony WF-1000XM5 (Midnight Blue) (PROD-00068)
 
-- **SKU:** VOL-EAR-4247-MID  |  **Brand:** Voltix  |  **Subcategory:** ANC Earbuds  |  **Colour:** Midnight Blue
+- **SKU:** VOL-EAR-4247-MID  |  **Brand:** Sony  |  **Subcategory:** ANC Earbuds  |  **Colour:** Midnight Blue
 - **Warranty:** 6 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.03 kg
 
@@ -340,11 +340,11 @@ Voltix Air Plus 3 is a true wireless from Voltix featuring driver: 50 mm, batter
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Voltix Air Neo 2 is a anc earbuds from Voltix featuring driver: 10 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Designed with Indian conditions in mind.
+Sony WF-1000XM5 (Midnight Blue) is a anc earbuds from Sony featuring driver: 10 mm, battery: 60 hours, noise cancellation: Adaptive ANC. Designed with Indian conditions in mind.
 
-## SoundNest Pods Plus 2 (PROD-00069)
+## OnePlus Buds 3 (Rose Gold) (PROD-00069)
 
-- **SKU:** SOU-EAR-4763-ROS  |  **Brand:** SoundNest  |  **Subcategory:** True Wireless  |  **Colour:** Rose Gold
+- **SKU:** SOU-EAR-4763-ROS  |  **Brand:** OnePlus  |  **Subcategory:** True Wireless  |  **Colour:** Rose Gold
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.04 kg
 
@@ -357,11 +357,11 @@ Voltix Air Neo 2 is a anc earbuds from Voltix featuring driver: 10 mm, battery: 
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-SoundNest Pods Plus 2 is a true wireless from SoundNest featuring driver: 10 mm, battery: 8 hours, noise cancellation: None. Popular with students and professionals alike.
+OnePlus Buds 3 (Rose Gold) is a true wireless from OnePlus featuring driver: 10 mm, battery: 8 hours, noise cancellation: None. Popular with students and professionals alike.
 
-## Auralix Buds Air ANC (PROD-00070)
+## Apple EarPods (USB-C) (Midnight Blue) (PROD-00070)
 
-- **SKU:** AUR-EAR-2621-MID  |  **Brand:** Auralix  |  **Subcategory:** Wired Earphones  |  **Colour:** Midnight Blue
+- **SKU:** AUR-EAR-2621-MID  |  **Brand:** Apple  |  **Subcategory:** Wired Earphones  |  **Colour:** Midnight Blue
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.06 kg
 
@@ -374,11 +374,11 @@ SoundNest Pods Plus 2 is a true wireless from SoundNest featuring driver: 10 mm,
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Auralix Buds Air ANC is a wired earphones from Auralix featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Engineered for long-term use.
+Apple EarPods (USB-C) (Midnight Blue) is a wired earphones from Apple featuring driver: 11 mm, battery: 8 hours, noise cancellation: None. Engineered for long-term use.
 
-## Auralix Buds Flex 3 (PROD-00071)
+## Sony MDR-EX15AP (Forest Green) (PROD-00071)
 
-- **SKU:** AUR-EAR-3228-FOR  |  **Brand:** Auralix  |  **Subcategory:** Wired Earphones  |  **Colour:** Forest Green
+- **SKU:** AUR-EAR-3228-FOR  |  **Brand:** Sony  |  **Subcategory:** Wired Earphones  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** yes
 - **Weight:** 0.06 kg
 
@@ -391,11 +391,11 @@ Auralix Buds Air ANC is a wired earphones from Auralix featuring driver: 11 mm, 
 | Water resistance | IPX4 |
 | Charging port | USB-C |
 
-Auralix Buds Flex 3 is a wired earphones from Auralix featuring driver: 11 mm, battery: 12 hours, noise cancellation: Passive. Built for everyday reliability.
+Sony MDR-EX15AP (Forest Green) is a wired earphones from Sony featuring driver: 11 mm, battery: 12 hours, noise cancellation: Passive. Built for everyday reliability.
 
-## Skylark Buds Pro ANC (PROD-00072)
+## Bose QuietComfort Ultra Earbuds (Charcoal) (PROD-00072)
 
-- **SKU:** SKY-EAR-3274-CHA  |  **Brand:** Skylark  |  **Subcategory:** ANC Earbuds  |  **Colour:** Charcoal
+- **SKU:** SKY-EAR-3274-CHA  |  **Brand:** Bose  |  **Subcategory:** ANC Earbuds  |  **Colour:** Charcoal
 - **Warranty:** 12 months  |  **Returnable (change of mind):** no  |  **Replacement for defects:** no
 - **Weight:** 0.06 kg
 
@@ -408,4 +408,4 @@ Auralix Buds Flex 3 is a wired earphones from Auralix featuring driver: 11 mm, b
 | Water resistance | None |
 | Charging port | USB-C |
 
-Skylark Buds Pro ANC is a anc earbuds from Skylark featuring driver: 12 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Built for everyday reliability.
+Bose QuietComfort Ultra Earbuds (Charcoal) is a anc earbuds from Bose featuring driver: 12 mm, battery: 30 hours, noise cancellation: Hybrid ANC. Built for everyday reliability.

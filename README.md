@@ -9,6 +9,8 @@ NovaMart is an electronics e-commerce store with a built-in AI customer-support 
 
 Store details: [`django_store/README.md`](django_store/README.md).
 
+> Demo store: product names use real brands for realism, but prices, stock and specs are sample data and NovaMart is not affiliated with these brands. Product photos are from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license).
+
 ## Store features
 
 - **Product listings:** 300 products with search, category chips and pagination.

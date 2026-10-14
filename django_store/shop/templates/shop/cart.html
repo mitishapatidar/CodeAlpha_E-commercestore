@@ -6,7 +6,7 @@
   <h1>Shopping Cart</h1>
   {% for i in items %}
   <div class="line">
-    <a href="{% url 'product_detail' i.product.pk %}" class="mini"><span class="cat-icon">{{ i.product.category|slice:":1" }}</span></a>
+    <a href="{% url 'product_detail' i.product.pk %}" class="mini">{% if i.product.image_url %}<img src="{{ i.product.image_url }}" alt="">{% else %}<span class="cat-icon">{{ i.product.category|slice:":1" }}</span>{% endif %}</a>
     <div class="grow">
       <a href="{% url 'product_detail' i.product.pk %}" class="name">{{ i.product.name }}</a>
       <div class="ok small">In stock</div>

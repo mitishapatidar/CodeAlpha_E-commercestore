@@ -61,8 +61,12 @@ def _item_matches(item: dict, words: list[str]) -> bool:
     cats = [w for w in words if w in CATEGORY_WORDS]
     if cats:
         return item["category"].lower() in cats
+    return _item_score(item, words) > 0
+
+
+def _item_score(item: dict, words: list[str]) -> int:
     hay = f"{item['product_name']} {item['brand']} {item['subcategory']}".lower()
-    return any(w in hay or (w.endswith("s") and w[:-1] in hay) for w in words)
+    return sum(w in hay or (w.endswith("s") and w[:-1] in hay) for w in words)
 
 
 def option_view(o: dict, items: list[dict]) -> dict:
@@ -118,7 +122,9 @@ def resolve_order(intent: Intent, customer_id: str, tracer: ToolTracer, now: dat
     if words:
         sub = [i for i in items if _item_matches(i, words)]
         if sub:
-            chosen = sub
+            # the item naming most of the customer's words wins ("Echo Dot (5th Gen)" over "AirPods (2nd Gen)")
+            best = max(_item_score(i, words) for i in sub)
+            chosen = [i for i in sub if _item_score(i, words) == best] if best > 1 else sub
     if len(chosen) > 1 and len({i["product_id"] for i in chosen}) > 1 and intent.reason in ITEM_SPECIFIC_REASONS \
             and intent.type in ("refund", "return", "replacement", "product_issue", "warranty"):
         return Resolution("ambiguous_item", order=order, all_items=items,

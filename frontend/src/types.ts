@@ -105,6 +105,7 @@ export interface Product {
   returnable: boolean;
   status: string;
   color: string;
+  image_url?: string;
 }
 
 export interface Category {

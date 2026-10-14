@@ -7,12 +7,12 @@ from app.main import app
 def test_named_order_then_problem_keeps_order_context():
     c = TestClient(app)
     first = c.post("/chat", json={"customer_id": "CUST-00001", "session_id": "ctx-1",
-                                  "message": "I have a problem with my Auralix Wave Core 500 from order ORD-004897"}).json()
+                                  "message": "I have a problem with my Amazon Echo Dot (5th Gen) (Forest Green) from order ORD-004897"}).json()
     assert first["decision"] == "ASK"
-    assert "ORD-004897" in first["reply"] and "Auralix Wave Core 500" in first["reply"]
+    assert "ORD-004897" in first["reply"] and "Amazon Echo Dot (5th Gen) (Forest Green)" in first["reply"]
     second = c.post("/chat", json={"customer_id": "CUST-00001", "session_id": "ctx-1", "message": "it arrived damaged"}).json()
     assert second["decision"] != "ASK"
-    assert "Auralix Wave Core 500" in second["reply"]
+    assert "Amazon Echo Dot (5th Gen) (Forest Green)" in second["reply"]
 
 
 def test_someone_elses_order_is_not_described():

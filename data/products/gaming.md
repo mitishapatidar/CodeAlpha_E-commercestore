@@ -2,9 +2,9 @@
 
 Specification sheets for products in this category. Prices/stock live in `products.csv`; this file carries extra technical detail.
 
-## Orbitron Gaming Lite S Mousepad XL (PROD-00073)
+## Logitech G G840 XL Mouse Pad (Graphite) (PROD-00073)
 
-- **SKU:** ORB-GAM-6414-GRA  |  **Brand:** Orbitron  |  **Subcategory:** Mousepad XL  |  **Colour:** Graphite
+- **SKU:** ORB-GAM-6414-GRA  |  **Brand:** Logitech G  |  **Subcategory:** Mousepad XL  |  **Colour:** Graphite
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 1.83 kg
 
@@ -15,11 +15,11 @@ Specification sheets for products in this category. Prices/stock live in `produc
 | Material | ABS plastic |
 | Lighting | Single colour |
 
-Orbitron Gaming Lite S Mousepad XL is a mousepad xl from Orbitron featuring platform: PC / Mobile, connectivity: USB wired, material: ABS plastic. Includes all in-box accessories listed on the spec sheet.
+Logitech G G840 XL Mouse Pad (Graphite) is a mousepad xl from Logitech G featuring platform: PC / Mobile, connectivity: USB wired, material: ABS plastic. Includes all in-box accessories listed on the spec sheet.
 
-## Orbitron Gaming Spark S VR Headset (PROD-00074)
+## Meta Quest 3 128GB (Space Grey) (PROD-00074)
 
-- **SKU:** ORB-GAM-2185-SPA  |  **Brand:** Orbitron  |  **Subcategory:** VR Headset  |  **Colour:** Space Grey
+- **SKU:** ORB-GAM-2185-SPA  |  **Brand:** Meta  |  **Subcategory:** VR Headset  |  **Colour:** Space Grey
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 13.9 kg
 
@@ -30,11 +30,11 @@ Orbitron Gaming Lite S Mousepad XL is a mousepad xl from Orbitron featuring plat
 | Material | Mesh / PU |
 | Lighting | Single colour |
 
-Orbitron Gaming Spark S VR Headset is a vr headset from Orbitron featuring platform: PC / Console, connectivity: USB wired, material: Mesh / PU. Backed by NovaMart-certified service.
+Meta Quest 3 128GB (Space Grey) is a vr headset from Meta featuring platform: PC / Console, connectivity: USB wired, material: Mesh / PU. Backed by NovaMart-certified service.
 
-## ByteCore Play Prime X Gaming Chair (PROD-00075)
+## Green Soul Monster Ultimate (Forest Green) (PROD-00075)
 
-- **SKU:** BYT-GAM-6399-FOR  |  **Brand:** ByteCore  |  **Subcategory:** Gaming Chair  |  **Colour:** Forest Green
+- **SKU:** BYT-GAM-6399-FOR  |  **Brand:** Green Soul  |  **Subcategory:** Gaming Chair  |  **Colour:** Forest Green
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 5.33 kg
 
@@ -45,11 +45,11 @@ Orbitron Gaming Spark S VR Headset is a vr headset from Orbitron featuring platf
 | Material | Mesh / PU |
 | Lighting | RGB |
 
-ByteCore Play Prime X Gaming Chair is a gaming chair from ByteCore featuring platform: PC, connectivity: Bluetooth + wired, material: Mesh / PU. Designed with Indian conditions in mind.
+Green Soul Monster Ultimate (Forest Green) is a gaming chair from Green Soul featuring platform: PC, connectivity: Bluetooth + wired, material: Mesh / PU. Designed with Indian conditions in mind.
 
-## Arcadia Pro S Gaming Console Accessory (PROD-00076)
+## Sony PS5 DualSense Charging Station (Space Grey) (PROD-00076)
 
-- **SKU:** ARC-GAM-8489-SPA  |  **Brand:** Arcadia  |  **Subcategory:** Gaming Console Accessory  |  **Colour:** Space Grey
+- **SKU:** ARC-GAM-8489-SPA  |  **Brand:** Sony  |  **Subcategory:** Gaming Console Accessory  |  **Colour:** Space Grey
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 7.63 kg
 
@@ -60,11 +60,11 @@ ByteCore Play Prime X Gaming Chair is a gaming chair from ByteCore featuring pla
 | Material | Metal frame |
 | Lighting | None |
 
-Arcadia Pro S Gaming Console Accessory is a gaming console accessory from Arcadia featuring platform: PC, connectivity: 2.4 GHz wireless, material: Metal frame. Designed with Indian conditions in mind.
+Sony PS5 DualSense Charging Station (Space Grey) is a gaming console accessory from Sony featuring platform: PC, connectivity: 2.4 GHz wireless, material: Metal frame. Designed with Indian conditions in mind.
 
-## Orbitron Gaming Prime Pro Capture Card (PROD-00077)
+## Elgato HD60 X (Sand Beige) (PROD-00077)
 
-- **SKU:** ORB-GAM-4560-SAN  |  **Brand:** Orbitron  |  **Subcategory:** Capture Card  |  **Colour:** Sand Beige
+- **SKU:** ORB-GAM-4560-SAN  |  **Brand:** Elgato  |  **Subcategory:** Capture Card  |  **Colour:** Sand Beige
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 9.54 kg
 
@@ -75,11 +75,11 @@ Arcadia Pro S Gaming Console Accessory is a gaming console accessory from Arcadi
 | Material | Metal frame |
 | Lighting | RGB |
 
-Orbitron Gaming Prime Pro Capture Card is a capture card from Orbitron featuring platform: PC / Console, connectivity: USB wired, material: Metal frame. Built for everyday reliability.
+Elgato HD60 X (Sand Beige) is a capture card from Elgato featuring platform: PC / Console, connectivity: USB wired, material: Metal frame. Built for everyday reliability.
 
-## ByteCore Play Prime X Gaming Console Accessory (PROD-00078)
+## Microsoft Xbox Rechargeable Battery Kit (Graphite) (PROD-00078)
 
-- **SKU:** BYT-GAM-3105-GRA  |  **Brand:** ByteCore  |  **Subcategory:** Gaming Console Accessory  |  **Colour:** Graphite
+- **SKU:** BYT-GAM-3105-GRA  |  **Brand:** Microsoft  |  **Subcategory:** Gaming Console Accessory  |  **Colour:** Graphite
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 14.41 kg
 
@@ -90,11 +90,11 @@ Orbitron Gaming Prime Pro Capture Card is a capture card from Orbitron featuring
 | Material | ABS plastic |
 | Lighting | None |
 
-ByteCore Play Prime X Gaming Console Accessory is a gaming console accessory from ByteCore featuring platform: Console, connectivity: USB wired, material: ABS plastic. Designed with Indian conditions in mind.
+Microsoft Xbox Rechargeable Battery Kit (Graphite) is a gaming console accessory from Microsoft featuring platform: Console, connectivity: USB wired, material: ABS plastic. Designed with Indian conditions in mind.
 
-## Arcadia Neo Elite Mousepad XL (PROD-00079)
+## Razer Gigantus V2 XXL (Graphite) (PROD-00079)
 
-- **SKU:** ARC-GAM-9079-GRA  |  **Brand:** Arcadia  |  **Subcategory:** Mousepad XL  |  **Colour:** Graphite
+- **SKU:** ARC-GAM-9079-GRA  |  **Brand:** Razer  |  **Subcategory:** Mousepad XL  |  **Colour:** Graphite
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 5.1 kg
 
@@ -105,11 +105,11 @@ ByteCore Play Prime X Gaming Console Accessory is a gaming console accessory fro
 | Material | Mesh / PU |
 | Lighting | None |
 
-Arcadia Neo Elite Mousepad XL is a mousepad xl from Arcadia featuring platform: PC / Mobile, connectivity: USB wired, material: Mesh / PU. Popular with students and professionals alike.
+Razer Gigantus V2 XXL (Graphite) is a mousepad xl from Razer featuring platform: PC / Mobile, connectivity: USB wired, material: Mesh / PU. Popular with students and professionals alike.
 
-## Orbitron Gaming Go Z1 Capture Card (PROD-00080)
+## Elgato Cam Link 4K (Graphite) (PROD-00080)
 
-- **SKU:** ORB-GAM-9211-GRA  |  **Brand:** Orbitron  |  **Subcategory:** Capture Card  |  **Colour:** Graphite
+- **SKU:** ORB-GAM-9211-GRA  |  **Brand:** Elgato  |  **Subcategory:** Capture Card  |  **Colour:** Graphite
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 14.09 kg
 
@@ -120,11 +120,11 @@ Arcadia Neo Elite Mousepad XL is a mousepad xl from Arcadia featuring platform: 
 | Material | Cloth surface |
 | Lighting | Single colour |
 
-Orbitron Gaming Go Z1 Capture Card is a capture card from Orbitron featuring platform: PC / Console, connectivity: 2.4 GHz wireless, material: Cloth surface. Designed with Indian conditions in mind.
+Elgato Cam Link 4K (Graphite) is a capture card from Elgato featuring platform: PC / Console, connectivity: 2.4 GHz wireless, material: Cloth surface. Designed with Indian conditions in mind.
 
-## Orbitron Gaming Spark Pro VR Headset (PROD-00081)
+## Meta Quest 2 128GB (Ocean Blue) (PROD-00081)
 
-- **SKU:** ORB-GAM-5070-OCE  |  **Brand:** Orbitron  |  **Subcategory:** VR Headset  |  **Colour:** Ocean Blue
+- **SKU:** ORB-GAM-5070-OCE  |  **Brand:** Meta  |  **Subcategory:** VR Headset  |  **Colour:** Ocean Blue
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 6.04 kg
 
@@ -135,11 +135,11 @@ Orbitron Gaming Go Z1 Capture Card is a capture card from Orbitron featuring pla
 | Material | Cloth surface |
 | Lighting | Single colour |
 
-Orbitron Gaming Spark Pro VR Headset is a vr headset from Orbitron featuring platform: PC, connectivity: Bluetooth + wired, material: Cloth surface. Backed by NovaMart-certified service.
+Meta Quest 2 128GB (Ocean Blue) is a vr headset from Meta featuring platform: PC, connectivity: Bluetooth + wired, material: Cloth surface. Backed by NovaMart-certified service.
 
-## Voltix Gaming Ultra Elite Controller (PROD-00082)
+## Sony DualSense Wireless Controller (Ocean Blue) (PROD-00082)
 
-- **SKU:** VOL-GAM-1383-OCE  |  **Brand:** Voltix  |  **Subcategory:** Controller  |  **Colour:** Ocean Blue
+- **SKU:** VOL-GAM-1383-OCE  |  **Brand:** Sony  |  **Subcategory:** Controller  |  **Colour:** Ocean Blue
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 11.54 kg
 
@@ -150,11 +150,11 @@ Orbitron Gaming Spark Pro VR Headset is a vr headset from Orbitron featuring pla
 | Material | Metal frame |
 | Lighting | None |
 
-Voltix Gaming Ultra Elite Controller is a controller from Voltix featuring platform: PC, connectivity: USB wired, material: Metal frame. Engineered for long-term use.
+Sony DualSense Wireless Controller (Ocean Blue) is a controller from Sony featuring platform: PC, connectivity: USB wired, material: Metal frame. Engineered for long-term use.
 
-## ByteCore Play Flex X Controller (PROD-00083)
+## Microsoft Xbox Wireless Controller (Graphite) (PROD-00083)
 
-- **SKU:** BYT-GAM-4573-GRA  |  **Brand:** ByteCore  |  **Subcategory:** Controller  |  **Colour:** Graphite
+- **SKU:** BYT-GAM-4573-GRA  |  **Brand:** Microsoft  |  **Subcategory:** Controller  |  **Colour:** Graphite
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 14.94 kg
 
@@ -165,11 +165,11 @@ Voltix Gaming Ultra Elite Controller is a controller from Voltix featuring platf
 | Material | ABS plastic |
 | Lighting | RGB |
 
-ByteCore Play Flex X Controller is a controller from ByteCore featuring platform: Console, connectivity: 2.4 GHz wireless, material: ABS plastic. Built for everyday reliability.
+Microsoft Xbox Wireless Controller (Graphite) is a controller from Microsoft featuring platform: Console, connectivity: 2.4 GHz wireless, material: ABS plastic. Built for everyday reliability.
 
-## Arcadia Flex Pro Mousepad XL (PROD-00084)
+## SteelSeries QcK Heavy XXL (Sand Beige) (PROD-00084)
 
-- **SKU:** ARC-GAM-5433-SAN  |  **Brand:** Arcadia  |  **Subcategory:** Mousepad XL  |  **Colour:** Sand Beige
+- **SKU:** ARC-GAM-5433-SAN  |  **Brand:** SteelSeries  |  **Subcategory:** Mousepad XL  |  **Colour:** Sand Beige
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 8.43 kg
 
@@ -180,11 +180,11 @@ ByteCore Play Flex X Controller is a controller from ByteCore featuring platform
 | Material | Mesh / PU |
 | Lighting | RGB |
 
-Arcadia Flex Pro Mousepad XL is a mousepad xl from Arcadia featuring platform: PC / Console, connectivity: 2.4 GHz wireless, material: Mesh / PU. A balanced pick for its class.
+SteelSeries QcK Heavy XXL (Sand Beige) is a mousepad xl from SteelSeries featuring platform: PC / Console, connectivity: 2.4 GHz wireless, material: Mesh / PU. A balanced pick for its class.
 
-## ByteCore Play Lite S Gaming Chair (PROD-00085)
+## ASE Gaming Lite Series (Space Grey) (PROD-00085)
 
-- **SKU:** BYT-GAM-7239-SPA  |  **Brand:** ByteCore  |  **Subcategory:** Gaming Chair  |  **Colour:** Space Grey
+- **SKU:** BYT-GAM-7239-SPA  |  **Brand:** ASE Gaming  |  **Subcategory:** Gaming Chair  |  **Colour:** Space Grey
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 16.23 kg
 
@@ -195,11 +195,11 @@ Arcadia Flex Pro Mousepad XL is a mousepad xl from Arcadia featuring platform: P
 | Material | Mesh / PU |
 | Lighting | None |
 
-ByteCore Play Lite S Gaming Chair is a gaming chair from ByteCore featuring platform: Console, connectivity: Bluetooth + wired, material: Mesh / PU. Includes all in-box accessories listed on the spec sheet.
+ASE Gaming Lite Series (Space Grey) is a gaming chair from ASE Gaming featuring platform: Console, connectivity: Bluetooth + wired, material: Mesh / PU. Includes all in-box accessories listed on the spec sheet.
 
-## Voltix Gaming Flex Pro Capture Card (PROD-00086)
+## AVerMedia Live Gamer Mini (Rose Gold) (PROD-00086)
 
-- **SKU:** VOL-GAM-4774-ROS  |  **Brand:** Voltix  |  **Subcategory:** Capture Card  |  **Colour:** Rose Gold
+- **SKU:** VOL-GAM-4774-ROS  |  **Brand:** AVerMedia  |  **Subcategory:** Capture Card  |  **Colour:** Rose Gold
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 10.7 kg
 
@@ -210,11 +210,11 @@ ByteCore Play Lite S Gaming Chair is a gaming chair from ByteCore featuring plat
 | Material | Cloth surface |
 | Lighting | Single colour |
 
-Voltix Gaming Flex Pro Capture Card is a capture card from Voltix featuring platform: Console, connectivity: Bluetooth + wired, material: Cloth surface. Popular with students and professionals alike.
+AVerMedia Live Gamer Mini (Rose Gold) is a capture card from AVerMedia featuring platform: Console, connectivity: Bluetooth + wired, material: Cloth surface. Popular with students and professionals alike.
 
-## Orbitron Gaming Neo Pro Mousepad XL (PROD-00087)
+## Cosmic Byte Equinox XL (White) (PROD-00087)
 
-- **SKU:** ORB-GAM-9902-WHI  |  **Brand:** Orbitron  |  **Subcategory:** Mousepad XL  |  **Colour:** White
+- **SKU:** ORB-GAM-9902-WHI  |  **Brand:** Cosmic Byte  |  **Subcategory:** Mousepad XL  |  **Colour:** White
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 1.71 kg
 
@@ -225,11 +225,11 @@ Voltix Gaming Flex Pro Capture Card is a capture card from Voltix featuring plat
 | Material | Metal frame |
 | Lighting | RGB |
 
-Orbitron Gaming Neo Pro Mousepad XL is a mousepad xl from Orbitron featuring platform: PC / Mobile, connectivity: 2.4 GHz wireless, material: Metal frame. Built for everyday reliability.
+Cosmic Byte Equinox XL (White) is a mousepad xl from Cosmic Byte featuring platform: PC / Mobile, connectivity: 2.4 GHz wireless, material: Metal frame. Built for everyday reliability.
 
-## Voltix Gaming Edge Elite Mousepad XL (PROD-00088)
+## Logitech G G840 XL Mouse Pad (Space Grey) (PROD-00088)
 
-- **SKU:** VOL-GAM-5359-SPA  |  **Brand:** Voltix  |  **Subcategory:** Mousepad XL  |  **Colour:** Space Grey
+- **SKU:** VOL-GAM-5359-SPA  |  **Brand:** Logitech G  |  **Subcategory:** Mousepad XL  |  **Colour:** Space Grey
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 13.52 kg
 
@@ -240,11 +240,11 @@ Orbitron Gaming Neo Pro Mousepad XL is a mousepad xl from Orbitron featuring pla
 | Material | Mesh / PU |
 | Lighting | RGB |
 
-Voltix Gaming Edge Elite Mousepad XL is a mousepad xl from Voltix featuring platform: Console, connectivity: USB wired, material: Mesh / PU. Popular with students and professionals alike.
+Logitech G G840 XL Mouse Pad (Space Grey) is a mousepad xl from Logitech G featuring platform: Console, connectivity: USB wired, material: Mesh / PU. Popular with students and professionals alike.
 
-## ByteCore Play Air Pro VR Headset (PROD-00089)
+## Sony PlayStation VR2 (Silver) (PROD-00089)
 
-- **SKU:** BYT-GAM-3066-SIL  |  **Brand:** ByteCore  |  **Subcategory:** VR Headset  |  **Colour:** Silver
+- **SKU:** BYT-GAM-3066-SIL  |  **Brand:** Sony  |  **Subcategory:** VR Headset  |  **Colour:** Silver
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 9.17 kg
 
@@ -255,11 +255,11 @@ Voltix Gaming Edge Elite Mousepad XL is a mousepad xl from Voltix featuring plat
 | Material | Mesh / PU |
 | Lighting | None |
 
-ByteCore Play Air Pro VR Headset is a vr headset from ByteCore featuring platform: PC / Console, connectivity: Bluetooth + wired, material: Mesh / PU. Designed with Indian conditions in mind.
+Sony PlayStation VR2 (Silver) is a vr headset from Sony featuring platform: PC / Console, connectivity: Bluetooth + wired, material: Mesh / PU. Designed with Indian conditions in mind.
 
-## Voltix Gaming Neo Z1 Capture Card (PROD-00090)
+## Razer Ripsaw HD (Silver) (PROD-00090)
 
-- **SKU:** VOL-GAM-6405-SIL  |  **Brand:** Voltix  |  **Subcategory:** Capture Card  |  **Colour:** Silver
+- **SKU:** VOL-GAM-6405-SIL  |  **Brand:** Razer  |  **Subcategory:** Capture Card  |  **Colour:** Silver
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 16.68 kg
 
@@ -270,11 +270,11 @@ ByteCore Play Air Pro VR Headset is a vr headset from ByteCore featuring platfor
 | Material | Cloth surface |
 | Lighting | Single colour |
 
-Voltix Gaming Neo Z1 Capture Card is a capture card from Voltix featuring platform: Console, connectivity: Bluetooth + wired, material: Cloth surface. Popular with students and professionals alike.
+Razer Ripsaw HD (Silver) is a capture card from Razer featuring platform: Console, connectivity: Bluetooth + wired, material: Cloth surface. Popular with students and professionals alike.
 
-## ByteCore Play One Z1 Gaming Console Accessory (PROD-00091)
+## Nintendo Switch Pro Controller (Graphite) (PROD-00091)
 
-- **SKU:** BYT-GAM-6647-GRA  |  **Brand:** ByteCore  |  **Subcategory:** Gaming Console Accessory  |  **Colour:** Graphite
+- **SKU:** BYT-GAM-6647-GRA  |  **Brand:** Nintendo  |  **Subcategory:** Gaming Console Accessory  |  **Colour:** Graphite
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 11.09 kg
 
@@ -285,11 +285,11 @@ Voltix Gaming Neo Z1 Capture Card is a capture card from Voltix featuring platfo
 | Material | ABS plastic |
 | Lighting | None |
 
-ByteCore Play One Z1 Gaming Console Accessory is a gaming console accessory from ByteCore featuring platform: PC / Mobile, connectivity: Bluetooth + wired, material: ABS plastic. Includes all in-box accessories listed on the spec sheet.
+Nintendo Switch Pro Controller (Graphite) is a gaming console accessory from Nintendo featuring platform: PC / Mobile, connectivity: Bluetooth + wired, material: ABS plastic. Includes all in-box accessories listed on the spec sheet.
 
-## Arcadia Plus Elite Controller (PROD-00092)
+## Cosmic Byte Stellaris Wireless (Midnight Blue) (PROD-00092)
 
-- **SKU:** ARC-GAM-3003-MID  |  **Brand:** Arcadia  |  **Subcategory:** Controller  |  **Colour:** Midnight Blue
+- **SKU:** ARC-GAM-3003-MID  |  **Brand:** Cosmic Byte  |  **Subcategory:** Controller  |  **Colour:** Midnight Blue
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 11.99 kg
 
@@ -300,11 +300,11 @@ ByteCore Play One Z1 Gaming Console Accessory is a gaming console accessory from
 | Material | Mesh / PU |
 | Lighting | None |
 
-Arcadia Plus Elite Controller is a controller from Arcadia featuring platform: PC, connectivity: 2.4 GHz wireless, material: Mesh / PU. A balanced pick for its class.
+Cosmic Byte Stellaris Wireless (Midnight Blue) is a controller from Cosmic Byte featuring platform: PC, connectivity: 2.4 GHz wireless, material: Mesh / PU. A balanced pick for its class.
 
-## ByteCore Play Ultra Z1 Capture Card (PROD-00093)
+## Elgato HD60 X (Titanium) (PROD-00093)
 
-- **SKU:** BYT-GAM-3732-TIT  |  **Brand:** ByteCore  |  **Subcategory:** Capture Card  |  **Colour:** Titanium
+- **SKU:** BYT-GAM-3732-TIT  |  **Brand:** Elgato  |  **Subcategory:** Capture Card  |  **Colour:** Titanium
 - **Warranty:** 24 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** yes
 - **Weight:** 0.17 kg
 
@@ -315,11 +315,11 @@ Arcadia Plus Elite Controller is a controller from Arcadia featuring platform: P
 | Material | Mesh / PU |
 | Lighting | None |
 
-ByteCore Play Ultra Z1 Capture Card is a capture card from ByteCore featuring platform: PC, connectivity: Bluetooth + wired, material: Mesh / PU. Built for everyday reliability.
+Elgato HD60 X (Titanium) is a capture card from Elgato featuring platform: PC, connectivity: Bluetooth + wired, material: Mesh / PU. Built for everyday reliability.
 
-## ByteCore Play Pro S Capture Card (PROD-00094)
+## Elgato Cam Link 4K (Ocean Blue) (PROD-00094)
 
-- **SKU:** BYT-GAM-3310-OCE  |  **Brand:** ByteCore  |  **Subcategory:** Capture Card  |  **Colour:** Ocean Blue
+- **SKU:** BYT-GAM-3310-OCE  |  **Brand:** Elgato  |  **Subcategory:** Capture Card  |  **Colour:** Ocean Blue
 - **Warranty:** 12 months  |  **Returnable (change of mind):** yes  |  **Replacement for defects:** no
 - **Weight:** 0.75 kg
 
@@ -330,4 +330,4 @@ ByteCore Play Ultra Z1 Capture Card is a capture card from ByteCore featuring pl
 | Material | ABS plastic |
 | Lighting | RGB |
 
-ByteCore Play Pro S Capture Card is a capture card from ByteCore featuring platform: PC / Console, connectivity: 2.4 GHz wireless, material: ABS plastic. Built for everyday reliability.
+Elgato Cam Link 4K (Ocean Blue) is a capture card from Elgato featuring platform: PC / Console, connectivity: 2.4 GHz wireless, material: ABS plastic. Built for everyday reliability.

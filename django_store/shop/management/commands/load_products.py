@@ -18,7 +18,7 @@ class Command(BaseCommand):
                     "description": r["description"], "price": round(float(r["price"])), "mrp": round(float(r["mrp"])),
                     "stock": int(r["stock_quantity"]), "rating": float(r["rating"] or 0),
                     "review_count": int(r["review_count"] or 0), "warranty_months": int(r["warranty_months"] or 0),
-                    "returnable": r["returnable"].lower() == "true", "color": r["color"],
+                    "returnable": r["returnable"].lower() == "true", "color": r["color"], "image_url": r.get("image_url", ""),
                     "active": r["status"] == "active",
                 })
                 n += 1

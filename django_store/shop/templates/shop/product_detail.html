@@ -3,7 +3,7 @@
 {% block content %}
 <nav class="crumbs"><a href="{% url 'home' %}">Home</a> › <a href="{% url 'home' %}?category={{ p.category|urlencode }}">{{ p.category }}</a> › {{ p.name }}</nav>
 <section class="detail">
-  <div class="big-thumb"><span class="cat-icon">{{ p.category|slice:":1" }}</span></div>
+  <div class="big-thumb">{% if p.image_url %}<img src="{{ p.image_url|cut:"w=600" }}w=1000" alt="{{ p.name }}">{% else %}<span class="cat-icon">{{ p.category|slice:":1" }}</span>{% endif %}</div>
   <div>
     <div class="brand">{{ p.brand }}</div>
     <h1>{{ p.name }}</h1>
